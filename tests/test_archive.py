@@ -55,3 +55,13 @@ def test_archive_audit_rejects_hidden_env_variant(tmp_path):
         zipped.writestr("app/.env.production", "OPENAI_API_KEY=PRIVATE")
     with pytest.raises(ValueError, match="Private .env"):
         inspect_archive(archive)
+
+
+def test_release_includes_linked_security_and_changelog_docs(tmp_path):
+    make_minimal(tmp_path)
+    (tmp_path / "SECURITY.md").write_text("Security instructions\n")
+    (tmp_path / "CHANGELOG.md").write_text("Changes\n")
+    archive = tmp_path / "dist" / "release.zip"
+    build_archive(tmp_path, archive)
+    with ZipFile(archive) as zipped:
+        assert {"SECURITY.md", "CHANGELOG.md"}.issubset(zipped.namelist())
