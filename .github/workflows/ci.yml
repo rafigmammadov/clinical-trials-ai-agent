@@ -29,3 +29,5 @@ jobs:
         run: python -m evals.run --mode validate
       - name: Validate registered intervention matching benchmark
         run: python -m evals.identity
+      - name: Validate question-grounded query filters
+        run: python -m evals.grounding
