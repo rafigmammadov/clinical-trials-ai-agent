@@ -453,7 +453,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T21:10:21.339809Z",
+    "analyzed_at": "2026-11-14T22:31:29.937603Z",
     "query_plan": {
       "intent": "phase_distribution",
       "condition": "Fabry disease",
@@ -463,7 +463,7 @@
       "start_year": null,
       "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Distribution of clinical trials for Fabry disease across phases."
+      "interpretation": "Count of clinical trials focused on Fabry disease grouped by their study phase."
     },
     "filters": {
       "condition": "Fabry disease",
