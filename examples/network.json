@@ -105,7 +105,7 @@
         },
         {
           "id": "drug:agalsidase beta",
-          "label": "agalsidase beta",
+          "label": "Agalsidase beta",
           "kind": "drug",
           "citation_count": 4,
           "citations_complete": true,
@@ -420,7 +420,7 @@
         },
         {
           "id": "drug:enzyme replacement therapy (ert)",
-          "label": "Enzyme replacement therapy (ERT)",
+          "label": "Enzyme Replacement Therapy (ERT)",
           "kind": "drug",
           "citation_count": 2,
           "citations_complete": true,
@@ -714,7 +714,7 @@
         },
         {
           "id": "drug:migalastat hcl",
-          "label": "migalastat HCl",
+          "label": "Migalastat HCl",
           "kind": "drug",
           "citation_count": 7,
           "citations_complete": true,
@@ -765,7 +765,7 @@
         },
         {
           "id": "drug:migalastat hcl 150 mg",
-          "label": "migalastat HCl 150 mg",
+          "label": "Migalastat HCl 150 mg",
           "kind": "drug",
           "citation_count": 5,
           "citations_complete": true,
@@ -804,7 +804,7 @@
         },
         {
           "id": "drug:migalastat hcl 20 mg",
-          "label": "migalastat HCl 20 mg",
+          "label": "Migalastat HCl 20 mg",
           "kind": "drug",
           "citation_count": 2,
           "citations_complete": true,
@@ -912,7 +912,7 @@
         },
         {
           "id": "drug:pegunigalsidase alfa",
-          "label": "pegunigalsidase alfa",
+          "label": "Pegunigalsidase Alfa",
           "kind": "drug",
           "citation_count": 4,
           "citations_complete": true,
@@ -1119,7 +1119,7 @@
         },
         {
           "id": "drug:replagal",
-          "label": "Replagal",
+          "label": "REPLAGAL",
           "kind": "drug",
           "citation_count": 6,
           "citations_complete": true,
@@ -3374,7 +3374,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T08:36:35.826946Z",
+    "analyzed_at": "2026-11-14T18:34:50.196935Z",
     "query_plan": {
       "intent": "sponsor_drug_network",
       "condition": "Fabry disease",
@@ -3384,7 +3384,7 @@
       "start_year": null,
       "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Display the network of lead sponsors connected to drug interventions in Fabry disease trials."
+      "interpretation": "Showing the network of lead sponsors connected to drug interventions in trials for Fabry disease."
     },
     "filters": {
       "condition": "Fabry disease",
@@ -3395,7 +3395,8 @@
     "total_matches": 258,
     "complete": true,
     "warnings": [
-      "Visualization displays only 75 of 81 edges; complete registry retrieval does not mean complete visualization coverage"
+      "Visualization displays only 75 of 81 edges; complete registry retrieval does not mean complete visualization coverage",
+      "183 post-filter studies did not contribute to the displayed visualization (missing chart fields or display limits)"
     ],
     "assumptions": [
       "Edges are weighted by distinct NCT IDs; duplicates within the same study do not inflate weight.",
@@ -3406,6 +3407,8 @@
     "cohort_matches": null,
     "visualization_truncated": true,
     "visualization_items_returned": 75,
-    "visualization_total_items": 81
+    "visualization_total_items": 81,
+    "records_visualized": 75,
+    "records_not_visualized": 183
   }
 }
