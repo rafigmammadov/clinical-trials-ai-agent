@@ -49,6 +49,10 @@ class OpenAIPlanner:
         self._client = AsyncOpenAI(api_key=api_key, timeout=30.0, max_retries=2)
         self._model = model
 
+    async def close(self) -> None:
+        """Release the underlying OpenAI HTTP connection pool on app shutdown."""
+        await self._client.close()
+
     async def plan(self, query: str) -> QueryPlan:
         try:
             response = await self._client.responses.parse(
