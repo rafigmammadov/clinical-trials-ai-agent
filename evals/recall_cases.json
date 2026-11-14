@@ -1,0 +1,871 @@
+[
+  {
+    "id": "r001",
+    "category": "omitted",
+    "question": "How many melanoma trials started each year since 2018?",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2018
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r002",
+    "category": "omitted",
+    "question": "How many melanoma trials started each year since 2018?",
+    "plan": {
+      "intent": "time_trend",
+      "condition": "melanoma"
+    },
+    "expected_missing": [
+      "start_year"
+    ]
+  },
+  {
+    "id": "r003",
+    "category": "omitted",
+    "question": "How are Fabry disease clinical trials distributed across phases?",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r004",
+    "category": "omitted",
+    "question": "Show a sponsor drug network for Wilson disease trials",
+    "plan": {
+      "intent": "sponsor_drug_network"
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r005",
+    "category": "omitted",
+    "question": "Show recruiting breast cancer trials in Canada",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "breast cancer",
+      "country": "Canada"
+    },
+    "expected_missing": [
+      "recruiting_only"
+    ]
+  },
+  {
+    "id": "r006",
+    "category": "omitted",
+    "question": "Show recruiting breast cancer trials in Canada",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "breast cancer",
+      "recruiting_only": true
+    },
+    "expected_missing": [
+      "country"
+    ]
+  },
+  {
+    "id": "r007",
+    "category": "omitted",
+    "question": "Show trials sponsored by Pfizer",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected_missing": [
+      "sponsor"
+    ]
+  },
+  {
+    "id": "r008",
+    "category": "omitted",
+    "question": "Show trial phases sponsored by Roche in Germany",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Germany"
+    },
+    "expected_missing": [
+      "sponsor"
+    ]
+  },
+  {
+    "id": "r009",
+    "category": "omitted",
+    "question": "Count recruiting studies in Brazil",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Brazil"
+    },
+    "expected_missing": [
+      "recruiting_only"
+    ]
+  },
+  {
+    "id": "r010",
+    "category": "omitted",
+    "question": "Count recruiting studies in Brazil",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected_missing": [
+      "country"
+    ]
+  },
+  {
+    "id": "r011",
+    "category": "omitted",
+    "question": "Compare trial phases for pembrolizumab and nivolumab",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "pembrolizumab"
+      ]
+    },
+    "expected_missing": [
+      "drugs"
+    ]
+  },
+  {
+    "id": "r012",
+    "category": "omitted",
+    "question": "Compare trial phases for ivacaftor versus lumacaftor",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "ivacaftor"
+      ]
+    },
+    "expected_missing": [
+      "drugs"
+    ]
+  },
+  {
+    "id": "r013",
+    "category": "omitted",
+    "question": "Show studies from 2018 through 2024",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2018
+    },
+    "expected_missing": [
+      "end_year"
+    ]
+  },
+  {
+    "id": "r014",
+    "category": "omitted",
+    "question": "Show studies between 2018 and 2024",
+    "plan": {
+      "intent": "time_trend",
+      "end_year": 2024
+    },
+    "expected_missing": [
+      "start_year"
+    ]
+  },
+  {
+    "id": "r015",
+    "category": "omitted",
+    "question": "Show studies that started in 2024",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2024
+    },
+    "expected_missing": [
+      "end_year"
+    ]
+  },
+  {
+    "id": "r016",
+    "category": "omitted",
+    "question": "Show studies that started in 2024",
+    "plan": {
+      "intent": "phase_distribution",
+      "end_year": 2024
+    },
+    "expected_missing": [
+      "start_year"
+    ]
+  },
+  {
+    "id": "r017",
+    "category": "omitted",
+    "question": "Show trends since 2020",
+    "plan": {
+      "intent": "time_trend"
+    },
+    "expected_missing": [
+      "start_year"
+    ]
+  },
+  {
+    "id": "r018",
+    "category": "omitted",
+    "question": "Which sponsor leads diabetes clinical trials?",
+    "plan": {
+      "intent": "sponsor_distribution"
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r019",
+    "category": "omitted",
+    "question": "Show asthma trials in Japan",
+    "plan": {
+      "intent": "geography",
+      "country": "Japan"
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r020",
+    "category": "omitted",
+    "question": "Show diabetes studies in India",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "diabetes"
+    },
+    "expected_missing": [
+      "country"
+    ]
+  },
+  {
+    "id": "r021",
+    "category": "omitted",
+    "question": "Show countries with recruiting melanoma trials",
+    "plan": {
+      "intent": "geography",
+      "condition": "melanoma"
+    },
+    "expected_missing": [
+      "recruiting_only"
+    ]
+  },
+  {
+    "id": "r022",
+    "category": "omitted",
+    "question": "Show drug medication trials for drug ivacaftor",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected_missing": [
+      "drugs"
+    ]
+  },
+  {
+    "id": "r023",
+    "category": "mismatch",
+    "question": "Show breast cancer trials in Canada",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "breast cancer",
+      "country": "France"
+    },
+    "expected_missing": [
+      "country"
+    ]
+  },
+  {
+    "id": "r024",
+    "category": "mismatch",
+    "question": "Count melanoma trials since 2019",
+    "plan": {
+      "intent": "time_trend",
+      "condition": "melanoma",
+      "start_year": 2018
+    },
+    "expected_missing": [
+      "start_year"
+    ]
+  },
+  {
+    "id": "r025",
+    "category": "mismatch",
+    "question": "Count trials sponsored by Pfizer",
+    "plan": {
+      "intent": "phase_distribution",
+      "sponsor": "Roche"
+    },
+    "expected_missing": [
+      "sponsor"
+    ]
+  },
+  {
+    "id": "r026",
+    "category": "mismatch",
+    "question": "Compare phases for nivolumab versus pembrolizumab",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "nivolumab",
+        "lumacaftor"
+      ]
+    },
+    "expected_missing": [
+      "drugs"
+    ]
+  },
+  {
+    "id": "r027",
+    "category": "mismatch",
+    "question": "Count studies in the USA",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada"
+    },
+    "expected_missing": [
+      "country"
+    ]
+  },
+  {
+    "id": "r028",
+    "category": "mismatch",
+    "question": "Show trials from 2018 to 2024",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2018,
+      "end_year": 2023
+    },
+    "expected_missing": [
+      "end_year"
+    ]
+  },
+  {
+    "id": "r029",
+    "category": "mismatch",
+    "question": "Show trends since 2018",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2018,
+      "end_year": 2018
+    },
+    "expected_missing": [
+      "end_year"
+    ]
+  },
+  {
+    "id": "r030",
+    "category": "mismatch",
+    "question": "Show studies started in 2024",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2024,
+      "end_year": 2025
+    },
+    "expected_missing": [
+      "end_year"
+    ]
+  },
+  {
+    "id": "r031",
+    "category": "mismatch",
+    "question": "Compare lung cancer and breast cancer studies",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "breast cancer"
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r032",
+    "category": "mismatch",
+    "question": "Compare trial phases for ivacaftor and lumacaftor",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "ivacaftor",
+        "nivolumab"
+      ]
+    },
+    "expected_missing": [
+      "drugs"
+    ]
+  },
+  {
+    "id": "r033",
+    "category": "complete",
+    "question": "How many melanoma trials started each year since 2018?",
+    "plan": {
+      "intent": "time_trend",
+      "condition": "melanoma",
+      "start_year": 2018
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r034",
+    "category": "complete",
+    "question": "How are Fabry disease clinical trials distributed across phases?",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "Fabry disease"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r035",
+    "category": "complete",
+    "question": "Which countries have the most recruiting trials for Wilson disease?",
+    "plan": {
+      "intent": "geography",
+      "condition": "Wilson disease",
+      "recruiting_only": true
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r036",
+    "category": "complete",
+    "question": "Show the sponsor to drug network for Fabry disease trials",
+    "plan": {
+      "intent": "sponsor_drug_network",
+      "condition": "Fabry disease"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r037",
+    "category": "complete",
+    "question": "Compare trial phases for ivacaftor versus lumacaftor",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "ivacaftor",
+        "lumacaftor"
+      ]
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r038",
+    "category": "complete",
+    "question": "Show recruiting breast cancer trials in Canada since 2020 sponsored by Pfizer",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "breast cancer",
+      "country": "Canada",
+      "sponsor": "Pfizer",
+      "start_year": 2020,
+      "recruiting_only": true
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r039",
+    "category": "complete",
+    "question": "Show study phase distribution in the United States",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United States"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r040",
+    "category": "complete",
+    "question": "Count US clinical studies",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United States"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r041",
+    "category": "complete",
+    "question": "Count UK clinical trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United Kingdom"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r042",
+    "category": "complete",
+    "question": "Count U.S.A. trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United States"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r043",
+    "category": "complete",
+    "question": "Show recruiting lung cancer trials in Germany",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "lung cancer",
+      "country": "Germany",
+      "recruiting_only": true
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r044",
+    "category": "complete",
+    "question": "Count trials from 2018 to 2024",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2018,
+      "end_year": 2024
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r045",
+    "category": "complete",
+    "question": "Count trials between 2020 and 2025",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2020,
+      "end_year": 2025
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r046",
+    "category": "complete",
+    "question": "Show studies started in 2024",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2024,
+      "end_year": 2024
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r047",
+    "category": "complete",
+    "question": "Show sponsor counts for psoriasis trials",
+    "plan": {
+      "intent": "sponsor_distribution",
+      "condition": "psoriasis"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r048",
+    "category": "complete",
+    "question": "Show trials sponsored by Pfizer Inc in Canada",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada",
+      "sponsor": "Pfizer Inc"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r049",
+    "category": "complete",
+    "question": "Show clinical trials for Niemann-Pick disease type C since 2018",
+    "plan": {
+      "intent": "time_trend",
+      "condition": "Niemann-Pick disease type C",
+      "start_year": 2018
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r050",
+    "category": "complete",
+    "question": "Compare trial phases for pembrolizumab and nivolumab in Japan",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "pembrolizumab",
+        "nivolumab"
+      ],
+      "country": "Japan"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r051",
+    "category": "overrides",
+    "question": "Show recruiting breast cancer trials in Canada since 2018 sponsored by Pfizer",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "asthma",
+      "country": "France",
+      "start_year": 2021,
+      "sponsor": "Roche",
+      "recruiting_only": false
+    },
+    "expected_missing": [],
+    "overrides": {
+      "condition": "asthma",
+      "country": "France",
+      "start_year": 2021,
+      "sponsor": "Roche",
+      "recruiting_only": false
+    }
+  },
+  {
+    "id": "r052",
+    "category": "overrides",
+    "question": "Show melanoma trial phase distribution",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected_missing": [],
+    "overrides": {
+      "condition": "melanoma"
+    }
+  },
+  {
+    "id": "r053",
+    "category": "overrides",
+    "question": "Show trials in Canada",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "France"
+    },
+    "expected_missing": [],
+    "overrides": {
+      "country": "France"
+    }
+  },
+  {
+    "id": "r054",
+    "category": "overrides",
+    "question": "Show trends since 2018",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2020
+    },
+    "expected_missing": [],
+    "overrides": {
+      "start_year": 2020
+    }
+  },
+  {
+    "id": "r055",
+    "category": "overrides",
+    "question": "Show recruiting trials in India",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "India",
+      "recruiting_only": false
+    },
+    "expected_missing": [],
+    "overrides": {
+      "recruiting_only": false
+    }
+  },
+  {
+    "id": "r056",
+    "category": "overrides",
+    "question": "Count trials sponsored by Roche",
+    "plan": {
+      "intent": "phase_distribution",
+      "sponsor": "Pfizer"
+    },
+    "expected_missing": [],
+    "overrides": {
+      "sponsor": "Pfizer"
+    }
+  },
+  {
+    "id": "r057",
+    "category": "overrides",
+    "question": "Compare phases for ivacaftor and lumacaftor",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "pembrolizumab",
+        "nivolumab"
+      ]
+    },
+    "expected_missing": [],
+    "overrides": {
+      "drugs": [
+        "pembrolizumab",
+        "nivolumab"
+      ]
+    }
+  },
+  {
+    "id": "r058",
+    "category": "overrides",
+    "question": "Show trials from 2018 through 2024",
+    "plan": {
+      "intent": "time_trend",
+      "start_year": 2021,
+      "end_year": 2025
+    },
+    "expected_missing": [],
+    "overrides": {
+      "start_year": 2021,
+      "end_year": 2025
+    }
+  },
+  {
+    "id": "r059",
+    "category": "unrestricted",
+    "question": "Show all clinical trials by phase",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r060",
+    "category": "unrestricted",
+    "question": "Show worldwide trial trends",
+    "plan": {
+      "intent": "time_trend"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r061",
+    "category": "unrestricted",
+    "question": "Show study status distributions",
+    "plan": {
+      "intent": "status_distribution"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r062",
+    "category": "unrestricted",
+    "question": "Show recruiting status categories",
+    "plan": {
+      "intent": "status_distribution"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r063",
+    "category": "unrestricted",
+    "question": "Show intervention types for trials",
+    "plan": {
+      "intent": "intervention_distribution"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r064",
+    "category": "unrestricted",
+    "question": "Show us trial statistics",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r065",
+    "category": "unrestricted",
+    "question": "Which countries host the most trials?",
+    "plan": {
+      "intent": "geography"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r066",
+    "category": "unrestricted",
+    "question": "Show the relationship between sponsors and drugs",
+    "plan": {
+      "intent": "sponsor_drug_network"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r067",
+    "category": "unrestricted",
+    "question": "Compare trial counts across phases",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r068",
+    "category": "unrestricted",
+    "question": "Show trial starts for the last five years",
+    "plan": {
+      "intent": "time_trend"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r069",
+    "category": "unrestricted",
+    "question": "Show enrollment histograms by phase",
+    "plan": {
+      "intent": "enrollment_histogram"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r070",
+    "category": "unrestricted",
+    "question": "Show enrollment versus start year for studies",
+    "plan": {
+      "intent": "enrollment_scatter"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r071",
+    "category": "unrestricted",
+    "question": "Show non-melanoma skin cancer study patterns",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "non-melanoma skin cancer"
+    },
+    "expected_missing": []
+  },
+  {
+    "id": "r072",
+    "category": "multi_entity",
+    "question": "Show breast cancer and lung cancer trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "breast cancer"
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r073",
+    "category": "multi_entity",
+    "question": "Compare lung cancer versus breast cancer studies",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "lung cancer"
+    },
+    "expected_missing": [
+      "condition"
+    ]
+  },
+  {
+    "id": "r074",
+    "category": "multi_entity",
+    "question": "Count studies in Canada versus Japan",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada"
+    },
+    "expected_missing": [
+      "country"
+    ]
+  }
+]
