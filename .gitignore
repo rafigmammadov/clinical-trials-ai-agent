@@ -16,3 +16,5 @@ dist/
 build/
 *.egg-info/
 *.zip
+# Locally measured evaluation reports (never commit model transcripts by accident)
+evals/reports/
