@@ -2,6 +2,9 @@
 
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+import logging
+from time import perf_counter
+from uuid import uuid4
 
 import httpx
 from fastapi import FastAPI, Request
@@ -15,13 +18,27 @@ from app.schemas.api import AnalyzeRequest, AnalyzeResponse
 from app.services.clinicaltrials import ClinicalTrialsClient
 
 
+logger = logging.getLogger("clinical_trials.http")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """One pooled connection client per application process."""
     settings = get_settings()
     async with httpx.AsyncClient(timeout=settings.clinicaltrials_timeout_seconds) as http:
         app.state.trials = ClinicalTrialsClient(http, settings.clinicaltrials_api_url)
-        yield
+        # Construct one planner per process rather than one OpenAI HTTP pool
+        # per request. Missing credentials do not prevent health checks.
+        app.state.planner = (
+            RulesPlanner() if settings.planner_mode == "rules"
+            else OpenAIPlanner(settings.openai_api_key, settings.openai_model)
+            if settings.openai_api_key else None
+        )
+        try:
+            yield
+        finally:
+            if isinstance(app.state.planner, OpenAIPlanner):
+                await app.state.planner.close()
 
 
 app = FastAPI(
@@ -31,6 +48,22 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+
+@app.middleware("http")
+async def request_telemetry(request: Request, call_next):
+    """Correlate requests without logging prompts, bodies, or credentials."""
+    request_id = uuid4().hex
+    started = perf_counter()
+    response = await call_next(request)
+    duration_ms = (perf_counter() - started) * 1000
+    response.headers["X-Request-ID"] = request_id
+    response.headers["X-Process-Time-Ms"] = f"{duration_ms:.2f}"
+    logger.info(
+        "request_completed request_id=%s method=%s path=%s status=%s duration_ms=%.2f",
+        request_id, request.method, request.url.path, response.status_code, duration_ms,
+    )
+    return response
 
 
 @app.exception_handler(PlanningError)
@@ -69,8 +102,10 @@ async def capabilities() -> dict[str, object]:
 
 @app.post("/api/v1/analyze", response_model=AnalyzeResponse, tags=["analysis"])
 async def analyze(payload: AnalyzeRequest, request: Request) -> AnalyzeResponse:
-    settings = get_settings()
-    planner = (RulesPlanner() if settings.planner_mode == "rules"
-               else OpenAIPlanner(settings.openai_api_key, settings.openai_model))
+    planner = request.app.state.planner
+    if planner is None:
+        raise PlanningError(
+            "OPENAI_API_KEY is not configured; use PLANNER_MODE=rules for local smoke tests"
+        )
     service = AnalysisService(planner=planner, trials=request.app.state.trials)
     return await service.analyze(payload)
