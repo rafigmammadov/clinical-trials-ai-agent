@@ -31,3 +31,5 @@ jobs:
         run: python -m evals.identity
       - name: Validate question-grounded query filters
         run: python -m evals.grounding
+      - name: Validate requested-filter recall benchmark
+        run: python -m evals.recall
