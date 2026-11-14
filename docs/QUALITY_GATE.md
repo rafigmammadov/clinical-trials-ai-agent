@@ -6,7 +6,10 @@ The checks below separate automated correctness from registry and clinical-seman
 
 ```bash
 python -m pytest -q
-python -m compileall -q app tests scripts
+python -m compileall -q app tests scripts evals
+python -m evals.run --mode validate
+python -m evals.identity
+python -m evals.grounding
 python -m scripts.verify_examples
 ```
 
