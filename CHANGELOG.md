@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased (v0.6.0 query-plan filter recall candidate)
+
+- Check that high-confidence user-requested clinical conditions, drugs, sponsors,
+  countries, recruiting restrictions, and calendar-year boundaries survive model
+  planning and typed override resolution before any registry retrieval.
+- Reject supported-form but unrepresented multi-entity requests and recognized
+  negative filters instead of silently broadening results.
+- Add 74 hand-labeled synthetic plan-omission cases, with separate guard
+  omission-detection recall and precision. These are not live GPT metrics.
+- Extend opt-in live planner evaluation with requested-filter assertion counts
+  and recall, distinct from the existing field-accuracy score.
+- Establish one source for the service version (`app/version.py`), separately
+  from the stable `/api/v1` URL.
+- Extend pytest, CI, local checks, and release packaging quality gates.
+
 ## Unreleased (v0.5.0 query-filter grounding candidate)
 
 - Reject unrequested conditions, drugs, sponsors, countries, year lower bounds, and recruiting-only constraints before registry retrieval. Structured request overrides remain authoritative per field.
