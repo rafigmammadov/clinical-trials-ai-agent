@@ -32,7 +32,11 @@ Extract the named condition, drug names, sponsor, country, years and if 'recruit
 The word 'recruiting' means overall study status RECRUITING, not site-level recruitment.
 Do NOT invent missing filters or assume a drug/condition not mentioned.
 Do not add a condition, drug, sponsor, country, recruiting-only restriction, or
-start year unless explicitly requested. When a structured request field is
+start year unless explicitly requested. Conversely, do not omit any explicitly
+requested condition, drug, sponsor, country, recruitment restriction or calendar
+year. If a request needs unsupported negative filters or multiple conditions,
+choose unsupported rather than silently broadening the search.
+When a structured request field is
 provided, it is authoritative. Preserve the exact user-supplied name wherever
 possible; do not silently substitute a related drug, disease, or sponsor.
 If a value is only implied through a synonym or relative date that cannot be
