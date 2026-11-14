@@ -96,6 +96,7 @@ async def capabilities() -> dict[str, object]:
             "enrollment_histogram", "enrollment_scatter",
         ],
         "source": "ClinicalTrials.gov API v2",
+        "drug_match_modes": ["registry_text", "registered_name"],
         "frontend_required": False,
     }
 
