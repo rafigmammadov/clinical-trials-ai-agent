@@ -2,6 +2,8 @@
 
 import asyncio
 from dataclasses import dataclass
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from typing import Any
 
 import httpx
@@ -43,14 +45,30 @@ class ClinicalTrialsClient:
             params["filter.advanced"] = f"AREA[StartDate]RANGE[{low},{high}]"
         return params
 
+    @staticmethod
+    def retry_delay(value: str | None, attempt: int, *, now: datetime | None = None) -> float:
+        """Bounded retry delay for RFC 9110 delta-seconds and HTTP-date values."""
+        fallback = min(0.5 * (2 ** attempt), 4.0)
+        if not value:
+            return fallback
+        value = value.strip()
+        if value.isdecimal():
+            return min(float(value), 4.0)
+        try:
+            until = parsedate_to_datetime(value)
+            if until.tzinfo is None:
+                until = until.replace(tzinfo=timezone.utc)
+            current = now or datetime.now(timezone.utc)
+            return max(0.0, min((until - current).total_seconds(), 4.0))
+        except (TypeError, ValueError, OverflowError):
+            return fallback
+
     async def _request(self, params: dict[str, Any]) -> dict[str, Any]:
         for attempt in range(3):
             try:
                 resp = await self._http.get(f"{self._base_url}/studies", params=params)
-                if resp.status_code in {429, 500, 502, 503, 504} and attempt < 2:
-                    retry_after = resp.headers.get("Retry-After", "")
-                    delay = min(float(retry_after), 4.0) if retry_after.isdecimal() else 0.5 * (2 ** attempt)
-                    await asyncio.sleep(delay)
+                if resp.status_code in {408, 429, 500, 502, 503, 504} and attempt < 2:
+                    await asyncio.sleep(self.retry_delay(resp.headers.get("Retry-After"), attempt))
                     continue
                 resp.raise_for_status()
                 data = resp.json()
