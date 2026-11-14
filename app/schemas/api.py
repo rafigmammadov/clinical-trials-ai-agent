@@ -10,7 +10,7 @@ Intent = Literal[
     "time_trend", "phase_distribution", "intervention_distribution",
     "status_distribution", "sponsor_distribution", "geography",
     "drug_comparison", "sponsor_drug_network", "drug_cooccurrence_network",
-    "enrollment_histogram", "enrollment_scatter",
+    "enrollment_histogram", "enrollment_scatter", "unsupported",
 ]
 ChartType = Literal[
     "time_series", "bar_chart", "grouped_bar_chart", "network_graph",
@@ -107,6 +107,15 @@ class QueryPlan(StrictModel):
             raise ValueError("start_year must be <= end_year")
         if len(self.drugs) > 3 or any(not x.strip() for x in self.drugs):
             raise ValueError("at most 3 non-empty drug names are permitted")
+        # Defense-in-depth: structured request filters have their own limits,
+        # but model-generated fields bypass AnalyzeRequest validation.
+        for name, limit in (("condition", 200), ("sponsor", 200),
+                            ("country", 100), ("interpretation", 500)):
+            value = getattr(self, name)
+            if value is not None and len(value) > limit:
+                raise ValueError(f"{name} exceeds the permitted length")
+        if any(len(drug) > 200 for drug in self.drugs):
+            raise ValueError("drug name exceeds the permitted length")
         return self
 
 
@@ -136,6 +145,10 @@ class ResponseMeta(StrictModel):
     visualization_truncated: bool = False
     visualization_items_returned: int | None = None
     visualization_total_items: int | None = None
+    # Count distinct NCT IDs actually represented by a displayed chart datum/edge.
+    # records_used retains its original meaning: matched post-filter records.
+    records_visualized: int | None = None
+    records_not_visualized: int | None = None
 
 
 class AnalyzeResponse(StrictModel):
