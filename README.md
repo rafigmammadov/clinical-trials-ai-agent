@@ -1,61 +1,74 @@
 # Clinical Trials AI Agent
 
-A Python service that translates natural-language questions about clinical studies into chart-ready JSON. It uses an LLM to interpret the question, retrieves study records from ClinicalTrials.gov, and computes visualizations from those records rather than asking the model to produce numbers.
+A FastAPI service that turns natural-language questions about clinical studies into evidence-backed, renderer-ready visualization JSON. A language model interprets the request; application code retrieves study records from [ClinicalTrials.gov](https://clinicaltrials.gov/data-api/api) and performs the calculations.
 
-The API returns chart encodings, aggregated data, NCT-level evidence, and metadata about how much of the matching dataset was retrieved. There is no frontend; any renderer that understands the response contract can consume the output.
+The API returns chart encodings, aggregated values, NCT-level source evidence, and explicit retrieval and visualization completeness metadata. It does not produce clinical advice and does not include a frontend.
 
-## How it works
+## Architecture
 
-```text
-POST /api/v1/analyze
-        |
-        v
-Pydantic request validation
-        |
-        v
-OpenAI planner -> constrained QueryPlan
-        |
-        v
-ClinicalTrials.gov v2 client -> pagination, retries, NCT deduplication
-        |
-        v
-Study normalization -> local filter checks
-        |
-        v
-Deterministic aggregation -> visualization specification + citations
-        |
-        v
-Pydantic response validation -> JSON
+```mermaid
+flowchart TD
+    A[POST /api/v1/analyze] --> B[Pydantic request validation]
+    B --> C[OpenAI structured query planner]
+    C --> D[Semantic plan validation]
+    D --> E[ClinicalTrials.gov API client]
+    E --> F[Pagination, normalization and NCT deduplication]
+    F --> G[Deterministic filters and aggregation]
+    G --> H[Visualization builder and source citations]
+    H --> I[Response contract validation]
+    I --> J[JSON chart specification]
 ```
 
-The model selects an allowed analysis intent and extracts filters. It cannot execute generated code, choose arbitrary network destinations, or fabricate the values in the response. A limited rule-based planner is available for local smoke tests, but it is not equivalent to the LLM planner.
+`app/agent/` owns planning and orchestration; `app/services/` handles the registry integration and normalized study model; `app/visualizations/` calculates the chart data; `app/schemas/` validates inputs, plans and outputs. The API layer does not calculate study counts. The OpenAI client is reused for the lifetime of the application process and closed on shutdown.
 
-## Getting started
+The model cannot choose arbitrary network URLs, execute generated code, or supply study counts. It produces an allowlisted, typed `QueryPlan` that the application independently validates. The numbers and citations originate from normalized registry records. We deliberately use no general-purpose agent framework: a small, inspectable workflow makes data lineage and failure modes easier to reason about.
 
-Requirements: Python 3.11 or newer, internet access to ClinicalTrials.gov, and an OpenAI API key for natural-language planning. The registry itself does not require an API key.
+See [architecture and counting semantics](docs/architecture.md) and [design decisions](docs/DECISIONS.md).
+
+## Quick start
+
+Requirements: Python 3.11 or newer; network access to the ClinicalTrials.gov API; an authorized OpenAI API key for `PLANNER_MODE=openai`. ClinicalTrials.gov does not require a key.
 
 ```bash
+git clone https://github.com/rafigmammadov/clinical-trials-ai-agent.git
+cd clinical-trials-ai-agent
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Set `OPENAI_API_KEY` in `.env`, keep `PLANNER_MODE=openai`, and choose an allowed model (default: `gpt-4.1-mini`). Do not commit `.env` or copy real credentials into examples or logs. If a key has been exposed, revoke it and use a replacement.
-
-Start the API:
+Edit `.env` to insert a newly provisioned API key. Never commit a key or paste one into issues, logs, or chat. The example configuration is a template, not a secret store. If the key is missing, health and documentation remain available but LLM-backed analysis returns HTTP 503. For an offline rule-based smoke check, set `PLANNER_MODE=rules` and restart the application; that limited planner is not equivalent to the LLM.
 
 ```bash
 python -m uvicorn app.main:app --reload
 ```
 
-Visit `http://127.0.0.1:8000/docs` for the generated OpenAPI interface. Other endpoints:
+Open <http://127.0.0.1:8000/docs> for the generated OpenAPI interface. Production deployments must use an appropriate process manager and add access controls, quotas and monitoring; `--reload` is for development only.
 
-- `GET /health` — liveness check
-- `GET /api/v1/capabilities` — supported query intents
-- `POST /api/v1/analyze` — plan, retrieve, aggregate, and return a visualization
+## Configuration
 
-### Example request
+| Variable | Default | Meaning |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | Empty | Required for LLM-backed analysis; never logged or committed |
+| `OPENAI_MODEL` | `gpt-4.1-mini` | Structured planning model (must be permitted by your API project) |
+| `PLANNER_MODE` | `openai` | `openai` or limited `rules` test mode |
+| `CLINICALTRIALS_API_URL` | `https://clinicaltrials.gov/api/v2` | Registry API base URL; HTTPS required except local loopback testing |
+| `CLINICALTRIALS_TIMEOUT_SECONDS` | `20` | HTTPX timeout for each registry request (0.1–120 seconds) |
+
+`get_settings()` caches settings in-process. Restart the application after changing `.env`. Dependencies use bounded version ranges, not a cross-platform lockfile. The CI workflow checks supported Python versions; a successful test on one machine is not a full compatibility guarantee.
+
+## API
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| GET | `/health` | Application liveness; does not verify upstream availability |
+| GET | `/api/v1/capabilities` | Supported query intents |
+| POST | `/api/v1/analyze` | Interpret, retrieve, analyze and return one visualization |
+
+All HTTP responses include `X-Request-ID` (server-generated) and `X-Process-Time-Ms`. Request logs contain request IDs, HTTP paths, status codes and elapsed time—not prompts, payloads or API keys.
+
+Example:
 
 ```bash
 curl --fail-with-body -sS http://127.0.0.1:8000/api/v1/analyze \
@@ -71,117 +84,103 @@ curl --fail-with-body -sS http://127.0.0.1:8000/api/v1/analyze \
 python -m json.tool /tmp/clinical-trials-response.json
 ```
 
-`query` is required. Structured fields are optional and override the corresponding filters inferred by the model. The request also accepts `drugs` (up to three, or exactly two for a comparison), `sponsor`, `country`, `end_year`, `recruiting_only`, `max_studies` (1–5000 per registry search), and `citation_limit` (0–50). See `/docs` and `app/schemas/api.py` for validation constraints.
+`query` is required (5–2,000 characters). Optional inputs include `condition`, `drugs`, `sponsor`, `country`, `start_year`, `end_year`, `recruiting_only`, `max_studies` (1–5,000 **per registry search**) and `citation_limit` (0–50 **contributing studies per datum**). Explicit structured inputs override the corresponding inferred plan fields. A two-drug comparison performs separate searches; its cohorts can overlap.
 
-### Response contract
-
-The response has two top-level objects:
-
-- `visualization`: a chart `type`, `title`, renderer `encoding`, and `data`. Ordinary charts use a row array; networks use `{ "nodes": [...], "edges": [...] }`.
-- `meta`: the interpreted query plan, applied filters, retrieval counts, completeness, assumptions, warnings, and citation limits.
-
-Each populated chart row or graph relationship can contain supporting NCT IDs, links to the official study record, field paths, and excerpts. To keep responses bounded, citations can be capped. `citation_count` records the number of contributing studies; `citations_complete` indicates whether the response includes all their citations.
-
-Treat `meta.complete` and `meta.visualization_truncated` separately. The former describes registry retrieval; the latter indicates that the renderer-facing chart omits lower-ranked categories or graph edges. A full registry result can still produce a truncated graph.
-
-`records_fetched` counts unique studies retrieved; `records_used` counts unique post-filter studies; `records_visualized` counts distinct NCT IDs that actually support a displayed datum or graph edge. `records_not_visualized` is the difference, for example when dates or enrollment are missing, or network edges are omitted. A `record_identity_only` citation indicates an NCT record link where the relevant clinical field was missing; it is not a fabricated field-value excerpt. Unsupported analyses return HTTP 422 without accessing the registry.
+Expected errors: HTTP 422 for invalid input or unsupported analyses, 502 for registry failures, and 503 for unavailable planning. FastAPI also emits HTTP 422 for invalid JSON schema inputs. These errors do not include provider response bodies or credentials. Full field definitions are in [API contract](docs/api.md) and the live `/docs` interface.
 
 ## Supported analyses
 
-| Intent | JSON visualization | Calculation |
+| Intent | Output type | Count or relationship |
 | --- | --- | --- |
-| `time_trend` | `time_series` | Distinct studies grouped by start year |
-| `phase_distribution` | `bar_chart` | Study counts per phase |
-| `intervention_distribution` | `bar_chart` | Study counts per intervention type |
-| `status_distribution` | `bar_chart` | Study counts per overall status |
-| `sponsor_distribution` | `bar_chart` | Study counts per lead sponsor |
-| `geography` | `bar_chart` | Distinct studies with a listed site in each country |
-| `drug_comparison` | `grouped_bar_chart` | Phase distribution for two independently searched drug cohorts |
-| `sponsor_drug_network` | `network_graph` | Co-occurrence of lead sponsor and registered drug intervention |
-| `drug_cooccurrence_network` | `network_graph` | Drug interventions co-listed in the same study |
-| `enrollment_histogram` | `histogram` | Enrollment counts binned into ranges |
-| `enrollment_scatter` | `scatter_plot` | Study start year against enrollment count |
+| `time_trend` | `time_series` | Unique NCT records grouped by start year |
+| `phase_distribution` | `bar_chart` | Unique studies per phase |
+| `intervention_distribution` | `bar_chart` | Unique studies per intervention type |
+| `status_distribution` | `bar_chart` | Unique studies per overall study status |
+| `sponsor_distribution` | `bar_chart` | Unique studies per lead sponsor |
+| `geography` | `bar_chart` | Unique studies with at least one listed study site in a country |
+| `drug_comparison` | `grouped_bar_chart` | Phase distribution of two independently searched drug cohorts |
+| `sponsor_drug_network` | `network_graph` | Lead sponsor and drug name co-listed in a study |
+| `drug_cooccurrence_network` | `network_graph` | Drug names co-listed within one study |
+| `enrollment_histogram` | `histogram` | Enrollment count distributions |
+| `enrollment_scatter` | `scatter_plot` | Enrollment against study start year |
 
-The chart builder is deterministic and does not use the LLM to compute counts. Study IDs are deduplicated within each category. A multi-phase or multinational study may contribute to multiple categories, so category totals can exceed the number of distinct studies. Two drug cohorts can overlap.
+The planner can return `unsupported`; the server responds with HTTP 422 instead of substituting a misleading chart. It is not a medical reasoning or efficacy-analysis service. Complex multi-condition comparisons, patient-level outcomes, and clinical ontology resolution are not implemented.
 
-## Correctness boundaries
+## Output contract and provenance
 
-These are deliberate semantics, not guarantees of complete clinical interpretation:
+Every successful response contains `visualization` and `meta`:
 
-- Registry searches for drugs use text matching, not RxNorm or another canonical drug ontology. A matching intervention name is not proof of pharmacological equivalence.
-- `recruiting_only` filters the study's overall status. A listed study site in a country is not necessarily recruiting locally.
-- Start-year trends use the study start-date field. Missing or invalid dates are excluded; partial and estimated dates cannot establish precise start timing. Known future full dates are excluded when no end year is supplied.
-- Enrollment can be anticipated or actual. The current aggregations do not split those types.
-- A network edge records co-listing within registry records, not a causal, contractual, or treatment relationship.
-- Queries exceeding `max_studies` return explicitly incomplete results. Network graphs and some categorical charts may additionally limit rendered items, with independent warnings.
+- `visualization.type`, `.title`, `.encoding`, `.data` tell a frontend how to render the result. Ordinary charts contain row arrays; network charts contain `nodes` and `edges`.
+- `meta.query_plan` records the interpreted intent and filters; `meta.filters` records the applied query parameters and `meta.assumptions` describes grouping semantics.
+- `meta.records_fetched` counts distinct retrieved NCT IDs; `records_used` counts post-filter records; `records_visualized` counts distinct records supporting displayed rows or edges; `records_not_visualized` reports eligible records omitted from the displayed chart.
+- `meta.complete` describes **registry retrieval**; `meta.visualization_truncated` describes **chart display limits**. A complete registry retrieval can still render only the highest-weighted 75 network edges.
+- A datum's `citation_count` is the number of contributing studies; the `citations` array may be capped and `citations_complete` indicates whether every contributing study has a citation. Each citation carries an NCT ID, canonical registry link, supporting source field and excerpt. Multi-field evidence is kept on the same NCT citation using `related_field_path` and `related_excerpt`.
 
-Do not interpret the JSON as medical advice or as a complete population count when `meta.complete` is false. For field-level definitions and tradeoffs, see [architecture decisions](docs/DECISIONS.md).
+Source values are taken from the registry, not generated by the LLM. `evidence_scope: record_identity_only` flags records without the relevant field value; the NCT link does not prove that a missing field equals a particular category. Invalid channel references and graph edges referring to nonexistent nodes are rejected by the response schema.
 
-## Tests and reproducibility
+A trial can count toward multiple phase buckets or country buckets. The sum of category assignments is therefore not generally the number of distinct studies. Drug comparison cohorts may overlap. These decisions are made explicit in response assumptions. See [data and provenance design](docs/architecture.md).
 
-The default tests are offline: they use mocked API interactions and fixtures rather than billing an LLM account or requiring network access.
+## Examples
+
+Five example query/result pairs are generated from the live API, and their JSON output is stored at:
+
+- [Annual trends](examples/time_trend.json)
+- [Phase distribution](examples/phase_distribution.json)
+- [Recruiting studies by country](examples/geography.json)
+- [Sponsor–drug graph](examples/network.json)
+- [Drug comparison](examples/comparison.json)
+
+The registry updates over time; study counts and cited records are snapshots, not constants. Example generation requires a running server, a configured LLM, network access, and may use billable model calls.
 
 ```bash
-python -m pytest -q
-python -m compileall -q app tests scripts
-```
-
-The test suite covers parsing, validation, pagination, deduplication, HTTP retries, malformed records, aggregation, citations, truncation, error mapping, metamorphic counting invariants, and a mocked API request. CI runs it on Python 3.11, 3.12, and 3.13. A passing offline suite does not replace a live registry and model smoke test.
-
-With the server running and `PLANNER_MODE=openai`:
-
-```bash
-bash scripts/smoke.sh
 python scripts/generate_examples.py --max-studies 1500
 python -m scripts.verify_examples
 ```
 
-The generator writes five registry-backed responses to `examples/` for time trends, phases, geography, sponsor–drug networks, and drug comparisons. Actual counts change as the registry is updated. The verifier checks structural consistency, chart accounting, citation references, and completeness metadata using the saved files; it makes no provider calls.
+The verifier is offline: it checks stored JSON structure, counts, evidence references and completeness metadata. It is not a substitute for independently checking sample study fields against the registry.
 
-For an offline plumbing check, use `PLANNER_MODE=rules` and pass explicit structured filters. Restart the server after changing `.env`.
-
-The labeled 50-question planner benchmark is opt-in and separate from unit tests:
+## Verification and evaluation
 
 ```bash
-python -m evals.run --mode validate                   # offline schema check
-python -m evals.run --mode live --limit 10             # genuine, billable model calls
+python -m pytest -q
+python -m compileall -q app tests scripts evals
+python -m evals.run --mode validate
+python -m scripts.verify_examples
 ```
 
-The default live sample interleaves query categories. See [evaluation methodology](evals/README.md), [engineering audit](docs/engineering_audit.md) and [requirements traceability](docs/requirements_traceability.md). Offline benchmark validation does not establish natural-language interpretation accuracy.
+The offline tests use deterministic fixtures and mocked HTTP interactions. They cover query contracts, pagination, retries, failure injection, deduplication, visualization invariants and response metadata. The test suite does **not** demonstrate live-model accuracy or guarantee that public registry search terminology perfectly matches a clinical ontology.
 
-## Code layout
+For a live smoke test, start Uvicorn in another terminal and run `bash scripts/smoke.sh`. Its low record limit intentionally generates partial results and is not a population estimate.
 
-```text
-app/
-  agent/           structured planning and orchestration
-  schemas/         HTTP request, query plan, and visualization types
-  services/        registry HTTP client and study normalization
-  visualizations/  deterministic aggregations and evidence attachment
-  config.py        environment-backed configuration
-  main.py          FastAPI application and exception mapping
-tests/             offline unit and API contract tests
-examples/          saved live JSON responses
-scripts/           setup, smoke checks, example validation, release archive
-docs/              decisions, requirements traceability, audit, quality gates
-evals/             labeled planner questions and opt-in live evaluation
+The 50-case planner benchmark uses labeled, independently asserted expectations. Schema validation requires no API calls. Live evaluation is opt-in and billable:
+
+```bash
+python -m evals.run --mode live --limit 10 --output evals/reports/planner-10.json
 ```
 
-The HTTP layer does not contain analysis rules. The planner, registry client, normalizer, and visualization builder can be tested independently. Provider failures are mapped to stable HTTP errors (`422` for invalid analyses, `502` for registry failures, and `503` for planning failures).
+Reports include overall intent and field-extraction accuracy and per-category results. When a category has no filter assertions, its filter accuracy is `null`, not 100%. Live observations should be inspected before generalizing beyond the benchmark. See [evaluation methodology](evals/README.md).
 
-## Development
+## Security and operational boundaries
 
-Changes use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) such as `feat(agent): ...`, `fix(data): ...`, `test(charts): ...`, and `docs: ...`. Run the tests before pushing changes. See [development workflow](docs/DEVELOPMENT.md) and [release checks](docs/QUALITY_GATE.md).
+The development API does not include authentication, user quotas, or infrastructure-level abuse protection; do not deploy it publicly without adding these controls. Input lengths and retrieval limits are bounded, registry requests have timeouts and retry limits, and untrusted user text cannot supply code or arbitrary outbound URLs. Responses expose no OpenAI credentials and provider errors are mapped to constrained messages. See [security notes](SECURITY.md).
 
-To build a source archive after generating and validating the examples:
+ClinicalTrials.gov searches are term-based. Drug names are not resolved to RxNorm identities and disease names are not mapped to a clinical ontology. Study-wide recruiting status is not site-level recruiting status. Some start dates are estimated or partially specified; enrollment can be anticipated rather than actual. The service does not measure therapeutic effectiveness. Higher fidelity terminology, richer outcome analysis, caching and production controls remain future work.
+
+## Maintainer workflow
+
+The source uses a small-layer architecture rather than distributed services. Changes should include a focused regression test, a documented reason, and a passing offline suite. The repository follows [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), for example `fix(charts): preserve scatter provenance` or `test(api): validate response invariants`. See [developer workflow](docs/DEVELOPMENT.md), [release checks](docs/QUALITY_GATE.md) and [unreleased changes](CHANGELOG.md).
+
+To create a source-only ZIP after validating real examples:
 
 ```bash
 bash scripts/package_release.sh
+python -m scripts.audit_archive --inspect dist/clinical-trials-ai-agent.zip
 ```
 
-The archive is written to `dist/clinical-trials-ai-agent.zip`. The script excludes the local environment and runs the quality checks before packaging. Review the archive contents and keep all API keys outside Git.
+The scanner rejects known secret patterns and unexpected paths, but cannot prove secrets are absent from Git history. Keep `.env` and local evaluation reports outside version control.
 
-## References
+### AI-assisted development and license
 
-- [ClinicalTrials.gov Data API](https://clinicaltrials.gov/data-api/api)
-- [OpenAI Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
-- [FastAPI documentation](https://fastapi.tiangolo.com/)
+AI assistants have been used to help draft and revise implementation and documentation. The code has undergone offline regression tests and user-run live API checks; these are distinct forms of verification. Neither AI assistance nor passing tests constitutes an independent clinical or security audit.
+
+No software license has been selected in this repository. Public source visibility alone does not grant reuse or redistribution rights. Contact the repository owner about licensing and contributions.
