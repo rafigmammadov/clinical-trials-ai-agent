@@ -16,6 +16,7 @@ from app.config import get_settings
 from app.errors import PlanningError, QueryError, UpstreamError
 from app.schemas.api import AnalyzeRequest, AnalyzeResponse
 from app.services.clinicaltrials import ClinicalTrialsClient
+from app.version import __version__
 
 
 logger = logging.getLogger("clinical_trials.http")
@@ -45,7 +46,7 @@ app = FastAPI(
     title="Clinical Trials AI Agent",
     description=("Structured natural-language clinical trial analytics backed by "
                  "ClinicalTrials.gov, with deterministic data aggregation and citations."),
-    version="1.0.0",
+    version=__version__,
     lifespan=lifespan,
 )
 
