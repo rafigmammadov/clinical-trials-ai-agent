@@ -179,13 +179,53 @@
         "citation_count": 0,
         "citations_complete": true,
         "citations": []
+      },
+      {
+        "year": 2025,
+        "trial_count": 3,
+        "citation_count": 3,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT07054515",
+            "url": "https://clinicaltrials.gov/study/NCT07054515",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2025-06-30"
+          },
+          {
+            "nct_id": "NCT07082543",
+            "url": "https://clinicaltrials.gov/study/NCT07082543",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2025-06-30"
+          },
+          {
+            "nct_id": "NCT07082725",
+            "url": "https://clinicaltrials.gov/study/NCT07082725",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2025-06-30"
+          }
+        ]
+      },
+      {
+        "year": 2026,
+        "trial_count": 1,
+        "citation_count": 1,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT07399704",
+            "url": "https://clinicaltrials.gov/study/NCT07399704",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2026-02-04"
+          }
+        ]
       }
     ]
   },
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T19:25:35.856707Z",
+    "analyzed_at": "2026-11-14T19:33:43.816053Z",
     "query_plan": {
       "intent": "time_trend",
       "condition": "Niemann-Pick disease type C",
@@ -193,33 +233,33 @@
       "sponsor": null,
       "country": null,
       "start_year": 2018,
-      "end_year": 2024,
+      "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Count of trials starting each year since 2018 for Niemann-Pick disease type C."
+      "interpretation": "Count trials for Niemann-Pick disease type C started each year since 2018."
     },
     "filters": {
       "condition": "Niemann-Pick disease type C",
       "start_year": 2018,
-      "end_year": 2024,
       "recruiting_only": false
     },
-    "records_fetched": 18,
-    "records_used": 18,
-    "total_matches": 18,
+    "records_fetched": 23,
+    "records_used": 22,
+    "total_matches": 23,
     "complete": true,
     "warnings": [],
     "assumptions": [
       "Year is derived from startDateStruct.date; missing start dates are excluded. A start date may be estimated.",
-      "Start-year filters apply to study start dates, not registration or publication dates."
+      "Start-year filters apply to study start dates, not registration or publication dates.",
+      "With no end year, known future calendar dates are excluded; partial or estimated dates do not establish verified trial starts."
     ],
     "citation_limit_per_datum": 10,
     "cohort_matches": null,
     "drug_match_mode": "registry_text",
     "matched_drug_counts": null,
     "visualization_truncated": false,
-    "visualization_items_returned": 7,
+    "visualization_items_returned": 9,
     "visualization_total_items": null,
-    "records_visualized": 18,
+    "records_visualized": 22,
     "records_not_visualized": 0
   }
 }
