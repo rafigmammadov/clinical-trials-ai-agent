@@ -120,10 +120,55 @@ class QueryPlan(StrictModel):
 
 
 class VisualizationSpec(StrictModel):
+    """Renderer contract; verify that specified channels exist in actual data."""
+
     type: ChartType
-    title: str
+    title: str = Field(min_length=1)
     encoding: dict[str, dict[str, Any]]
     data: list[dict[str, Any]] | dict[str, list[dict[str, Any]]]
+
+    @model_validator(mode="after")
+    def validate_renderer_contract(self) -> "VisualizationSpec":
+        if self.type == "network_graph":
+            if not isinstance(self.data, dict) or set(self.data) != {"nodes", "edges"}:
+                raise ValueError("network_graph data must contain nodes and edges")
+            if not {"nodes", "edges"}.issubset(self.encoding):
+                raise ValueError("network_graph encoding requires nodes and edges")
+            ids = []
+            for node in self.data["nodes"]:
+                if not isinstance(node.get("id"), str) or not node["id"]:
+                    raise ValueError("network node requires a non-empty string id")
+                ids.append(node["id"])
+            if len(ids) != len(set(ids)):
+                raise ValueError("network node ids must be unique")
+            valid_ids = set(ids)
+            for edge in self.data["edges"]:
+                if edge.get("source") not in valid_ids or edge.get("target") not in valid_ids:
+                    raise ValueError("network edge references an unknown node")
+                weight = edge.get("weight")
+                if type(weight) is not int or weight < 1:
+                    raise ValueError("network edge weight must be a positive integer")
+            return self
+
+        if not isinstance(self.data, list):
+            raise ValueError("non-network chart data must be a row array")
+        if "x" not in self.encoding or "y" not in self.encoding:
+            raise ValueError("chart encoding must contain x and y channels")
+        for channel in ("x", "y", "color", "tooltip"):
+            if channel not in self.encoding:
+                continue
+            spec = self.encoding[channel]
+            fields = (spec.get("field"), spec.get("end_field"))
+            for field in (x for x in fields if x is not None):
+                if not isinstance(field, str) or not field:
+                    raise ValueError(f"encoding {channel} requires a field name")
+                if any(field not in row for row in self.data):
+                    raise ValueError(f"encoding {channel} references missing field {field}")
+        for row in self.data:
+            count = row.get("trial_count")
+            if count is not None and (type(count) is not int or count < 0):
+                raise ValueError("trial_count must be a non-negative integer")
+        return self
 
 
 class ResponseMeta(StrictModel):
@@ -150,7 +195,37 @@ class ResponseMeta(StrictModel):
     records_visualized: int | None = None
     records_not_visualized: int | None = None
 
+    @model_validator(mode="after")
+    def validate_accounting(self) -> "ResponseMeta":
+        for field in ("records_fetched", "records_used", "citation_limit_per_datum"):
+            if getattr(self, field) < 0:
+                raise ValueError(f"{field} must be non-negative")
+        if self.records_used > self.records_fetched:
+            raise ValueError("records_used cannot exceed records_fetched")
+        if self.records_visualized is not None:
+            if not 0 <= self.records_visualized <= self.records_used:
+                raise ValueError("records_visualized must be between zero and records_used")
+            if (self.records_not_visualized is not None and
+                    self.records_not_visualized != self.records_used - self.records_visualized):
+                raise ValueError("records_not_visualized must equal records_used minus records_visualized")
+        if self.visualization_truncated:
+            if (self.visualization_total_items is None or
+                    self.visualization_items_returned is None or
+                    self.visualization_items_returned >= self.visualization_total_items):
+                raise ValueError("visualization truncation requires a larger total-items count")
+        return self
+
 
 class AnalyzeResponse(StrictModel):
     visualization: VisualizationSpec
     meta: ResponseMeta
+
+    @model_validator(mode="after")
+    def check_item_count(self) -> "AnalyzeResponse":
+        actual = (len(self.visualization.data["edges"])
+                  if self.visualization.type == "network_graph"
+                  else len(self.visualization.data))
+        recorded = self.meta.visualization_items_returned
+        if recorded is not None and recorded != actual:
+            raise ValueError("visualization_items_returned must equal the number of output rows/edges")
+        return self
