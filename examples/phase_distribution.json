@@ -1,0 +1,476 @@
+{
+  "visualization": {
+    "type": "bar_chart",
+    "title": "Clinical trials by trial phase — Fabry disease",
+    "encoding": {
+      "x": {
+        "field": "phase",
+        "type": "nominal",
+        "title": "Trial phase"
+      },
+      "y": {
+        "field": "trial_count",
+        "type": "quantitative",
+        "title": "Distinct studies",
+        "aggregate": "none"
+      }
+    },
+    "data": [
+      {
+        "phase": "Early Phase 1",
+        "trial_count": 1,
+        "citation_count": 1,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT06207552",
+            "url": "https://clinicaltrials.gov/study/NCT06207552",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "EARLY_PHASE1"
+          }
+        ]
+      },
+      {
+        "phase": "Phase 1",
+        "trial_count": 25,
+        "citation_count": 25,
+        "citations_complete": false,
+        "citations": [
+          {
+            "nct_id": "NCT00001234",
+            "url": "https://clinicaltrials.gov/study/NCT00001234",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT00357786",
+            "url": "https://clinicaltrials.gov/study/NCT00357786",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01489995",
+            "url": "https://clinicaltrials.gov/study/NCT01489995",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01653444",
+            "url": "https://clinicaltrials.gov/study/NCT01653444",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01678898",
+            "url": "https://clinicaltrials.gov/study/NCT01678898",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01730469",
+            "url": "https://clinicaltrials.gov/study/NCT01730469",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01730482",
+            "url": "https://clinicaltrials.gov/study/NCT01730482",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01839526",
+            "url": "https://clinicaltrials.gov/study/NCT01839526",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01853852",
+            "url": "https://clinicaltrials.gov/study/NCT01853852",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          },
+          {
+            "nct_id": "NCT01981720",
+            "url": "https://clinicaltrials.gov/study/NCT01981720",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1"
+          }
+        ]
+      },
+      {
+        "phase": "Phase 2",
+        "trial_count": 35,
+        "citation_count": 35,
+        "citations_complete": false,
+        "citations": [
+          {
+            "nct_id": "NCT00048906",
+            "url": "https://clinicaltrials.gov/study/NCT00048906",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00068107",
+            "url": "https://clinicaltrials.gov/study/NCT00068107",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00071877",
+            "url": "https://clinicaltrials.gov/study/NCT00071877",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00074958",
+            "url": "https://clinicaltrials.gov/study/NCT00074958",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00075244",
+            "url": "https://clinicaltrials.gov/study/NCT00075244",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00084084",
+            "url": "https://clinicaltrials.gov/study/NCT00084084",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00196716",
+            "url": "https://clinicaltrials.gov/study/NCT00196716",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00214500",
+            "url": "https://clinicaltrials.gov/study/NCT00214500",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00283933",
+            "url": "https://clinicaltrials.gov/study/NCT00283933",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          },
+          {
+            "nct_id": "NCT00283959",
+            "url": "https://clinicaltrials.gov/study/NCT00283959",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2"
+          }
+        ]
+      },
+      {
+        "phase": "Phase 3",
+        "trial_count": 30,
+        "citation_count": 30,
+        "citations_complete": false,
+        "citations": [
+          {
+            "nct_id": "NCT00074971",
+            "url": "https://clinicaltrials.gov/study/NCT00074971",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT00701415",
+            "url": "https://clinicaltrials.gov/study/NCT00701415",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT00864851",
+            "url": "https://clinicaltrials.gov/study/NCT00864851",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT00925301",
+            "url": "https://clinicaltrials.gov/study/NCT00925301",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT01124643",
+            "url": "https://clinicaltrials.gov/study/NCT01124643",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT01218659",
+            "url": "https://clinicaltrials.gov/study/NCT01218659",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT01298141",
+            "url": "https://clinicaltrials.gov/study/NCT01298141",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT01458119",
+            "url": "https://clinicaltrials.gov/study/NCT01458119",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT02194985",
+            "url": "https://clinicaltrials.gov/study/NCT02194985",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          },
+          {
+            "nct_id": "NCT02795676",
+            "url": "https://clinicaltrials.gov/study/NCT02795676",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE3"
+          }
+        ]
+      },
+      {
+        "phase": "Phase 4",
+        "trial_count": 13,
+        "citation_count": 13,
+        "citations_complete": false,
+        "citations": [
+          {
+            "nct_id": "NCT00074984",
+            "url": "https://clinicaltrials.gov/study/NCT00074984",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT00081497",
+            "url": "https://clinicaltrials.gov/study/NCT00081497",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT00097890",
+            "url": "https://clinicaltrials.gov/study/NCT00097890",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT00140621",
+            "url": "https://clinicaltrials.gov/study/NCT00140621",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT00230607",
+            "url": "https://clinicaltrials.gov/study/NCT00230607",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT00312767",
+            "url": "https://clinicaltrials.gov/study/NCT00312767",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT00487630",
+            "url": "https://clinicaltrials.gov/study/NCT00487630",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT01650779",
+            "url": "https://clinicaltrials.gov/study/NCT01650779",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT01997489",
+            "url": "https://clinicaltrials.gov/study/NCT01997489",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          },
+          {
+            "nct_id": "NCT04143958",
+            "url": "https://clinicaltrials.gov/study/NCT04143958",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE4"
+          }
+        ]
+      },
+      {
+        "phase": "Not Applicable",
+        "trial_count": 28,
+        "citation_count": 28,
+        "citations_complete": false,
+        "citations": [
+          {
+            "nct_id": "NCT00484549",
+            "url": "https://clinicaltrials.gov/study/NCT00484549",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT01109875",
+            "url": "https://clinicaltrials.gov/study/NCT01109875",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT01178164",
+            "url": "https://clinicaltrials.gov/study/NCT01178164",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT01374997",
+            "url": "https://clinicaltrials.gov/study/NCT01374997",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT01947634",
+            "url": "https://clinicaltrials.gov/study/NCT01947634",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT02090608",
+            "url": "https://clinicaltrials.gov/study/NCT02090608",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT02450604",
+            "url": "https://clinicaltrials.gov/study/NCT02450604",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT02798458",
+            "url": "https://clinicaltrials.gov/study/NCT02798458",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT02956954",
+            "url": "https://clinicaltrials.gov/study/NCT02956954",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          },
+          {
+            "nct_id": "NCT02985710",
+            "url": "https://clinicaltrials.gov/study/NCT02985710",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "NA"
+          }
+        ]
+      },
+      {
+        "phase": "Not Reported",
+        "trial_count": 140,
+        "citation_count": 140,
+        "citations_complete": false,
+        "citations": [
+          {
+            "nct_id": "NCT00001491",
+            "url": "https://clinicaltrials.gov/study/NCT00001491",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00001491"
+          },
+          {
+            "nct_id": "NCT00001774",
+            "url": "https://clinicaltrials.gov/study/NCT00001774",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00001774"
+          },
+          {
+            "nct_id": "NCT00005111",
+            "url": "https://clinicaltrials.gov/study/NCT00005111",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00005111"
+          },
+          {
+            "nct_id": "NCT00030134",
+            "url": "https://clinicaltrials.gov/study/NCT00030134",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00030134"
+          },
+          {
+            "nct_id": "NCT00055016",
+            "url": "https://clinicaltrials.gov/study/NCT00055016",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00055016"
+          },
+          {
+            "nct_id": "NCT00106912",
+            "url": "https://clinicaltrials.gov/study/NCT00106912",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00106912"
+          },
+          {
+            "nct_id": "NCT00149318",
+            "url": "https://clinicaltrials.gov/study/NCT00149318",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00149318"
+          },
+          {
+            "nct_id": "NCT00168974",
+            "url": "https://clinicaltrials.gov/study/NCT00168974",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00168974"
+          },
+          {
+            "nct_id": "NCT00196742",
+            "url": "https://clinicaltrials.gov/study/NCT00196742",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00196742"
+          },
+          {
+            "nct_id": "NCT00233870",
+            "url": "https://clinicaltrials.gov/study/NCT00233870",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT00233870"
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "source": "ClinicalTrials.gov API v2",
+    "source_url": "https://clinicaltrials.gov/data-api/api",
+    "analyzed_at": "2026-11-14T08:36:33.023989Z",
+    "query_plan": {
+      "intent": "phase_distribution",
+      "condition": "Fabry disease",
+      "drugs": [],
+      "sponsor": null,
+      "country": null,
+      "start_year": null,
+      "end_year": null,
+      "recruiting_only": false,
+      "interpretation": "Count of clinical trials for Fabry disease by their trial phase."
+    },
+    "filters": {
+      "condition": "Fabry disease",
+      "recruiting_only": false
+    },
+    "records_fetched": 258,
+    "records_used": 258,
+    "total_matches": 258,
+    "complete": true,
+    "warnings": [],
+    "assumptions": [
+      "Each NCT ID contributes once per category; multi-valued categories may count a trial more than once across categories."
+    ],
+    "citation_limit_per_datum": 10,
+    "cohort_matches": null,
+    "visualization_truncated": false,
+    "visualization_items_returned": 7,
+    "visualization_total_items": 7
+  }
+}
