@@ -57,7 +57,7 @@ def normalize_study(raw: dict[str, Any]) -> Study:
     protocol = raw.get("protocolSection") or {}
     identification = protocol.get("identificationModule") or {}
     nct_id = identification.get("nctId")
-    if not isinstance(nct_id, str) or not nct_id.startswith("NCT"):
+    if not isinstance(nct_id, str) or not re.fullmatch(r"NCT\d{8}", nct_id):
         raise ValueError("Study missing a valid NCT ID")
 
     status = protocol.get("statusModule") or {}
