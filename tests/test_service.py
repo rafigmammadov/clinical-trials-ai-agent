@@ -95,3 +95,74 @@ def test_future_calendar_date_in_same_year_is_identified():
     record["protocolSection"]["statusModule"]["startDateStruct"]["date"] = "2026"
     partial = normalize_study(record)
     assert is_future_study_start(partial, date(2026, 11, 14)) is False
+
+@pytest.mark.asyncio
+async def test_since_question_cannot_gain_unrequested_llm_end_year():
+    from app.services.normalizer import normalize_study
+    from tests.conftest import raw_study
+
+    registry = FixedTrials([
+        normalize_study(raw_study('NCT12345678', year=2025)),
+    ])
+    service = AnalysisService(
+        FixedPlanner(QueryPlan(
+            intent='time_trend', condition='melanoma',
+            start_year=2018, end_year=2024,
+        )),
+        registry,
+    )
+
+    result = await service.analyze(AnalyzeRequest(
+        query='How many melanoma trials started each year since 2018?'
+    ))
+    assert result.meta.query_plan.end_year is None
+    assert result.meta.records_used == 1
+    assert next(row for row in result.visualization.data if row['year'] == 2025)['trial_count'] == 1
+    assert 'end_year' not in result.meta.filters
+
+
+@pytest.mark.asyncio
+async def test_explicit_structured_end_year_overrides_since_guard():
+    service = AnalysisService(
+        FixedPlanner(QueryPlan(
+            intent='time_trend', condition='melanoma',
+            start_year=2018, end_year=2024,
+        )),
+        FixedTrials([]),
+    )
+    response = await service.analyze(AnalyzeRequest(
+        query='How many melanoma trials started each year since 2018?',
+        end_year=2024,
+    ))
+    assert response.meta.query_plan.end_year == 2024
+    assert response.meta.filters['end_year'] == 2024
+
+
+@pytest.mark.asyncio
+async def test_explicit_natural_language_end_year_is_preserved():
+    service = AnalysisService(
+        FixedPlanner(QueryPlan(
+            intent='time_trend', condition='melanoma',
+            start_year=2018, end_year=2024,
+        )),
+        FixedTrials([]),
+    )
+    response = await service.analyze(AnalyzeRequest(
+        query='Show melanoma trials from 2018 through 2024 by year'
+    ))
+    assert response.meta.query_plan.end_year == 2024
+
+
+@pytest.mark.asyncio
+async def test_unexplained_model_year_is_not_used_silently():
+    service = AnalysisService(
+        FixedPlanner(QueryPlan(
+            intent='time_trend', condition='melanoma',
+            start_year=2018, end_year=2024,
+        )),
+        FixedTrials([]),
+    )
+    with pytest.raises(QueryError, match='end year'):
+        await service.analyze(AnalyzeRequest(
+            query='Show melanoma trial trends from 2018 onwards with rolling averages'
+        ))
