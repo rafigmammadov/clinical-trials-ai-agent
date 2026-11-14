@@ -304,14 +304,13 @@ def _scatter(studies: list[Study], limit: int) -> ChartResult:
         if s.start_year is None or s.enrollment is None:
             continue
         citations = _citations([s], field_kind="year", value=s.start_year, limit=limit)
-        if limit >= 2:
-            citations["citations"].append({
-                "nct_id": s.nct_id,
-                "url": f"https://clinicaltrials.gov/study/{s.nct_id}",
-                "field_path": "protocolSection.designModule.enrollmentInfo.count",
-                "excerpt": str(s.enrollment),
-            })
-        citations["citations_complete"] = limit >= 2
+        # The citation limit counts contributing STUDIES, not field excerpts.
+        # Store both source fields in the same per-study citation so a scatter
+        # point remains fully supported when citation_limit=1.
+        if citations["citations"]:
+            citation = citations["citations"][0]
+            citation["related_field_path"] = "protocolSection.designModule.enrollmentInfo.count"
+            citation["related_excerpt"] = str(s.enrollment)
         rows.append({"nct_id": s.nct_id, "year": s.start_year,
                      "enrollment": s.enrollment, **citations})
     return ChartResult(
