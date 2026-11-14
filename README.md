@@ -11,7 +11,7 @@ flowchart TD
     A[POST /api/v1/analyze] --> B[Pydantic request validation]
     B --> C[OpenAI structured query planner]
     C --> D[Typed plan and temporal reconciliation]
-    D --> Q[Question-grounded filter validation]
+    D --> Q[Grounding and requested-filter recall checks]
     Q --> E[ClinicalTrials.gov API client]
     E --> F[Pagination, normalization and NCT deduplication]
     F --> G[Optional registered drug-name verification]
@@ -25,7 +25,7 @@ flowchart TD
 
 The model cannot choose arbitrary network URLs, execute generated code, or supply study counts. It produces an allowlisted, typed `QueryPlan` that the application independently validates. A deterministic evidence guard also rejects certain model-added filters that were not named in the question; rejected plans never reach the registry. This is a conservative lexical check, not clinical ontology resolution. The numbers and citations originate from normalized registry records. We deliberately use no general-purpose agent framework: a small, inspectable workflow makes data lineage and failure modes easier to reason about.
 
-See [architecture and counting semantics](docs/architecture.md), [query-filter grounding](docs/agent_grounding.md), and [design decisions](docs/DECISIONS.md).
+See [architecture and counting semantics](docs/architecture.md), [query-filter grounding](docs/agent_grounding.md), [plan recall](docs/plan_recall.md), and [design decisions](docs/DECISIONS.md).
 
 ## Quick start
 
@@ -86,7 +86,7 @@ curl --fail-with-body -sS http://127.0.0.1:8000/api/v1/analyze \
 python -m json.tool /tmp/clinical-trials-response.json
 ```
 
-`query` is required (5–2,000 characters). Optional inputs include `condition`, `drugs`, `sponsor`, `country`, `start_year`, `end_year`, `recruiting_only`, `max_studies` (1–5,000 **per registry search**) and `citation_limit` (0–50 **contributing studies per datum**). Set `drug_match_mode` to `registered_name` to retain only records that explicitly register the requested DRUG name or alias; its default is `registry_text` for backward compatibility. Explicit structured inputs override the corresponding inferred plan fields. A two-drug comparison performs separate searches; its cohorts can overlap. For time-trend questions of the form `since YYYY`, the end year remains open unless the user supplies a closing year. The service discards an unsupported model-inferred end year for this form and reports the correction; unexplained end-year guesses in other forms are rejected instead of silently changing the dataset. Model-added conditions, drugs, sponsors, countries, start years, and recruiting-only restrictions must also have explicit evidence in the question or a typed structured override, otherwise the request fails with HTTP 422.
+`query` is required (5–2,000 characters). Optional inputs include `condition`, `drugs`, `sponsor`, `country`, `start_year`, `end_year`, `recruiting_only`, `max_studies` (1–5,000 **per registry search**) and `citation_limit` (0–50 **contributing studies per datum**). Set `drug_match_mode` to `registered_name` to retain only records that explicitly register the requested DRUG name or alias; its default is `registry_text` for backward compatibility. Explicit structured inputs override the corresponding inferred plan fields. A two-drug comparison performs separate searches; its cohorts can overlap. For time-trend questions of the form `since YYYY`, the end year remains open unless the user supplies a closing year. The service discards an unsupported model-inferred end year for this form and reports the correction; unexplained end-year guesses in other forms are rejected instead of silently changing the dataset. Model-added conditions, drugs, sponsors, countries, start years, and recruiting-only restrictions must also have explicit evidence in the question or a typed structured override, otherwise the request fails with HTTP 422. A second check rejects selected high-confidence **omitted requested filters** before retrieval, so a model cannot silently broaden a query by forgetting the disease, date, geography, sponsor, or recruitment constraint. See [plan recall](docs/plan_recall.md).
 
 Expected errors: HTTP 422 for invalid input or unsupported analyses, 502 for registry failures, and 503 for unavailable planning. FastAPI also emits HTTP 422 for invalid JSON schema inputs. These errors do not include provider response bodies or credentials. Full field definitions are in [API contract](docs/api.md) and the live `/docs` interface.
 
@@ -154,10 +154,11 @@ python -m compileall -q app tests scripts evals
 python -m evals.run --mode validate
 python -m evals.identity
 python -m evals.grounding
+python -m evals.recall
 python -m scripts.verify_examples
 ```
 
-The filter-grounding validator has a separate, deterministic 54-case synthetic decision benchmark (`python -m evals.grounding`). Its 54 labels are not measurements of live model accuracy. The identity matcher also has a 24-case, hand-labeled **synthetic** evaluation (`python -m evals.identity`). It does not measure registry search recall or live-model accuracy. The offline tests use deterministic fixtures and mocked HTTP interactions. They cover query contracts, pagination, retries, failure injection, deduplication, visualization invariants and response metadata. The test suite does **not** demonstrate live-model accuracy or guarantee that public registry search terminology perfectly matches a clinical ontology.
+The filter-recall guard has an independent 74-case synthetic omission benchmark (`python -m evals.recall`), distinct from the live planner recall metric. The filter-grounding validator has a separate, deterministic 54-case synthetic decision benchmark (`python -m evals.grounding`). Its 54 labels are not measurements of live model accuracy. The identity matcher also has a 24-case, hand-labeled **synthetic** evaluation (`python -m evals.identity`). It does not measure registry search recall or live-model accuracy. The offline tests use deterministic fixtures and mocked HTTP interactions. They cover query contracts, pagination, retries, failure injection, deduplication, visualization invariants and response metadata. The test suite does **not** demonstrate live-model accuracy or guarantee that public registry search terminology perfectly matches a clinical ontology.
 
 For a live smoke test, start Uvicorn in another terminal and run `bash scripts/smoke.sh`. Its low record limit intentionally generates partial results and is not a population estimate.
 
@@ -167,13 +168,15 @@ The 50-case planner benchmark uses labeled, independently asserted expectations.
 python -m evals.run --mode live --limit 10 --output evals/reports/planner-10.json
 ```
 
-Reports include overall intent and field-extraction accuracy and per-category results. When a category has no filter assertions, its filter accuracy is `null`, not 100%. Live observations should be inspected before generalizing beyond the benchmark. See [evaluation methodology](evals/README.md).
+Reports include overall intent accuracy, annotated field-extraction accuracy, and the recall of positively labeled requested constraints, with category-level results. This new `requested_filter_recall` metric is `null` when there are no positive labeled assertions. When a category has no filter assertions, its filter accuracy is `null`, not 100%. Live observations should be inspected before generalizing beyond the benchmark. See [evaluation methodology](evals/README.md).
+
+The service reports the source-defined release version in `/health`; this version is distinct from the stable `/api/v1` HTTP contract.
 
 ## Security and operational boundaries
 
 The development API does not include authentication, user quotas, or infrastructure-level abuse protection; do not deploy it publicly without adding these controls. Input lengths and retrieval limits are bounded, registry requests have timeouts and retry limits, and untrusted user text cannot supply code or arbitrary outbound URLs. Responses expose no OpenAI credentials and provider errors are mapped to constrained messages. See [security notes](SECURITY.md).
 
-ClinicalTrials.gov searches are term-based. The opt-in registered-name match checks only names/aliases included in returned records; it is not comprehensive clinical terminology resolution. Drug names are not resolved to RxNorm identities and disease names are not mapped to a clinical ontology. A conservative lexical guard may reject clinical synonyms, unrecognized acronyms or relative dates; it does not prove full semantic consistency and cannot detect every omitted filter. Study-wide recruiting status is not site-level recruiting status. Some start dates are estimated or partially specified; enrollment can be anticipated rather than actual. The service does not measure therapeutic effectiveness. Higher fidelity terminology, richer outcome analysis, caching and production controls remain future work.
+ClinicalTrials.gov searches are term-based. The opt-in registered-name match checks only names/aliases included in returned records; it is not comprehensive clinical terminology resolution. Drug names are not resolved to RxNorm identities and disease names are not mapped to a clinical ontology. Conservative lexical guards can reject clinical synonyms, unrecognized acronyms, or relative dates; the new recall guard recognizes selected explicit constraints but cannot detect every omitted filter or guarantee semantic completeness. Study-wide recruiting status is not site-level recruiting status. Some start dates are estimated or partially specified; enrollment can be anticipated rather than actual. The service does not measure therapeutic effectiveness. Higher fidelity terminology, richer outcome analysis, caching and production controls remain future work.
 
 ## Maintainer workflow
 
