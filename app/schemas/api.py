@@ -12,6 +12,7 @@ Intent = Literal[
     "drug_comparison", "sponsor_drug_network", "drug_cooccurrence_network",
     "enrollment_histogram", "enrollment_scatter", "unsupported",
 ]
+DrugMatchMode = Literal["registry_text", "registered_name"]
 ChartType = Literal[
     "time_series", "bar_chart", "grouped_bar_chart", "network_graph",
     "histogram", "scatter_plot",
@@ -31,6 +32,7 @@ class AnalyzeRequest(StrictModel):
     start_year: int | None = Field(default=None, ge=1900, le=2100)
     end_year: int | None = Field(default=None, ge=1900, le=2100)
     recruiting_only: bool | None = None
+    drug_match_mode: DrugMatchMode = "registry_text"
     max_studies: int = Field(default=1000, ge=1, le=5000)
     citation_limit: int = Field(default=10, ge=0, le=50)
 
@@ -186,6 +188,8 @@ class ResponseMeta(StrictModel):
     citation_limit_per_datum: int
     # For two separate cohort searches, no meaningful combined totalCount exists.
     cohort_matches: dict[str, int | None] | None = None
+    drug_match_mode: DrugMatchMode = "registry_text"
+    matched_drug_counts: dict[str, int] | None = None
     # Registry completeness and visualization coverage are independent.
     visualization_truncated: bool = False
     visualization_items_returned: int | None = None
@@ -213,6 +217,15 @@ class ResponseMeta(StrictModel):
                     self.visualization_items_returned is None or
                     self.visualization_items_returned >= self.visualization_total_items):
                 raise ValueError("visualization truncation requires a larger total-items count")
+        if self.drug_match_mode == "registry_text" and self.matched_drug_counts is not None:
+            raise ValueError("Text search mode cannot claim verified matched drug counts")
+        if self.drug_match_mode == "registered_name" and self.query_plan.drugs:
+            if (self.matched_drug_counts is None or
+                    set(self.matched_drug_counts) != set(self.query_plan.drugs)):
+                raise ValueError("Strict matching requires counts for each requested drug")
+            if any(type(count) is not int or count < 0 or count > self.records_used
+                   for count in self.matched_drug_counts.values()):
+                raise ValueError("Strict drug cohort counts must be valid post-filter study counts")
         return self
 
 
