@@ -71,7 +71,7 @@ python -m evals.run --mode validate
 ## Known limitations and non-goals
 
 - Lexical evidence is not evidence of **correct clinical meaning**. A substring can be an explicitly mentioned but overly broad disease term; a negated phrase outside the limited local patterns may be misinterpreted.
-- This policy checks **extra restrictions**, not whether a planner omitted a required filter or chose the wrong visualization intent. Those still require model evaluations and independently reviewed examples.
+- v0.6.0 adds a separate conservative [requested-filter recall guard](plan_recall.md) for some omissions, but neither guard can prove complete semantic fidelity or correct intent selection.
 - No RxNorm/MeSH/CT vocabulary or general-purpose entity linker is used. Acronyms and domain synonyms beyond a tiny country-abbreviation table can be rejected even when clinically equivalent.
 - Relative dates such as “last five years” are not deterministically resolved. Supply `start_year` explicitly if a year is important.
 - The question text is untrusted; a malicious instruction can mention a filter value and thereby pass the lexical evidence check. The typed plan, fixed upstream destination, and deterministic analytics remain separate trust boundaries.
