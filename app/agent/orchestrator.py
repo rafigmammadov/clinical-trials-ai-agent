@@ -5,7 +5,10 @@ import re
 from datetime import date, datetime, timezone
 from typing import Any
 
+from pydantic import ValidationError
+
 from app.agent.planner import Planner
+from app.agent.grounding import validate_plan_grounding
 from app.errors import QueryError
 from app.schemas.api import AnalyzeRequest, AnalyzeResponse, DrugMatchMode, QueryPlan, ResponseMeta
 from app.services.intervention_matching import find_registered_drug_match
@@ -44,7 +47,13 @@ class AnalysisService:
             for key in ("condition", "drugs", "sponsor", "country", "start_year", "end_year", "recruiting_only")
             if getattr(request, key) is not None
         }
-        return QueryPlan.model_validate({**plan.model_dump(), **overrides})
+        try:
+            return QueryPlan.model_validate({**plan.model_dump(), **overrides})
+        except ValidationError as exc:
+            raise QueryError(
+                "Explicit request filters conflict with the AI plan; "
+                "provide a consistent date range or clarify the question"
+            ) from exc
 
     @staticmethod
     def _reconcile_end_year(plan: QueryPlan, request: AnalyzeRequest) -> tuple[QueryPlan, str | None]:
@@ -63,11 +72,12 @@ class AnalysisService:
         if plan.end_year in explicit_years:
             return plan, None
 
+        start_year = request.start_year if request.start_year is not None else plan.start_year
         is_unbounded_since = (
             plan.intent == "time_trend"
-            and plan.start_year is not None
-            and explicit_years == {plan.start_year}
-            and re.search(rf"\bsince\s+{plan.start_year}\b", request.query, re.I)
+            and start_year is not None
+            and explicit_years == {start_year}
+            and re.search(rf"\bsince\s+{start_year}\b", request.query, re.I)
             and not re.search(
                 r"\b(?:through|until|ending|before|prior|up to|last year)\b",
                 request.query, re.I,
@@ -83,7 +93,7 @@ class AnalysisService:
             "the question; the unsupported end-year restriction was removed"
         )
         interpretation = (
-            f"Count clinical trial starts by year since {plan.start_year}, without an "
+            f"Count clinical trial starts by year since {start_year}, without an "
             "end-year cap; other validated filters remain applicable."
         )
         return plan.model_copy(update={
@@ -123,10 +133,12 @@ class AnalysisService:
         return chosen
 
     async def analyze(self, request: AnalyzeRequest) -> AnalyzeResponse:
-        plan = self._merge(await self._planner.plan(request.query), request)
-        plan, temporal_warning = self._reconcile_end_year(plan, request)
-        if plan.intent == "unsupported":
+        inferred_plan = await self._planner.plan(request.query)
+        if inferred_plan.intent == "unsupported":
             raise QueryError("The requested analysis is unsupported; ask a question about clinical trial counts, distributions or relationships")
+        inferred_plan, temporal_warning = self._reconcile_end_year(inferred_plan, request)
+        plan = self._merge(inferred_plan, request)
+        plan = validate_plan_grounding(plan, request)
         if request.drug_match_mode == "registered_name" and not plan.drugs:
             raise QueryError("registered_name drug matching requires a named drug filter")
         if plan.intent == "drug_comparison":
