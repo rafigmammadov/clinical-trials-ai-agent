@@ -70,7 +70,9 @@ def test_scatter_has_study_references(studies):
                         citation_limit=2).visualization
     assert chart.type == "scatter_plot"
     assert len(chart.data) == 3
-    assert len(chart.data[0]["citations"]) == 2
+    # One NCT citation carries both start-date and enrollment evidence.
+    assert len(chart.data[0]["citations"]) == 1
+    assert chart.data[0]["citations"][0]["related_field_path"] == "protocolSection.designModule.enrollmentInfo.count"
 
 
 def test_citation_limits_are_honored(studies):
