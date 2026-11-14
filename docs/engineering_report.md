@@ -67,3 +67,18 @@ python -m scripts.audit_archive --inspect dist/clinical-trials-ai-agent.zip
 ```
 
 Never claim any remote push or official submission happened unless it actually did.
+
+## Subsequent local reliability iteration (unreleased)
+
+This iteration begins with a reconstructed, offline-tested v0.2 snapshot rather than a writable GitHub checkout. The pre-change test suite passed 98 tests. The post-change suite passed 121 offline tests and the 50-case evaluation corpus validated without making any LLM calls.
+
+- Changed `app/schemas/api.py` to reject incompatible channel encodings, dangling graph references and inconsistent response accounting.
+- Changed `app/visualizations/builder.py` to preserve both scatter-axis evidence fields within one NCT citation. This slightly changes the scatter citation shape; `docs/api.md` documents the migration.
+- Changed `app/main.py` and `app/agent/planner.py` to reuse and close the OpenAI client and provide privacy-conscious request tracing.
+- Changed `app/services/clinicaltrials.py` to honor HTTP-date `Retry-After` and retry HTTP 408 with bounded delays.
+- Changed `evals/run.py` to report per-category live benchmark results and close its planner client reliably.
+- Added targeted regression tests and updated the README, API contract, architecture and security notes.
+
+Unverified in the working environment: live OpenAI model calls, live registry counts, dependency vulnerability scanning, hosted CI and current GitHub commit state. No remote changes or official hiring submission were performed.
+
+- Changed `app/config.py` to reject insecure non-loopback registry URLs and invalid or unbounded request timeouts; `tests/test_settings_security.py` covers these cases.
