@@ -9,6 +9,7 @@ from pydantic import ValidationError
 
 from app.agent.planner import Planner
 from app.agent.grounding import validate_plan_grounding
+from app.agent.recall import validate_plan_recall
 from app.errors import QueryError
 from app.schemas.api import AnalyzeRequest, AnalyzeResponse, DrugMatchMode, QueryPlan, ResponseMeta
 from app.services.intervention_matching import find_registered_drug_match
@@ -139,6 +140,7 @@ class AnalysisService:
         inferred_plan, temporal_warning = self._reconcile_end_year(inferred_plan, request)
         plan = self._merge(inferred_plan, request)
         plan = validate_plan_grounding(plan, request)
+        plan = validate_plan_recall(plan, request)
         if request.drug_match_mode == "registered_name" and not plan.drugs:
             raise QueryError("registered_name drug matching requires a named drug filter")
         if plan.intent == "drug_comparison":
