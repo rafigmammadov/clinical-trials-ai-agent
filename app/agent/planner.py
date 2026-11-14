@@ -31,6 +31,10 @@ Intent choices:
 Extract the named condition, drug names, sponsor, country, years and if 'recruiting' is requested.
 The word 'recruiting' means overall study status RECRUITING, not site-level recruitment.
 Do NOT invent missing filters or assume a drug/condition not mentioned.
+A request saying "since YYYY" specifies a start year only: set end_year=null
+unless the question also explicitly supplies a closing year. Never assume an
+arbitrary cutoff such as 2024 or the current year in the end_year field.
+For an explicitly bounded range such as "2018 through 2024", use both years.
 For drug_comparison extract exactly two drug names if identifiable.
 Interpretation must be one short sentence of what you understood, not detailed reasoning.
 Never include clinical-trial results, numbers or study identifiers.
