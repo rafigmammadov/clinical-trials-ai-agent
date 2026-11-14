@@ -30,3 +30,19 @@ A perfect 24/24 result demonstrates only that the current matching policy agrees
 ## Query-filter grounding benchmark (offline, v0.5.0)
 
 `python -m evals.grounding` runs **54 hand-labeled synthetic model plans** against the deterministic request-grounding guard. It contains allowed, rejected, negated, abbreviation, and typed-override cases. This benchmark neither calls a model nor measures genuine GPT filter-extraction accuracy. It verifies that the service does not accept selected unsupported restrictions. Read [the grounding policy](../docs/agent_grounding.md) for evidence rules and false-positive/false-negative tradeoffs.
+
+## Requested-filter recall (v0.6.0)
+
+`python -m evals.recall` scores 74 hand-labeled **synthetic model plans** against
+the fail-closed omission guard, and reports per-category coverage,
+`omission_detection_recall`, and `omission_detection_precision`. It does not
+call OpenAI or ClinicalTrials.gov. A perfect fixture score is **not** proof that
+GPT understands 100% of live user questions.
+
+Opt-in live evaluation now also reports `requested_filter_assertions` and
+`requested_filter_recall` using *positive* expected fields in the existing
+50-question benchmark. Missing, incorrect or provider-failed fields count as
+misses. False/null filters remain represented in `filter_accuracy` but do not
+enter the positive-recall denominator. Unannotated fields are excluded from
+the denominator; a `null` recall means there were no positively labeled
+constraints. Review each case, not just the aggregate.
