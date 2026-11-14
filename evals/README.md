@@ -26,3 +26,7 @@ Do not claim live accuracy based on schema-only validation. Review individual ca
 Run `python -m evals.identity` to test 24 hand-labeled synthetic registration examples. This is separate from the 50-question LLM planning benchmark. The test fixtures cover registered names, `otherNames` aliases, Unicode/whitespace normalization, non-drug interventions, and deliberately rejected substring/fuzzy matches. The runner is deterministic and makes **no** model or registry API calls.
 
 A perfect 24/24 result demonstrates only that the current matching policy agrees with the annotated synthetic cases. It does not measure the recall of `query.intr`, drug ontology coverage, or the correctness of live registered records. See [intervention matching semantics](../docs/intervention_identity.md).
+
+## Query-filter grounding benchmark (offline, v0.5.0)
+
+`python -m evals.grounding` runs **54 hand-labeled synthetic model plans** against the deterministic request-grounding guard. It contains allowed, rejected, negated, abbreviation, and typed-override cases. This benchmark neither calls a model nor measures genuine GPT filter-extraction accuracy. It verifies that the service does not accept selected unsupported restrictions. Read [the grounding policy](../docs/agent_grounding.md) for evidence rules and false-positive/false-negative tradeoffs.
