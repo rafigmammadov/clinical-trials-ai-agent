@@ -10,8 +10,9 @@ test:
 	python -m pytest -q
 
 check:
-	python -m compileall -q app tests scripts
+	python -m compileall -q app tests scripts evals
 	python -m pytest -q
+	python -m evals.run --mode validate
 
 smoke:
 	bash scripts/smoke.sh
