@@ -72,3 +72,17 @@ Strict mode sets `meta.matched_drug_counts` to post-filter cohort sizes, adds `m
 ## Model-inferred filter grounding (v0.5.0)
 
 The service checks inferred `condition`, `drugs`, `sponsor`, `country`, `start_year`, and `recruiting_only=true` before making registry requests. Fields not explicitly supported by the query are rejected with the normal `422 invalid_analysis` error; the application never silently removes named-entity restrictions. Explicit structured request fields remain authoritative for their corresponding fields. An unsupported domain synonym or relative time phrase may need an explicit typed filter. This is deterministic lexical checking, not a promise of exhaustive semantic understanding. See [grounding policy](agent_grounding.md).
+
+## Omitted requested filters (v0.6.0)
+
+A second deterministic check rejects selected explicitly stated conditions,
+drugs, sponsors, countries, positive recruiting-only restrictions and calendar
+year boundaries that the LLM omitted or changed. Recognized unsupported
+exclusions (e.g. `not in Canada` and `non-recruiting`) also fail with HTTP 422
+instead of returning unrestricted totals. Explicit structured input filters
+remain authoritative for that field. The successful JSON response shape is
+unchanged; the check runs before ClinicalTrials.gov retrieval.
+
+The application service version is reported by `/health` as `0.6.0`. This
+is independent of the `/api/v1` route prefix. See
+[query-plan recall semantics](plan_recall.md).
