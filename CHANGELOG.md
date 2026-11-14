@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased (v0.5.0 query-filter grounding candidate)
+
+- Reject unrequested conditions, drugs, sponsors, countries, year lower bounds, and recruiting-only constraints before registry retrieval. Structured request overrides remain authoritative per field.
+- Reject simple negative expressions (e.g. `without melanoma`, `not in Canada`, `non-recruiting`) rather than converting excluded entities into positive filters.
+- Permit explicitly documented US/USA/UK abbreviation families without treating the lowercase pronoun “us” as geographic evidence; canonicalize aliases to full registry country labels before retrieval.
+- Handle conflicting model and explicit year boundaries as safe HTTP 422 analysis errors; preserve unbounded `since YYYY` correction when a structured start year is provided.
+- Add 54 labeled synthetic grounding decisions, HTTP boundary regressions and documentation describing the lexical policy's limits.
+
 ## Unreleased (v0.4.1 temporal planning fix)
 
 - Reject model-inferred end years absent from the question unless the user provided a structured override.
