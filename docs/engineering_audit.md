@@ -41,3 +41,21 @@ Open risks: prompt-injection classification is probabilistic, not guaranteed; so
 3. Verify the updated patch on the owner's Mac, refresh five live output examples, and inspect the produced ZIP.
 4. Pin tested dependency versions and assess known vulnerabilities before any public production deployment.
 5. Add canonical condition/drug terminology resolution and stronger resource controls only when empirical failures justify them.
+
+## Follow-up reliability review (prepared locally after the v0.2 baseline)
+
+This section reports changes against a reconstructed v0.2 source snapshot. It does not claim to be a live checkout of the GitHub `main` branch. The source reconstruction passed 98 offline tests before these changes.
+
+| Severity | Finding | Reproduction | Resolution |
+| --- | --- | --- | --- |
+| P1 | The visualization schema accepted broken channel references and graph edges pointing to nonexistent nodes. | New `test_schema_rejects_chart_row_missing_encoded_field`, `test_schema_rejects_network_edges_with_missing_nodes` failed first. | `VisualizationSpec` validates renderer fields, graph references, and positive edge weights. |
+| P1 | Enrollment-scatter citations could produce two entries for one contributing NCT ID and falsely report incomplete evidence when citation_limit=1. | New scatter provenance test failed first; previous `test_scatter_has_study_references` documented the older behavior. | Attach the start-date and enrollment values within one source citation; update compatibility notes and tests. |
+| P2 | A new OpenAI HTTP client was constructed per `/analyze` request and never explicitly closed. | Source inspection in `app/main.py` and planner implementation. | Planner client is app-scoped and closed in FastAPI lifespan; regression test checks reuse. |
+| P2 | API responses lacked correlation IDs and processing-time metadata. | New `test_request_id_returned_on_health_and_validation_errors` initially failed. | Generated request IDs and response timing headers, with logs that omit request bodies and secrets. |
+| P2 | The registry adapter ignored HTTP-date `Retry-After` and did not retry HTTP 408. | New deterministic time/date tests and a mocked 408 response failed first. | RFC-style delta-seconds and date handling with a four-second cap and bounded retries. |
+| P2 | Response metadata could contradict itself without failing Pydantic validation. | New accounting and rendered-row tests failed before validation. | Metadata and response-level invariants reject inconsistent records and displayed-item counts. |
+| P2 | Live planner reports did not break down accuracy by query category and did not explicitly close the provider client. | New mocked-evaluation test failed first. | Per-category rates, schema-valid rates and explicit resource cleanup; no model accuracy claim from offline tests. |
+
+A fresh offline run passed 109 tests using Python 3.13 in the reconstructed working tree. No OpenAI key or live ClinicalTrials.gov connectivity was available in this container; user-side live smoke and five saved example verification must be rerun after patch application. The lack of public endpoint authentication, term-based clinical matching and unpinned transitive dependencies remain known limitations, not resolved vulnerabilities.
+
+| P2 | Registry endpoint configuration accepted insecure protocols, embedded URL credentials and nonfinite or negative timeouts. | Eleven new configuration tests failed before the fix. | `get_settings()` now validates the endpoint protocol and bounded, finite timeout. |
