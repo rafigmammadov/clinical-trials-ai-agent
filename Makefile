@@ -15,6 +15,7 @@ check:
 	python -m evals.run --mode validate
 	python -m evals.identity
 	python -m evals.grounding
+	python -m evals.recall
 
 smoke:
 	bash scripts/smoke.sh
