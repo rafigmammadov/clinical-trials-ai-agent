@@ -544,7 +544,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T22:31:35.571712Z",
+    "analyzed_at": "2026-11-14T23:07:00.914282Z",
     "query_plan": {
       "intent": "drug_comparison",
       "condition": null,
@@ -557,7 +557,7 @@
       "start_year": null,
       "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Compare phase distributions of trials involving ivacaftor and lumacaftor."
+      "interpretation": "Compare the distribution of trial phases for the drugs ivacaftor and lumacaftor."
     },
     "filters": {
       "drugs": [
@@ -579,6 +579,8 @@
       "Registered-name mode verifies DRUG intervention names and otherNames in retrieved records using case-insensitive, whitespace-normalized equality. It is not drug ontology resolution and cannot recover candidates absent from the upstream registry text search."
     ],
     "citation_limit_per_datum": 10,
+    "planner_attempts": 1,
+    "planner_repaired": false,
     "cohort_matches": {
       "ivacaftor": 202,
       "lumacaftor": 49

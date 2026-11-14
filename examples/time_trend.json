@@ -225,7 +225,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T22:31:28.397536Z",
+    "analyzed_at": "2026-11-14T23:06:55.351619Z",
     "query_plan": {
       "intent": "time_trend",
       "condition": "Niemann-Pick disease type C",
@@ -253,6 +253,8 @@
       "With no end year, known future calendar dates are excluded; partial or estimated dates do not establish verified trial starts."
     ],
     "citation_limit_per_datum": 10,
+    "planner_attempts": 1,
+    "planner_repaired": false,
     "cohort_matches": null,
     "drug_match_mode": "registry_text",
     "matched_drug_counts": null,
