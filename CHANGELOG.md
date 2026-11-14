@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased (v0.4.1 temporal planning fix)
+
+- Reject model-inferred end years absent from the question unless the user provided a structured override.
+- For an unbounded `since YYYY` time trend, remove an unsupported model-inferred end year and disclose the correction.
+- Add regression cases and labeled benchmark assertions for unbounded time ranges.
+
 ## v0.4.0 — Registered intervention evidence (candidate, not a published release)
 
 - Add opt-in `drug_match_mode=registered_name` for registered DRUG name or `otherNames` alias verification after registry candidate search. Preserve `registry_text` as the default.
