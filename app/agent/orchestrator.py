@@ -13,9 +13,14 @@ from app.visualizations.builder import build_chart
 
 
 def is_future_study_start(study: Study, today: date) -> bool:
-    """Exclude future starts with complete dates; partial dates lack day precision."""
+    """Exclude known future start dates, including future YYYY-MM months."""
     if study.start_year is not None and study.start_year > today.year:
         return True
+    if study.start_date and len(study.start_date) == 7:
+        # YYYY-MM is sufficient to exclude a known future month; a missing
+        # day within the current month does not establish a future start.
+        year, month = (int(part) for part in study.start_date.split("-"))
+        return (year, month) > (today.year, today.month)
     if study.start_date:
         try:
             return date.fromisoformat(study.start_date) > today
@@ -41,7 +46,11 @@ class AnalysisService:
 
     @staticmethod
     def _post_filter(studies: tuple[Study, ...], plan: QueryPlan) -> list[Study]:
-        """Exact checks after search. Prevents fuzzy search mismatches."""
+        """Apply local date/status/country/lead-sponsor filters.
+
+        Condition and intervention terms still rely on registry text search;
+        this is not canonical disease or drug identity resolution.
+        """
         chosen = []
         for study in studies:
             if plan.start_year is not None and (study.start_year is None or study.start_year < plan.start_year):
@@ -63,6 +72,8 @@ class AnalysisService:
 
     async def analyze(self, request: AnalyzeRequest) -> AnalyzeResponse:
         plan = self._merge(await self._planner.plan(request.query), request)
+        if plan.intent == "unsupported":
+            raise QueryError("The requested analysis is unsupported; ask a question about clinical trial counts, distributions or relationships")
         if plan.intent == "drug_comparison":
             if len(plan.drugs) != 2 or plan.drugs[0].casefold() == plan.drugs[1].casefold():
                 raise QueryError("Drug comparisons require exactly two distinct drug names")
@@ -118,6 +129,15 @@ class AnalysisService:
                 f"{chart.visualization_total_items} {item_name}; "
                 "complete registry retrieval does not mean complete visualization coverage"
             )
+        # Post-filter records can lack fields needed for the selected chart.
+        # Keep historical records_used semantics while disclosing actual support.
+        visualized_count = len(chart.visualized_nct_ids)
+        not_visualized_count = len(studies) - visualized_count
+        if not_visualized_count > 0:
+            warnings.append(
+                f"{not_visualized_count} post-filter studies did not contribute to the "
+                "displayed visualization (missing chart fields or display limits)"
+            )
         assumptions = list(chart.assumptions)
         if plan.intent != "drug_comparison" and plan.drugs:
             assumptions.append("Intervention search uses registry text matching, not exact drug-name identity resolution.")
@@ -140,6 +160,8 @@ class AnalysisService:
                 cohort_matches=cohort_matches,
                 visualization_truncated=chart.visualization_truncated,
                 visualization_total_items=chart.visualization_total_items,
+                records_visualized=visualized_count,
+                records_not_visualized=not_visualized_count,
                 visualization_items_returned=(
                     len(chart.visualization.data["edges"])
                     if chart.visualization.type == "network_graph"
