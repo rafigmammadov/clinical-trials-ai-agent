@@ -78,6 +78,7 @@ class ClinicalTrialsClient:
         token: str | None = None
         total: int | None = None
         warnings: list[str] = []
+        skipped_records = 0
         while len(seen) < max_studies:
             request_params = {**params, "pageSize": min(1000, max_studies - len(seen))}
             if token:
@@ -90,6 +91,7 @@ class ClinicalTrialsClient:
                 try:
                     record = normalize_study(raw)
                 except (TypeError, AttributeError, ValueError, KeyError):
+                    skipped_records += 1
                     warnings.append("Skipped one record with missing/invalid required fields")
                     continue
                 seen.setdefault(record.nct_id, record)
@@ -104,7 +106,10 @@ class ClinicalTrialsClient:
             if len(seen) == before:
                 raise UpstreamError("Pagination made no progress while retrieving studies")
             token = next_token
-        complete = token is None and (total is None or len(seen) >= total)
+        # A malformed study is an omitted source record even when totalCount is
+        # absent; successful pagination alone does not prove data completeness.
+        complete = (token is None and skipped_records == 0
+                    and (total is None or len(seen) >= total))
         if not complete:
             warnings.append(
                 f"Only {len(seen)} of {total if total is not None else 'unknown'} "
