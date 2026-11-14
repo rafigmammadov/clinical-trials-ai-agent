@@ -44,7 +44,7 @@ For ordinary charts, channel encodings use field names present in output rows. N
 | HTTP status | Meaning |
 | --- | --- |
 | 200 | Analysis completed; check `meta.complete` and warnings for limitations |
-| 422 | Invalid input, contradictory comparison or unsupported analysis |
+| 422 | Invalid input, contradictory comparison, unsupported analysis, or ungrounded model-inferred restriction |
 | 502 | The registry failed or returned invalid data |
 | 503 | Planner could not be configured or failed to produce a plan |
 
@@ -68,3 +68,7 @@ This iteration adds stricter validation of existing response fields without chan
 ```
 
 Strict mode sets `meta.matched_drug_counts` to post-filter cohort sizes, adds `meta.filters.drug_match_mode`, and adds drug-name/alias provenance to cited studies. For a comparison datum this is `related_field_path` plus `related_excerpt`; for other chart types this is `matched_drug_field_path` plus `matched_drug_excerpt`. Upstream `total_matches` still describes text search candidates, not verified identity matches, and matching cannot recover studies not returned by the search. See [matching semantics](intervention_identity.md).
+
+## Model-inferred filter grounding (v0.5.0)
+
+The service checks inferred `condition`, `drugs`, `sponsor`, `country`, `start_year`, and `recruiting_only=true` before making registry requests. Fields not explicitly supported by the query are rejected with the normal `422 invalid_analysis` error; the application never silently removes named-entity restrictions. Explicit structured request fields remain authoritative for their corresponding fields. An unsupported domain synonym or relative time phrase may need an explicit typed filter. This is deterministic lexical checking, not a promise of exhaustive semantic understanding. See [grounding policy](agent_grounding.md).
