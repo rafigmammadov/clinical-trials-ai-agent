@@ -45,11 +45,26 @@ def balanced_sample(cases: list[dict], limit: int) -> list[dict]:
 
 
 def matches(field: str, actual, expected) -> bool:
+    if field == "country" and isinstance(actual, str) and isinstance(expected, str):
+        from app.agent.grounding import _canonical_country
+        return _canonical_country(actual).casefold() == _canonical_country(expected).casefold()
     if field == "drugs" and isinstance(actual, list) and isinstance(expected, list):
         return sorted(v.strip().casefold() for v in actual) == sorted(v.strip().casefold() for v in expected)
     if isinstance(actual, str) and isinstance(expected, str):
         return actual.strip().casefold() == expected.strip().casefold()
     return actual == expected
+
+
+def positive_requested_filters(fields: dict) -> set[str]:
+    """Only positively labeled constraints belong in the recall denominator.
+
+    Missing/empty/null expected fields and `recruiting_only=False` are not
+    requested positive retrieval restrictions. This is an evaluation over
+    annotated fields, not a full extraction of all semantic requirements.
+    """
+    return {name for name, expected in fields.items()
+            if name in {"condition", "drugs", "sponsor", "country", "start_year", "end_year", "recruiting_only"}
+            and expected is not None and expected is not False and expected != [] and expected != ""}
 
 
 async def run_live(cases: list[dict], model: str, key: str) -> dict:
@@ -66,11 +81,13 @@ async def run_live(cases: list[dict], model: str, key: str) -> dict:
                     name: matches(name, getattr(actual, name), expected)
                     for name, expected in case["fields"].items()
                 }
+                requested = positive_requested_filters(case["fields"])
                 results.append({
                     "id": case["id"], "category": case["category"],
                     "expected_intent": case["intent"], "observed": observed,
                     "schema_valid": True, "intent_correct": intent_correct,
                     "checked_filters": checked,
+                    "requested_filter_results": {name: checked[name] for name in sorted(requested)},
                 })
             except Exception as exc:
                 # Keep private provider exception content out of reports.
@@ -78,18 +95,24 @@ async def run_live(cases: list[dict], model: str, key: str) -> dict:
                     "id": case["id"], "category": case["category"],
                     "schema_valid": False, "error_type": type(exc).__name__,
                     "intent_correct": False, "checked_filters": {},
+                    "requested_filter_results": {
+                        name: False for name in sorted(positive_requested_filters(case["fields"]))
+                    },
                 })
     finally:
         await planner.close()
 
     def score(group: list[dict]) -> dict:
         checked = [v for row in group for v in row["checked_filters"].values()]
+        requested = [v for row in group for v in row["requested_filter_results"].values()]
         return {
             "evaluated": len(group),
             "schema_valid_rate": sum(row["schema_valid"] for row in group) / len(group) if group else None,
             "intent_accuracy": sum(row["intent_correct"] for row in group) / len(group) if group else None,
             "evaluated_filter_assertions": len(checked),
             "filter_accuracy": sum(checked) / len(checked) if checked else None,
+            "requested_filter_assertions": len(requested),
+            "requested_filter_recall": sum(requested) / len(requested) if requested else None,
         }
 
     categories = sorted({row["category"] for row in results})
