@@ -3374,7 +3374,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T18:34:50.196935Z",
+    "analyzed_at": "2026-11-14T19:25:40.059166Z",
     "query_plan": {
       "intent": "sponsor_drug_network",
       "condition": "Fabry disease",
@@ -3384,7 +3384,7 @@
       "start_year": null,
       "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Showing the network of lead sponsors connected to drug interventions in trials for Fabry disease."
+      "interpretation": "Map the network of lead sponsors connected to drug interventions in Fabry disease trials."
     },
     "filters": {
       "condition": "Fabry disease",
@@ -3405,6 +3405,8 @@
     ],
     "citation_limit_per_datum": 10,
     "cohort_matches": null,
+    "drug_match_mode": "registry_text",
+    "matched_drug_counts": null,
     "visualization_truncated": true,
     "visualization_items_returned": 75,
     "visualization_total_items": 81,
