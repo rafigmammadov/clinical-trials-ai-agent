@@ -6,7 +6,8 @@ from typing import Any
 
 from app.agent.planner import Planner
 from app.errors import QueryError
-from app.schemas.api import AnalyzeRequest, AnalyzeResponse, QueryPlan, ResponseMeta
+from app.schemas.api import AnalyzeRequest, AnalyzeResponse, DrugMatchMode, QueryPlan, ResponseMeta
+from app.services.intervention_matching import find_registered_drug_match
 from app.services.clinicaltrials import ClinicalTrialsClient
 from app.services.normalizer import Study
 from app.visualizations.builder import build_chart
@@ -45,7 +46,10 @@ class AnalysisService:
         return QueryPlan.model_validate({**plan.model_dump(), **overrides})
 
     @staticmethod
-    def _post_filter(studies: tuple[Study, ...], plan: QueryPlan) -> list[Study]:
+    def _post_filter(
+        studies: tuple[Study, ...], plan: QueryPlan, *, drug: str | None = None,
+        drug_match_mode: DrugMatchMode = "registry_text",
+    ) -> list[Study]:
         """Apply local date/status/country/lead-sponsor filters.
 
         Condition and intervention terms still rely on registry text search;
@@ -53,6 +57,9 @@ class AnalysisService:
         """
         chosen = []
         for study in studies:
+            if (drug_match_mode == "registered_name" and drug is not None
+                    and find_registered_drug_match(study, drug) is None):
+                continue
             if plan.start_year is not None and (study.start_year is None or study.start_year < plan.start_year):
                 continue
             if plan.end_year is not None and (study.start_year is None or study.start_year > plan.end_year):
@@ -74,6 +81,8 @@ class AnalysisService:
         plan = self._merge(await self._planner.plan(request.query), request)
         if plan.intent == "unsupported":
             raise QueryError("The requested analysis is unsupported; ask a question about clinical trial counts, distributions or relationships")
+        if request.drug_match_mode == "registered_name" and not plan.drugs:
+            raise QueryError("registered_name drug matching requires a named drug filter")
         if plan.intent == "drug_comparison":
             if len(plan.drugs) != 2 or plan.drugs[0].casefold() == plan.drugs[1].casefold():
                 raise QueryError("Drug comparisons require exactly two distinct drug names")
@@ -86,7 +95,10 @@ class AnalysisService:
                 for drug in plan.drugs
             ))
             cohorts = {
-                drug: self._post_filter(result.studies, plan)
+                drug: self._post_filter(
+                    result.studies, plan, drug=drug,
+                    drug_match_mode=request.drug_match_mode,
+                )
                 for drug, result in zip(plan.drugs, found)
             }
             studies_by_id = {s.nct_id: s for group in cohorts.values() for s in group}
@@ -102,7 +114,11 @@ class AnalysisService:
             result = await self._trials.search(
                 plan, max_studies=request.max_studies, drug=plan.drugs[0] if plan.drugs else None
             )
-            studies = self._post_filter(result.studies, plan)
+            studies = self._post_filter(
+                result.studies, plan,
+                drug=plan.drugs[0] if plan.drugs else None,
+                drug_match_mode=request.drug_match_mode,
+            )
             fetched_count = len(result.studies)
             cohorts = None
             complete = result.complete
@@ -112,11 +128,19 @@ class AnalysisService:
 
         if not studies:
             warnings.append("No matching study records were available for this analysis")
+            if plan.drugs and request.drug_match_mode == "registered_name":
+                warnings.append(
+                    "No returned candidate has the requested registered DRUG name or otherNames; "
+                    "this does not prove that no such trials exist in the registry"
+                )
         if not complete:
             warnings.append("This visualization is based on incomplete records and must not be read as a complete population count")
         if request.citation_limit == 0:
             warnings.append("Per-datum citations were disabled by citation_limit=0")
-        chart = build_chart(plan, studies, citation_limit=request.citation_limit, cohorts=cohorts)
+        chart = build_chart(
+            plan, studies, citation_limit=request.citation_limit, cohorts=cohorts,
+            drug_match_mode=request.drug_match_mode,
+        )
         if chart.visualization_truncated:
             rendered_count = (
                 len(chart.visualization.data["edges"])
@@ -139,16 +163,31 @@ class AnalysisService:
                 "displayed visualization (missing chart fields or display limits)"
             )
         assumptions = list(chart.assumptions)
+        if plan.drugs and request.drug_match_mode == "registered_name":
+            assumptions.append(
+                "Registered-name mode verifies DRUG intervention names and otherNames "
+                "in retrieved records using case-insensitive, whitespace-normalized equality. "
+                "It is not drug ontology resolution and cannot recover candidates absent "
+                "from the upstream registry text search."
+            )
         if plan.intent != "drug_comparison" and plan.drugs:
             assumptions.append("Intervention search uses registry text matching, not exact drug-name identity resolution.")
         if plan.start_year or plan.end_year:
             assumptions.append("Start-year filters apply to study start dates, not registration or publication dates.")
         if plan.intent == "time_trend" and plan.end_year is None:
             assumptions.append("With no end year, known future calendar dates are excluded; partial or estimated dates do not establish verified trial starts.")
+        matched_drug_counts = None
+        if plan.drugs and request.drug_match_mode == "registered_name":
+            matched_drug_counts = (
+                {drug: len(cohorts[drug]) for drug in plan.drugs}
+                if cohorts is not None else {plan.drugs[0]: len(studies)}
+            )
         filters: dict[str, Any] = {
             key: value for key, value in plan.model_dump(exclude={"intent", "interpretation"}).items()
             if value is not None and value != []
         }
+        if plan.drugs:
+            filters["drug_match_mode"] = request.drug_match_mode
         return AnalyzeResponse(
             visualization=chart.visualization,
             meta=ResponseMeta(
@@ -158,6 +197,8 @@ class AnalysisService:
                 warnings=warnings, assumptions=assumptions,
                 citation_limit_per_datum=request.citation_limit,
                 cohort_matches=cohort_matches,
+                drug_match_mode=request.drug_match_mode,
+                matched_drug_counts=matched_drug_counts,
                 visualization_truncated=chart.visualization_truncated,
                 visualization_total_items=chart.visualization_total_items,
                 records_visualized=visualized_count,
