@@ -53,38 +53,54 @@ def matches(field: str, actual, expected) -> bool:
 
 
 async def run_live(cases: list[dict], model: str, key: str) -> dict:
+    """Measure intent and explicitly labeled filters; never infer accuracy from JSON alone."""
     planner = OpenAIPlanner(api_key=key, model=model)
     results = []
-    for case in cases:
-        try:
-            actual = await planner.plan(case["question"])
-            observed = actual.model_dump()
-            intent_correct = actual.intent == case["intent"]
-            checked = {
-                name: matches(name, getattr(actual, name), expected)
-                for name, expected in case["fields"].items()
-            }
-            results.append({
-                "id": case["id"], "category": case["category"],
-                "expected_intent": case["intent"], "observed": observed,
-                "schema_valid": True,
-                "intent_correct": intent_correct,
-                "checked_filters": checked,
-            })
-        except Exception as exc:
-            # Keep private provider exception content out of reports.
-            results.append({
-                "id": case["id"], "category": case["category"],
-                "schema_valid": False, "error_type": type(exc).__name__,
-                "intent_correct": False, "checked_filters": {},
-            })
-    intent_correct = sum(x["intent_correct"] for x in results)
-    filters = [v for result in results for v in result["checked_filters"].values()]
+    try:
+        for case in cases:
+            try:
+                actual = await planner.plan(case["question"])
+                observed = actual.model_dump()
+                intent_correct = actual.intent == case["intent"]
+                checked = {
+                    name: matches(name, getattr(actual, name), expected)
+                    for name, expected in case["fields"].items()
+                }
+                results.append({
+                    "id": case["id"], "category": case["category"],
+                    "expected_intent": case["intent"], "observed": observed,
+                    "schema_valid": True, "intent_correct": intent_correct,
+                    "checked_filters": checked,
+                })
+            except Exception as exc:
+                # Keep private provider exception content out of reports.
+                results.append({
+                    "id": case["id"], "category": case["category"],
+                    "schema_valid": False, "error_type": type(exc).__name__,
+                    "intent_correct": False, "checked_filters": {},
+                })
+    finally:
+        await planner.close()
+
+    def score(group: list[dict]) -> dict:
+        checked = [v for row in group for v in row["checked_filters"].values()]
+        return {
+            "evaluated": len(group),
+            "schema_valid_rate": sum(row["schema_valid"] for row in group) / len(group) if group else None,
+            "intent_accuracy": sum(row["intent_correct"] for row in group) / len(group) if group else None,
+            "evaluated_filter_assertions": len(checked),
+            "filter_accuracy": sum(checked) / len(checked) if checked else None,
+        }
+
+    categories = sorted({row["category"] for row in results})
+    overall = score(results)
     return {
-        "mode": "live", "model": model, "evaluated": len(results),
-        "intent_accuracy": intent_correct / len(results) if results else None,
-        "evaluated_filter_assertions": len(filters),
-        "filter_accuracy": sum(filters) / len(filters) if filters else None,
+        "mode": "live", "model": model,
+        **overall,
+        "by_category": {
+            category: score([row for row in results if row["category"] == category])
+            for category in categories
+        },
         "results": results,
     }
 
