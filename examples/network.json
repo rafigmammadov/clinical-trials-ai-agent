@@ -1,0 +1,3411 @@
+{
+  "visualization": {
+    "type": "network_graph",
+    "title": "Clinical trial relationship network — Fabry disease",
+    "encoding": {
+      "nodes": {
+        "id": "id",
+        "label": "label",
+        "category": "kind"
+      },
+      "edges": {
+        "source": "source",
+        "target": "target",
+        "weight": "weight"
+      }
+    },
+    "data": {
+      "nodes": [
+        {
+          "id": "drug:[14c] at1001",
+          "label": "[14C] AT1001",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01730482",
+              "url": "https://clinicaltrials.gov/study/NCT01730482",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "[14C] AT1001"
+            }
+          ]
+        },
+        {
+          "id": "drug:a (migalastat)",
+          "label": "A (migalastat)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "A (migalastat)"
+            }
+          ]
+        },
+        {
+          "id": "drug:acetaminophen",
+          "label": "Acetaminophen",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Acetaminophen"
+            }
+          ]
+        },
+        {
+          "id": "drug:active comparator (agalsidase beta)",
+          "label": "Active comparator (Agalsidase beta)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06081062",
+              "url": "https://clinicaltrials.gov/study/NCT06081062",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Active comparator (Agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "id": "drug:agalsidase alfa",
+          "label": "Agalsidase alfa",
+          "kind": "drug",
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00084084",
+              "url": "https://clinicaltrials.gov/study/NCT00084084",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Agalsidase alfa"
+            },
+            {
+              "nct_id": "NCT04143958",
+              "url": "https://clinicaltrials.gov/study/NCT04143958",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "agalsidase alfa"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Agalsidase alfa"
+            }
+          ]
+        },
+        {
+          "id": "drug:agalsidase beta",
+          "label": "agalsidase beta",
+          "kind": "drug",
+          "citation_count": 4,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00140621",
+              "url": "https://clinicaltrials.gov/study/NCT00140621",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Agalsidase beta"
+            },
+            {
+              "nct_id": "NCT00230607",
+              "url": "https://clinicaltrials.gov/study/NCT00230607",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "agalsidase beta"
+            },
+            {
+              "nct_id": "NCT05054387",
+              "url": "https://clinicaltrials.gov/study/NCT05054387",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Agalsidase beta"
+            },
+            {
+              "nct_id": "NCT05698901",
+              "url": "https://clinicaltrials.gov/study/NCT05698901",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Agalsidase beta"
+            }
+          ]
+        },
+        {
+          "id": "drug:agalsidase beta (gz419828)",
+          "label": "AGALSIDASE BETA (GZ419828)",
+          "kind": "drug",
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04143958",
+              "url": "https://clinicaltrials.gov/study/NCT04143958",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "agalsidase beta (GZ419828)"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Agalsidase beta (GZ419828)"
+            },
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "AGALSIDASE BETA (GZ419828)"
+            }
+          ]
+        },
+        {
+          "id": "drug:agalsidase beta (recombinant form)",
+          "label": "Agalsidase beta (recombinant form)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00233870",
+              "url": "https://clinicaltrials.gov/study/NCT00233870",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Agalsidase beta (recombinant form)"
+            }
+          ]
+        },
+        {
+          "id": "drug:al01211",
+          "label": "AL01211",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06114329",
+              "url": "https://clinicaltrials.gov/study/NCT06114329",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "AL01211"
+            }
+          ]
+        },
+        {
+          "id": "drug:amt-191",
+          "label": "AMT-191",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06270316",
+              "url": "https://clinicaltrials.gov/study/NCT06270316",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "AMT-191"
+            }
+          ]
+        },
+        {
+          "id": "drug:at1001 150 mg",
+          "label": "AT1001 150 mg",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01730469",
+              "url": "https://clinicaltrials.gov/study/NCT01730469",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "AT1001 150 mg"
+            }
+          ]
+        },
+        {
+          "id": "drug:avr-rd-01",
+          "label": "AVR-RD-01",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03454893",
+              "url": "https://clinicaltrials.gov/study/NCT03454893",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "AVR-RD-01"
+            }
+          ]
+        },
+        {
+          "id": "drug:b (migalastat)",
+          "label": "B (migalastat)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "B (migalastat)"
+            }
+          ]
+        },
+        {
+          "id": "drug:c (migalastat)",
+          "label": "C (migalastat)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "C (migalastat)"
+            }
+          ]
+        },
+        {
+          "id": "drug:cannabis sativa l., folium cum flore",
+          "label": "Cannabis sativa L., folium cum flore",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04820361",
+              "url": "https://clinicaltrials.gov/study/NCT04820361",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Cannabis sativa L., folium cum flore"
+            }
+          ]
+        },
+        {
+          "id": "drug:cetirizine",
+          "label": "Cetirizine",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Cetirizine"
+            }
+          ]
+        },
+        {
+          "id": "drug:d (migalastat)",
+          "label": "D (migalastat)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "D (migalastat)"
+            }
+          ]
+        },
+        {
+          "id": "drug:dapagliflozin 10mg tab",
+          "label": "Dapagliflozin 10mg Tab",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05710367",
+              "url": "https://clinicaltrials.gov/study/NCT05710367",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Dapagliflozin 10mg Tab"
+            }
+          ]
+        },
+        {
+          "id": "drug:dexamethasone",
+          "label": "Dexamethasone",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Dexamethasone"
+            }
+          ]
+        },
+        {
+          "id": "drug:diphenhydramine",
+          "label": "Diphenhydramine",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Diphenhydramine"
+            }
+          ]
+        },
+        {
+          "id": "drug:drx005b",
+          "label": "DRX005B",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00048906",
+              "url": "https://clinicaltrials.gov/study/NCT00048906",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "DRX005B"
+            }
+          ]
+        },
+        {
+          "id": "drug:e (migalastat)",
+          "label": "E (migalastat)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "E (migalastat)"
+            }
+          ]
+        },
+        {
+          "id": "drug:enzyme replacement",
+          "label": "Enzyme replacement",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01997489",
+              "url": "https://clinicaltrials.gov/study/NCT01997489",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Enzyme replacement"
+            }
+          ]
+        },
+        {
+          "id": "drug:enzyme replacement therapy",
+          "label": "Enzyme replacement therapy",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02969200",
+              "url": "https://clinicaltrials.gov/study/NCT02969200",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Enzyme replacement therapy"
+            }
+          ]
+        },
+        {
+          "id": "drug:enzyme replacement therapy (ert)",
+          "label": "Enzyme replacement therapy (ERT)",
+          "kind": "drug",
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02930655",
+              "url": "https://clinicaltrials.gov/study/NCT02930655",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Enzyme replacement therapy (ERT)"
+            },
+            {
+              "nct_id": "NCT04281537",
+              "url": "https://clinicaltrials.gov/study/NCT04281537",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Enzyme Replacement Therapy (ERT)"
+            }
+          ]
+        },
+        {
+          "id": "drug:ert",
+          "label": "ERT",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06906367",
+              "url": "https://clinicaltrials.gov/study/NCT06906367",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "ERT"
+            }
+          ]
+        },
+        {
+          "id": "drug:exg110 injection",
+          "label": "EXG110 Injection",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06819514",
+              "url": "https://clinicaltrials.gov/study/NCT06819514",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "EXG110 Injection"
+            }
+          ]
+        },
+        {
+          "id": "drug:fabrazyme (agalsidase beta)",
+          "label": "Fabrazyme (agalsidase beta)",
+          "kind": "drug",
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00074971",
+              "url": "https://clinicaltrials.gov/study/NCT00074971",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Fabrazyme (agalsidase beta)"
+            },
+            {
+              "nct_id": "NCT00312767",
+              "url": "https://clinicaltrials.gov/study/NCT00312767",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Fabrazyme (agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "id": "drug:fexofenadine",
+          "label": "Fexofenadine",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Fexofenadine"
+            }
+          ]
+        },
+        {
+          "id": "drug:gc1119",
+          "label": "GC1119",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01653444",
+              "url": "https://clinicaltrials.gov/study/NCT01653444",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "GC1119"
+            }
+          ]
+        },
+        {
+          "id": "drug:gr181413a/at1001 capsule",
+          "label": "GR181413A/AT1001 capsule",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01853852",
+              "url": "https://clinicaltrials.gov/study/NCT01853852",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "GR181413A/AT1001 capsule"
+            }
+          ]
+        },
+        {
+          "id": "drug:gr181413a/at1001 solution",
+          "label": "GR181413A/AT1001 solution",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01853852",
+              "url": "https://clinicaltrials.gov/study/NCT01853852",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "GR181413A/AT1001 solution"
+            }
+          ]
+        },
+        {
+          "id": "drug:gz/sar402671",
+          "label": "GZ/SAR402671",
+          "kind": "drug",
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02228460",
+              "url": "https://clinicaltrials.gov/study/NCT02228460",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "GZ/SAR402671"
+            },
+            {
+              "nct_id": "NCT02489344",
+              "url": "https://clinicaltrials.gov/study/NCT02489344",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "GZ/SAR402671"
+            }
+          ]
+        },
+        {
+          "id": "drug:hm15421/gc1134a",
+          "label": "HM15421/GC1134A",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06858397",
+              "url": "https://clinicaltrials.gov/study/NCT06858397",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "HM15421/GC1134A"
+            }
+          ]
+        },
+        {
+          "id": "drug:iohexol",
+          "label": "Iohexol",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01839526",
+              "url": "https://clinicaltrials.gov/study/NCT01839526",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Iohexol"
+            }
+          ]
+        },
+        {
+          "id": "drug:iv migalastat hcl",
+          "label": "IV migalastat HCl",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02082327",
+              "url": "https://clinicaltrials.gov/study/NCT02082327",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "IV migalastat HCl"
+            }
+          ]
+        },
+        {
+          "id": "drug:iv placebo",
+          "label": "IV placebo",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02082327",
+              "url": "https://clinicaltrials.gov/study/NCT02082327",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "IV placebo"
+            }
+          ]
+        },
+        {
+          "id": "drug:loratadine",
+          "label": "Loratadine",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Loratadine"
+            }
+          ]
+        },
+        {
+          "id": "drug:lucerastat",
+          "label": "Lucerastat",
+          "kind": "drug",
+          "citation_count": 5,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02930655",
+              "url": "https://clinicaltrials.gov/study/NCT02930655",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT03425539",
+              "url": "https://clinicaltrials.gov/study/NCT03425539",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT03737214",
+              "url": "https://clinicaltrials.gov/study/NCT03737214",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT07762638",
+              "url": "https://clinicaltrials.gov/study/NCT07762638",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT07778667",
+              "url": "https://clinicaltrials.gov/study/NCT07778667",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Lucerastat"
+            }
+          ]
+        },
+        {
+          "id": "drug:migalastat",
+          "label": "Migalastat",
+          "kind": "drug",
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03949920",
+              "url": "https://clinicaltrials.gov/study/NCT03949920",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Migalastat"
+            },
+            {
+              "nct_id": "NCT04252066",
+              "url": "https://clinicaltrials.gov/study/NCT04252066",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Migalastat"
+            }
+          ]
+        },
+        {
+          "id": "drug:migalastat hcl",
+          "label": "migalastat HCl",
+          "kind": "drug",
+          "citation_count": 7,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00214500",
+              "url": "https://clinicaltrials.gov/study/NCT00214500",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00283933",
+              "url": "https://clinicaltrials.gov/study/NCT00283933",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00283959",
+              "url": "https://clinicaltrials.gov/study/NCT00283959",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00304512",
+              "url": "https://clinicaltrials.gov/study/NCT00304512",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00526071",
+              "url": "https://clinicaltrials.gov/study/NCT00526071",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT01196871",
+              "url": "https://clinicaltrials.gov/study/NCT01196871",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Migalastat HCl"
+            },
+            {
+              "nct_id": "NCT06906367",
+              "url": "https://clinicaltrials.gov/study/NCT06906367",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl"
+            }
+          ]
+        },
+        {
+          "id": "drug:migalastat hcl 150 mg",
+          "label": "migalastat HCl 150 mg",
+          "kind": "drug",
+          "citation_count": 5,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01476163",
+              "url": "https://clinicaltrials.gov/study/NCT01476163",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT02194985",
+              "url": "https://clinicaltrials.gov/study/NCT02194985",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT03500094",
+              "url": "https://clinicaltrials.gov/study/NCT03500094",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT04020055",
+              "url": "https://clinicaltrials.gov/study/NCT04020055",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT04049760",
+              "url": "https://clinicaltrials.gov/study/NCT04049760",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl 150 mg"
+            }
+          ]
+        },
+        {
+          "id": "drug:migalastat hcl 20 mg",
+          "label": "migalastat HCl 20 mg",
+          "kind": "drug",
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01476163",
+              "url": "https://clinicaltrials.gov/study/NCT01476163",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat HCl 20 mg"
+            },
+            {
+              "nct_id": "NCT06904261",
+              "url": "https://clinicaltrials.gov/study/NCT06904261",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Migalastat HCl 20 mg"
+            }
+          ]
+        },
+        {
+          "id": "drug:migalastat hydrochloride",
+          "label": "migalastat hydrochloride",
+          "kind": "drug",
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00925301",
+              "url": "https://clinicaltrials.gov/study/NCT00925301",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat hydrochloride"
+            },
+            {
+              "nct_id": "NCT01218659",
+              "url": "https://clinicaltrials.gov/study/NCT01218659",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat hydrochloride"
+            },
+            {
+              "nct_id": "NCT01458119",
+              "url": "https://clinicaltrials.gov/study/NCT01458119",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "migalastat hydrochloride"
+            }
+          ]
+        },
+        {
+          "id": "drug:montelukast",
+          "label": "Montelukast",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Montelukast"
+            }
+          ]
+        },
+        {
+          "id": "drug:moss-agal (recombinant human alpha-galactosidase a produced in moss)",
+          "label": "Moss-aGal (recombinant human alpha-galactosidase A produced in moss)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02995993",
+              "url": "https://clinicaltrials.gov/study/NCT02995993",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Moss-aGal (recombinant human alpha-galactosidase A produced in moss)"
+            }
+          ]
+        },
+        {
+          "id": "drug:oral migalastat hcl",
+          "label": "oral migalastat HCl",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02082327",
+              "url": "https://clinicaltrials.gov/study/NCT02082327",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "oral migalastat HCl"
+            }
+          ]
+        },
+        {
+          "id": "drug:paricalcitol",
+          "label": "Paricalcitol",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02090608",
+              "url": "https://clinicaltrials.gov/study/NCT02090608",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Paricalcitol"
+            }
+          ]
+        },
+        {
+          "id": "drug:pegunigalsidase alfa",
+          "label": "pegunigalsidase alfa",
+          "kind": "drug",
+          "citation_count": 4,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03566017",
+              "url": "https://clinicaltrials.gov/study/NCT03566017",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "pegunigalsidase alfa"
+            },
+            {
+              "nct_id": "NCT03614234",
+              "url": "https://clinicaltrials.gov/study/NCT03614234",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "pegunigalsidase alfa"
+            },
+            {
+              "nct_id": "NCT04552691",
+              "url": "https://clinicaltrials.gov/study/NCT04552691",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Pegunigalsidase Alfa"
+            },
+            {
+              "nct_id": "NCT07109375",
+              "url": "https://clinicaltrials.gov/study/NCT07109375",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "pegunigalsidase alfa"
+            }
+          ]
+        },
+        {
+          "id": "drug:pegunigalsidase-alfa",
+          "label": "Pegunigalsidase-alfa",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06663358",
+              "url": "https://clinicaltrials.gov/study/NCT06663358",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Pegunigalsidase-alfa"
+            }
+          ]
+        },
+        {
+          "id": "drug:placebo",
+          "label": "Placebo",
+          "kind": "drug",
+          "citation_count": 5,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00925301",
+              "url": "https://clinicaltrials.gov/study/NCT00925301",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Placebo"
+            },
+            {
+              "nct_id": "NCT03425539",
+              "url": "https://clinicaltrials.gov/study/NCT03425539",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Placebo"
+            },
+            {
+              "nct_id": "NCT04820361",
+              "url": "https://clinicaltrials.gov/study/NCT04820361",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Placebo"
+            },
+            {
+              "nct_id": "NCT05206773",
+              "url": "https://clinicaltrials.gov/study/NCT05206773",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Placebo"
+            },
+            {
+              "nct_id": "NCT05710367",
+              "url": "https://clinicaltrials.gov/study/NCT05710367",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Placebo"
+            }
+          ]
+        },
+        {
+          "id": "drug:placebo capsule",
+          "label": "Placebo capsule",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01853852",
+              "url": "https://clinicaltrials.gov/study/NCT01853852",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Placebo capsule"
+            }
+          ]
+        },
+        {
+          "id": "drug:prx-102",
+          "label": "PRX-102",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01678898",
+              "url": "https://clinicaltrials.gov/study/NCT01678898",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "PRX-102"
+            }
+          ]
+        },
+        {
+          "id": "drug:prx-102 1 mg/kg every 2 weeks",
+          "label": "PRX-102 1 mg/kg every 2 weeks",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05710692",
+              "url": "https://clinicaltrials.gov/study/NCT05710692",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "PRX-102 1 mg/kg every 2 weeks"
+            }
+          ]
+        },
+        {
+          "id": "drug:prx-102 1 mg/kg every two weeks",
+          "label": "PRX-102 1 mg/kg every two weeks",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06328608",
+              "url": "https://clinicaltrials.gov/study/NCT06328608",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "PRX-102 1 mg/kg every two weeks"
+            }
+          ]
+        },
+        {
+          "id": "drug:prx-102 2 mg/kg every 4 weeks",
+          "label": "PRX-102 2 mg/kg every 4 weeks",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05710692",
+              "url": "https://clinicaltrials.gov/study/NCT05710692",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "PRX-102 2 mg/kg every 4 weeks"
+            }
+          ]
+        },
+        {
+          "id": "drug:recombinant alpha-galactosidase a",
+          "label": "recombinant alpha-galactosidase A",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00487630",
+              "url": "https://clinicaltrials.gov/study/NCT00487630",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "recombinant alpha-galactosidase A"
+            }
+          ]
+        },
+        {
+          "id": "drug:recombinant human alpha galactosidase a (agalsidase beta)",
+          "label": "Recombinant human alpha galactosidase A (agalsidase beta)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05843916",
+              "url": "https://clinicaltrials.gov/study/NCT05843916",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Recombinant human alpha galactosidase A (agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "id": "drug:recombinant human alpha-galactosidase a (agalsidase beta)",
+          "label": "Recombinant human alpha-galactosidase A (agalsidase beta)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05843916",
+              "url": "https://clinicaltrials.gov/study/NCT05843916",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Recombinant human alpha-galactosidase A (agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "id": "drug:replagal",
+          "label": "Replagal",
+          "kind": "drug",
+          "citation_count": 6,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00068107",
+              "url": "https://clinicaltrials.gov/study/NCT00068107",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT00071877",
+              "url": "https://clinicaltrials.gov/study/NCT00071877",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT00075244",
+              "url": "https://clinicaltrials.gov/study/NCT00075244",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT00097890",
+              "url": "https://clinicaltrials.gov/study/NCT00097890",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT00357786",
+              "url": "https://clinicaltrials.gov/study/NCT00357786",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT04840667",
+              "url": "https://clinicaltrials.gov/study/NCT04840667",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "REPLAGAL"
+            }
+          ]
+        },
+        {
+          "id": "drug:replagal (agalsidase alfa)",
+          "label": "Replagal (Agalsidase Alfa)",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00097890",
+              "url": "https://clinicaltrials.gov/study/NCT00097890",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Replagal (Agalsidase Alfa)"
+            }
+          ]
+        },
+        {
+          "id": "drug:replagal agalsidase alfa",
+          "label": "Replagal agalsidase alfa",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00357786",
+              "url": "https://clinicaltrials.gov/study/NCT00357786",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Replagal agalsidase alfa"
+            }
+          ]
+        },
+        {
+          "id": "drug:rvx000222",
+          "label": "RVX000222",
+          "kind": "drug",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03228940",
+              "url": "https://clinicaltrials.gov/study/NCT03228940",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "RVX000222"
+            }
+          ]
+        },
+        {
+          "id": "drug:venglustat (gz402671)",
+          "label": "Venglustat (GZ402671)",
+          "kind": "drug",
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05206773",
+              "url": "https://clinicaltrials.gov/study/NCT05206773",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Venglustat (GZ402671)"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "excerpt": "Venglustat (GZ402671)"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:acelink therapeutics, inc.",
+          "label": "AceLink Therapeutics, Inc.",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06114329",
+              "url": "https://clinicaltrials.gov/study/NCT06114329",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "AceLink Therapeutics, Inc."
+            }
+          ]
+        },
+        {
+          "id": "sponsor:albina nowak, md",
+          "label": "Albina Nowak, MD",
+          "kind": "sponsor",
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04820361",
+              "url": "https://clinicaltrials.gov/study/NCT04820361",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Albina Nowak, MD"
+            },
+            {
+              "nct_id": "NCT05710367",
+              "url": "https://clinicaltrials.gov/study/NCT05710367",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Albina Nowak, MD"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:amicus therapeutics",
+          "label": "Amicus Therapeutics",
+          "kind": "sponsor",
+          "citation_count": 23,
+          "citations_complete": false,
+          "citations": [
+            {
+              "nct_id": "NCT00214500",
+              "url": "https://clinicaltrials.gov/study/NCT00214500",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT00283933",
+              "url": "https://clinicaltrials.gov/study/NCT00283933",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT00283959",
+              "url": "https://clinicaltrials.gov/study/NCT00283959",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT00304512",
+              "url": "https://clinicaltrials.gov/study/NCT00304512",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT00526071",
+              "url": "https://clinicaltrials.gov/study/NCT00526071",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT00925301",
+              "url": "https://clinicaltrials.gov/study/NCT00925301",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT01196871",
+              "url": "https://clinicaltrials.gov/study/NCT01196871",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT01218659",
+              "url": "https://clinicaltrials.gov/study/NCT01218659",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT01458119",
+              "url": "https://clinicaltrials.gov/study/NCT01458119",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            },
+            {
+              "nct_id": "NCT01476163",
+              "url": "https://clinicaltrials.gov/study/NCT01476163",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:assistance publique - hôpitaux de paris",
+          "label": "Assistance Publique - Hôpitaux de Paris",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00487630",
+              "url": "https://clinicaltrials.gov/study/NCT00487630",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Assistance Publique - Hôpitaux de Paris"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:avrobio",
+          "label": "AVROBIO",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03454893",
+              "url": "https://clinicaltrials.gov/study/NCT03454893",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "AVROBIO"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:baylor research institute",
+          "label": "Baylor Research Institute",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00068107",
+              "url": "https://clinicaltrials.gov/study/NCT00068107",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Baylor Research Institute"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:bio sidus sa",
+          "label": "Bio Sidus SA",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05843916",
+              "url": "https://clinicaltrials.gov/study/NCT05843916",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Bio Sidus SA"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:chiesi farmaceutici s.p.a.",
+          "label": "Chiesi Farmaceutici S.p.A.",
+          "kind": "sponsor",
+          "citation_count": 6,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03566017",
+              "url": "https://clinicaltrials.gov/study/NCT03566017",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A."
+            },
+            {
+              "nct_id": "NCT03614234",
+              "url": "https://clinicaltrials.gov/study/NCT03614234",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A."
+            },
+            {
+              "nct_id": "NCT04552691",
+              "url": "https://clinicaltrials.gov/study/NCT04552691",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A."
+            },
+            {
+              "nct_id": "NCT05710692",
+              "url": "https://clinicaltrials.gov/study/NCT05710692",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A."
+            },
+            {
+              "nct_id": "NCT06328608",
+              "url": "https://clinicaltrials.gov/study/NCT06328608",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A."
+            },
+            {
+              "nct_id": "NCT06663358",
+              "url": "https://clinicaltrials.gov/study/NCT06663358",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A."
+            }
+          ]
+        },
+        {
+          "id": "sponsor:chiesi italia",
+          "label": "Chiesi Italia",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT07109375",
+              "url": "https://clinicaltrials.gov/study/NCT07109375",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Italia"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:copenhagen university hospital, rigshospitalet",
+          "label": "Copenhagen University Hospital, Rigshospitalet",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01997489",
+              "url": "https://clinicaltrials.gov/study/NCT01997489",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Copenhagen University Hospital, Rigshospitalet"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:federico ii university",
+          "label": "Federico II University",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02090608",
+              "url": "https://clinicaltrials.gov/study/NCT02090608",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Federico II University"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:gc biopharma corp",
+          "label": "GC Biopharma Corp",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06858397",
+              "url": "https://clinicaltrials.gov/study/NCT06858397",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "GC Biopharma Corp"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:genzyme, a sanofi company",
+          "label": "Genzyme, a Sanofi Company",
+          "kind": "sponsor",
+          "citation_count": 9,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00074971",
+              "url": "https://clinicaltrials.gov/study/NCT00074971",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT00140621",
+              "url": "https://clinicaltrials.gov/study/NCT00140621",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT00230607",
+              "url": "https://clinicaltrials.gov/study/NCT00230607",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT00233870",
+              "url": "https://clinicaltrials.gov/study/NCT00233870",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT00312767",
+              "url": "https://clinicaltrials.gov/study/NCT00312767",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT01839526",
+              "url": "https://clinicaltrials.gov/study/NCT01839526",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT02228460",
+              "url": "https://clinicaltrials.gov/study/NCT02228460",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT02489344",
+              "url": "https://clinicaltrials.gov/study/NCT02489344",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            },
+            {
+              "nct_id": "NCT05054387",
+              "url": "https://clinicaltrials.gov/study/NCT05054387",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:green cross corporation",
+          "label": "Green Cross Corporation",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01653444",
+              "url": "https://clinicaltrials.gov/study/NCT01653444",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Green Cross Corporation"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:greenovation biotech gmbh",
+          "label": "Greenovation Biotech GmbH",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02995993",
+              "url": "https://clinicaltrials.gov/study/NCT02995993",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Greenovation Biotech GmbH"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:guangzhou jiayin biotech ltd",
+          "label": "Guangzhou Jiayin Biotech Ltd",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06819514",
+              "url": "https://clinicaltrials.gov/study/NCT06819514",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Guangzhou Jiayin Biotech Ltd"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:idorsia pharmaceuticals ltd.",
+          "label": "Idorsia Pharmaceuticals Ltd.",
+          "kind": "sponsor",
+          "citation_count": 5,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02930655",
+              "url": "https://clinicaltrials.gov/study/NCT02930655",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd."
+            },
+            {
+              "nct_id": "NCT03425539",
+              "url": "https://clinicaltrials.gov/study/NCT03425539",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd."
+            },
+            {
+              "nct_id": "NCT03737214",
+              "url": "https://clinicaltrials.gov/study/NCT03737214",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd."
+            },
+            {
+              "nct_id": "NCT07762638",
+              "url": "https://clinicaltrials.gov/study/NCT07762638",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd."
+            },
+            {
+              "nct_id": "NCT07778667",
+              "url": "https://clinicaltrials.gov/study/NCT07778667",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd."
+            }
+          ]
+        },
+        {
+          "id": "sponsor:isu abxis co., ltd.",
+          "label": "ISU Abxis Co., Ltd.",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06081062",
+              "url": "https://clinicaltrials.gov/study/NCT06081062",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "ISU Abxis Co., Ltd."
+            }
+          ]
+        },
+        {
+          "id": "sponsor:mackay memorial hospital",
+          "label": "Mackay Memorial Hospital",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05698901",
+              "url": "https://clinicaltrials.gov/study/NCT05698901",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Mackay Memorial Hospital"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:manchester university nhs foundation trust",
+          "label": "Manchester University NHS Foundation Trust",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03949920",
+              "url": "https://clinicaltrials.gov/study/NCT03949920",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Manchester University NHS Foundation Trust"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:national institute of neurological disorders and stroke (ninds)",
+          "label": "National Institute of Neurological Disorders and Stroke (NINDS)",
+          "kind": "sponsor",
+          "citation_count": 5,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00048906",
+              "url": "https://clinicaltrials.gov/study/NCT00048906",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)"
+            },
+            {
+              "nct_id": "NCT00071877",
+              "url": "https://clinicaltrials.gov/study/NCT00071877",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)"
+            },
+            {
+              "nct_id": "NCT00075244",
+              "url": "https://clinicaltrials.gov/study/NCT00075244",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)"
+            },
+            {
+              "nct_id": "NCT00097890",
+              "url": "https://clinicaltrials.gov/study/NCT00097890",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)"
+            },
+            {
+              "nct_id": "NCT00357786",
+              "url": "https://clinicaltrials.gov/study/NCT00357786",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:protalix",
+          "label": "Protalix",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01678898",
+              "url": "https://clinicaltrials.gov/study/NCT01678898",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Protalix"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:resverlogix corp",
+          "label": "Resverlogix Corp",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03228940",
+              "url": "https://clinicaltrials.gov/study/NCT03228940",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Resverlogix Corp"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:sanofi",
+          "label": "Sanofi",
+          "kind": "sponsor",
+          "citation_count": 4,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04143958",
+              "url": "https://clinicaltrials.gov/study/NCT04143958",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi"
+            },
+            {
+              "nct_id": "NCT05206773",
+              "url": "https://clinicaltrials.gov/study/NCT05206773",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi"
+            },
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:shire",
+          "label": "Shire",
+          "kind": "sponsor",
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00084084",
+              "url": "https://clinicaltrials.gov/study/NCT00084084",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Shire"
+            },
+            {
+              "nct_id": "NCT04840667",
+              "url": "https://clinicaltrials.gov/study/NCT04840667",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Shire"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:ulla feldt-rasmussen",
+          "label": "Ulla Feldt-Rasmussen",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02969200",
+              "url": "https://clinicaltrials.gov/study/NCT02969200",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Ulla Feldt-Rasmussen"
+            }
+          ]
+        },
+        {
+          "id": "sponsor:uniqure biopharma b.v.",
+          "label": "UniQure Biopharma B.V.",
+          "kind": "sponsor",
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06270316",
+              "url": "https://clinicaltrials.gov/study/NCT06270316",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "UniQure Biopharma B.V."
+            }
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:migalastat hcl",
+          "weight": 7,
+          "citation_count": 7,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00214500",
+              "url": "https://clinicaltrials.gov/study/NCT00214500",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00283933",
+              "url": "https://clinicaltrials.gov/study/NCT00283933",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00283959",
+              "url": "https://clinicaltrials.gov/study/NCT00283959",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00304512",
+              "url": "https://clinicaltrials.gov/study/NCT00304512",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT00526071",
+              "url": "https://clinicaltrials.gov/study/NCT00526071",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl"
+            },
+            {
+              "nct_id": "NCT01196871",
+              "url": "https://clinicaltrials.gov/study/NCT01196871",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Migalastat HCl"
+            },
+            {
+              "nct_id": "NCT06906367",
+              "url": "https://clinicaltrials.gov/study/NCT06906367",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:migalastat hcl 150 mg",
+          "weight": 5,
+          "citation_count": 5,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01476163",
+              "url": "https://clinicaltrials.gov/study/NCT01476163",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT02194985",
+              "url": "https://clinicaltrials.gov/study/NCT02194985",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT03500094",
+              "url": "https://clinicaltrials.gov/study/NCT03500094",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT04020055",
+              "url": "https://clinicaltrials.gov/study/NCT04020055",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl 150 mg"
+            },
+            {
+              "nct_id": "NCT04049760",
+              "url": "https://clinicaltrials.gov/study/NCT04049760",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl 150 mg"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:idorsia pharmaceuticals ltd.",
+          "target": "drug:lucerastat",
+          "weight": 5,
+          "citation_count": 5,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02930655",
+              "url": "https://clinicaltrials.gov/study/NCT02930655",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT03425539",
+              "url": "https://clinicaltrials.gov/study/NCT03425539",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT03737214",
+              "url": "https://clinicaltrials.gov/study/NCT03737214",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT07762638",
+              "url": "https://clinicaltrials.gov/study/NCT07762638",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Lucerastat"
+            },
+            {
+              "nct_id": "NCT07778667",
+              "url": "https://clinicaltrials.gov/study/NCT07778667",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Lucerastat"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:national institute of neurological disorders and stroke (ninds)",
+          "target": "drug:replagal",
+          "weight": 4,
+          "citation_count": 4,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00071877",
+              "url": "https://clinicaltrials.gov/study/NCT00071877",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT00075244",
+              "url": "https://clinicaltrials.gov/study/NCT00075244",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT00097890",
+              "url": "https://clinicaltrials.gov/study/NCT00097890",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Replagal"
+            },
+            {
+              "nct_id": "NCT00357786",
+              "url": "https://clinicaltrials.gov/study/NCT00357786",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Replagal"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:migalastat hydrochloride",
+          "weight": 3,
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00925301",
+              "url": "https://clinicaltrials.gov/study/NCT00925301",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat hydrochloride"
+            },
+            {
+              "nct_id": "NCT01218659",
+              "url": "https://clinicaltrials.gov/study/NCT01218659",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat hydrochloride"
+            },
+            {
+              "nct_id": "NCT01458119",
+              "url": "https://clinicaltrials.gov/study/NCT01458119",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat hydrochloride"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:chiesi farmaceutici s.p.a.",
+          "target": "drug:pegunigalsidase alfa",
+          "weight": 3,
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03566017",
+              "url": "https://clinicaltrials.gov/study/NCT03566017",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "pegunigalsidase alfa"
+            },
+            {
+              "nct_id": "NCT03614234",
+              "url": "https://clinicaltrials.gov/study/NCT03614234",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "pegunigalsidase alfa"
+            },
+            {
+              "nct_id": "NCT04552691",
+              "url": "https://clinicaltrials.gov/study/NCT04552691",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Pegunigalsidase Alfa"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:genzyme, a sanofi company",
+          "target": "drug:agalsidase beta",
+          "weight": 3,
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00140621",
+              "url": "https://clinicaltrials.gov/study/NCT00140621",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Agalsidase beta"
+            },
+            {
+              "nct_id": "NCT00230607",
+              "url": "https://clinicaltrials.gov/study/NCT00230607",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "agalsidase beta"
+            },
+            {
+              "nct_id": "NCT05054387",
+              "url": "https://clinicaltrials.gov/study/NCT05054387",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Agalsidase beta"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:agalsidase beta (gz419828)",
+          "weight": 3,
+          "citation_count": 3,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04143958",
+              "url": "https://clinicaltrials.gov/study/NCT04143958",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "agalsidase beta (GZ419828)"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Agalsidase beta (GZ419828)"
+            },
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "AGALSIDASE BETA (GZ419828)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:albina nowak, md",
+          "target": "drug:placebo",
+          "weight": 2,
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04820361",
+              "url": "https://clinicaltrials.gov/study/NCT04820361",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Albina Nowak, MD",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Placebo"
+            },
+            {
+              "nct_id": "NCT05710367",
+              "url": "https://clinicaltrials.gov/study/NCT05710367",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Albina Nowak, MD",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Placebo"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:migalastat hcl 20 mg",
+          "weight": 2,
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01476163",
+              "url": "https://clinicaltrials.gov/study/NCT01476163",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat HCl 20 mg"
+            },
+            {
+              "nct_id": "NCT06904261",
+              "url": "https://clinicaltrials.gov/study/NCT06904261",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Migalastat HCl 20 mg"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:genzyme, a sanofi company",
+          "target": "drug:fabrazyme (agalsidase beta)",
+          "weight": 2,
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00074971",
+              "url": "https://clinicaltrials.gov/study/NCT00074971",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Fabrazyme (agalsidase beta)"
+            },
+            {
+              "nct_id": "NCT00312767",
+              "url": "https://clinicaltrials.gov/study/NCT00312767",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Fabrazyme (agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:genzyme, a sanofi company",
+          "target": "drug:gz/sar402671",
+          "weight": 2,
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02228460",
+              "url": "https://clinicaltrials.gov/study/NCT02228460",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "GZ/SAR402671"
+            },
+            {
+              "nct_id": "NCT02489344",
+              "url": "https://clinicaltrials.gov/study/NCT02489344",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "GZ/SAR402671"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:agalsidase alfa",
+          "weight": 2,
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04143958",
+              "url": "https://clinicaltrials.gov/study/NCT04143958",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "agalsidase alfa"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Agalsidase alfa"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:venglustat (gz402671)",
+          "weight": 2,
+          "citation_count": 2,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05206773",
+              "url": "https://clinicaltrials.gov/study/NCT05206773",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Venglustat (GZ402671)"
+            },
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Venglustat (GZ402671)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:acelink therapeutics, inc.",
+          "target": "drug:al01211",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06114329",
+              "url": "https://clinicaltrials.gov/study/NCT06114329",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "AceLink Therapeutics, Inc.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "AL01211"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:albina nowak, md",
+          "target": "drug:cannabis sativa l., folium cum flore",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04820361",
+              "url": "https://clinicaltrials.gov/study/NCT04820361",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Albina Nowak, MD",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Cannabis sativa L., folium cum flore"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:albina nowak, md",
+          "target": "drug:dapagliflozin 10mg tab",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05710367",
+              "url": "https://clinicaltrials.gov/study/NCT05710367",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Albina Nowak, MD",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Dapagliflozin 10mg Tab"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:[14c] at1001",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01730482",
+              "url": "https://clinicaltrials.gov/study/NCT01730482",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "[14C] AT1001"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:a (migalastat)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "A (migalastat)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:at1001 150 mg",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01730469",
+              "url": "https://clinicaltrials.gov/study/NCT01730469",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "AT1001 150 mg"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:b (migalastat)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "B (migalastat)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:c (migalastat)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "C (migalastat)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:d (migalastat)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "D (migalastat)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:e (migalastat)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01489995",
+              "url": "https://clinicaltrials.gov/study/NCT01489995",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "E (migalastat)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:enzyme replacement therapy (ert)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04281537",
+              "url": "https://clinicaltrials.gov/study/NCT04281537",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Enzyme Replacement Therapy (ERT)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:ert",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06906367",
+              "url": "https://clinicaltrials.gov/study/NCT06906367",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "ERT"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:gr181413a/at1001 capsule",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01853852",
+              "url": "https://clinicaltrials.gov/study/NCT01853852",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "GR181413A/AT1001 capsule"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:gr181413a/at1001 solution",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01853852",
+              "url": "https://clinicaltrials.gov/study/NCT01853852",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "GR181413A/AT1001 solution"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:iv migalastat hcl",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02082327",
+              "url": "https://clinicaltrials.gov/study/NCT02082327",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "IV migalastat HCl"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:iv placebo",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02082327",
+              "url": "https://clinicaltrials.gov/study/NCT02082327",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "IV placebo"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:migalastat",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04252066",
+              "url": "https://clinicaltrials.gov/study/NCT04252066",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "migalastat"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:oral migalastat hcl",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02082327",
+              "url": "https://clinicaltrials.gov/study/NCT02082327",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "oral migalastat HCl"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:placebo",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00925301",
+              "url": "https://clinicaltrials.gov/study/NCT00925301",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Placebo"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:amicus therapeutics",
+          "target": "drug:placebo capsule",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01853852",
+              "url": "https://clinicaltrials.gov/study/NCT01853852",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Amicus Therapeutics",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Placebo capsule"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:assistance publique - hôpitaux de paris",
+          "target": "drug:recombinant alpha-galactosidase a",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00487630",
+              "url": "https://clinicaltrials.gov/study/NCT00487630",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Assistance Publique - Hôpitaux de Paris",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "recombinant alpha-galactosidase A"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:avrobio",
+          "target": "drug:avr-rd-01",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03454893",
+              "url": "https://clinicaltrials.gov/study/NCT03454893",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "AVROBIO",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "AVR-RD-01"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:baylor research institute",
+          "target": "drug:replagal",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00068107",
+              "url": "https://clinicaltrials.gov/study/NCT00068107",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Baylor Research Institute",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Replagal"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:bio sidus sa",
+          "target": "drug:recombinant human alpha galactosidase a (agalsidase beta)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05843916",
+              "url": "https://clinicaltrials.gov/study/NCT05843916",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Bio Sidus SA",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Recombinant human alpha galactosidase A (agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:bio sidus sa",
+          "target": "drug:recombinant human alpha-galactosidase a (agalsidase beta)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05843916",
+              "url": "https://clinicaltrials.gov/study/NCT05843916",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Bio Sidus SA",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Recombinant human alpha-galactosidase A (agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:chiesi farmaceutici s.p.a.",
+          "target": "drug:pegunigalsidase-alfa",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06663358",
+              "url": "https://clinicaltrials.gov/study/NCT06663358",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Pegunigalsidase-alfa"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:chiesi farmaceutici s.p.a.",
+          "target": "drug:prx-102 1 mg/kg every 2 weeks",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05710692",
+              "url": "https://clinicaltrials.gov/study/NCT05710692",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "PRX-102 1 mg/kg every 2 weeks"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:chiesi farmaceutici s.p.a.",
+          "target": "drug:prx-102 1 mg/kg every two weeks",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06328608",
+              "url": "https://clinicaltrials.gov/study/NCT06328608",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "PRX-102 1 mg/kg every two weeks"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:chiesi farmaceutici s.p.a.",
+          "target": "drug:prx-102 2 mg/kg every 4 weeks",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05710692",
+              "url": "https://clinicaltrials.gov/study/NCT05710692",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Farmaceutici S.p.A.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "PRX-102 2 mg/kg every 4 weeks"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:chiesi italia",
+          "target": "drug:pegunigalsidase alfa",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT07109375",
+              "url": "https://clinicaltrials.gov/study/NCT07109375",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Chiesi Italia",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "pegunigalsidase alfa"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:copenhagen university hospital, rigshospitalet",
+          "target": "drug:enzyme replacement",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01997489",
+              "url": "https://clinicaltrials.gov/study/NCT01997489",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Copenhagen University Hospital, Rigshospitalet",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Enzyme replacement"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:federico ii university",
+          "target": "drug:paricalcitol",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02090608",
+              "url": "https://clinicaltrials.gov/study/NCT02090608",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Federico II University",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Paricalcitol"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:gc biopharma corp",
+          "target": "drug:hm15421/gc1134a",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06858397",
+              "url": "https://clinicaltrials.gov/study/NCT06858397",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "GC Biopharma Corp",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "HM15421/GC1134A"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:genzyme, a sanofi company",
+          "target": "drug:agalsidase beta (recombinant form)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00233870",
+              "url": "https://clinicaltrials.gov/study/NCT00233870",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Agalsidase beta (recombinant form)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:genzyme, a sanofi company",
+          "target": "drug:iohexol",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01839526",
+              "url": "https://clinicaltrials.gov/study/NCT01839526",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Genzyme, a Sanofi Company",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Iohexol"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:green cross corporation",
+          "target": "drug:gc1119",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01653444",
+              "url": "https://clinicaltrials.gov/study/NCT01653444",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Green Cross Corporation",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "GC1119"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:greenovation biotech gmbh",
+          "target": "drug:moss-agal (recombinant human alpha-galactosidase a produced in moss)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02995993",
+              "url": "https://clinicaltrials.gov/study/NCT02995993",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Greenovation Biotech GmbH",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Moss-aGal (recombinant human alpha-galactosidase A produced in moss)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:guangzhou jiayin biotech ltd",
+          "target": "drug:exg110 injection",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06819514",
+              "url": "https://clinicaltrials.gov/study/NCT06819514",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Guangzhou Jiayin Biotech Ltd",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "EXG110 Injection"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:idorsia pharmaceuticals ltd.",
+          "target": "drug:enzyme replacement therapy (ert)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02930655",
+              "url": "https://clinicaltrials.gov/study/NCT02930655",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Enzyme replacement therapy (ERT)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:idorsia pharmaceuticals ltd.",
+          "target": "drug:placebo",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03425539",
+              "url": "https://clinicaltrials.gov/study/NCT03425539",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Idorsia Pharmaceuticals Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Placebo"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:isu abxis co., ltd.",
+          "target": "drug:active comparator (agalsidase beta)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06081062",
+              "url": "https://clinicaltrials.gov/study/NCT06081062",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "ISU Abxis Co., Ltd.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Active comparator (Agalsidase beta)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:mackay memorial hospital",
+          "target": "drug:agalsidase beta",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05698901",
+              "url": "https://clinicaltrials.gov/study/NCT05698901",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Mackay Memorial Hospital",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Agalsidase beta"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:manchester university nhs foundation trust",
+          "target": "drug:migalastat",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03949920",
+              "url": "https://clinicaltrials.gov/study/NCT03949920",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Manchester University NHS Foundation Trust",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Migalastat"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:national institute of neurological disorders and stroke (ninds)",
+          "target": "drug:drx005b",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00048906",
+              "url": "https://clinicaltrials.gov/study/NCT00048906",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "DRX005B"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:national institute of neurological disorders and stroke (ninds)",
+          "target": "drug:replagal (agalsidase alfa)",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00097890",
+              "url": "https://clinicaltrials.gov/study/NCT00097890",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Replagal (Agalsidase Alfa)"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:national institute of neurological disorders and stroke (ninds)",
+          "target": "drug:replagal agalsidase alfa",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00357786",
+              "url": "https://clinicaltrials.gov/study/NCT00357786",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "National Institute of Neurological Disorders and Stroke (NINDS)",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Replagal agalsidase alfa"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:protalix",
+          "target": "drug:prx-102",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT01678898",
+              "url": "https://clinicaltrials.gov/study/NCT01678898",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Protalix",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "PRX-102"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:resverlogix corp",
+          "target": "drug:rvx000222",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT03228940",
+              "url": "https://clinicaltrials.gov/study/NCT03228940",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Resverlogix Corp",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "RVX000222"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:acetaminophen",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Acetaminophen"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:cetirizine",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Cetirizine"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:dexamethasone",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Dexamethasone"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:diphenhydramine",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Diphenhydramine"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:fexofenadine",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Fexofenadine"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:loratadine",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Loratadine"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:migalastat",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05280548",
+              "url": "https://clinicaltrials.gov/study/NCT05280548",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Migalastat"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:montelukast",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06019728",
+              "url": "https://clinicaltrials.gov/study/NCT06019728",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Montelukast"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:sanofi",
+          "target": "drug:placebo",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT05206773",
+              "url": "https://clinicaltrials.gov/study/NCT05206773",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Sanofi",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Placebo"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:shire",
+          "target": "drug:agalsidase alfa",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT00084084",
+              "url": "https://clinicaltrials.gov/study/NCT00084084",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Shire",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Agalsidase alfa"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:shire",
+          "target": "drug:replagal",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT04840667",
+              "url": "https://clinicaltrials.gov/study/NCT04840667",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Shire",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "REPLAGAL"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:ulla feldt-rasmussen",
+          "target": "drug:enzyme replacement therapy",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT02969200",
+              "url": "https://clinicaltrials.gov/study/NCT02969200",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "Ulla Feldt-Rasmussen",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "Enzyme replacement therapy"
+            }
+          ]
+        },
+        {
+          "source": "sponsor:uniqure biopharma b.v.",
+          "target": "drug:amt-191",
+          "weight": 1,
+          "citation_count": 1,
+          "citations_complete": true,
+          "citations": [
+            {
+              "nct_id": "NCT06270316",
+              "url": "https://clinicaltrials.gov/study/NCT06270316",
+              "field_path": "protocolSection.sponsorCollaboratorsModule.leadSponsor.name",
+              "excerpt": "UniQure Biopharma B.V.",
+              "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+              "related_excerpt": "AMT-191"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "meta": {
+    "source": "ClinicalTrials.gov API v2",
+    "source_url": "https://clinicaltrials.gov/data-api/api",
+    "analyzed_at": "2026-11-14T08:36:35.826946Z",
+    "query_plan": {
+      "intent": "sponsor_drug_network",
+      "condition": "Fabry disease",
+      "drugs": [],
+      "sponsor": null,
+      "country": null,
+      "start_year": null,
+      "end_year": null,
+      "recruiting_only": false,
+      "interpretation": "Display the network of lead sponsors connected to drug interventions in Fabry disease trials."
+    },
+    "filters": {
+      "condition": "Fabry disease",
+      "recruiting_only": false
+    },
+    "records_fetched": 258,
+    "records_used": 258,
+    "total_matches": 258,
+    "complete": true,
+    "warnings": [
+      "Visualization displays only 75 of 81 edges; complete registry retrieval does not mean complete visualization coverage"
+    ],
+    "assumptions": [
+      "Edges are weighted by distinct NCT IDs; duplicates within the same study do not inflate weight.",
+      "Only the top 75 edges by study count are returned; other relationships are omitted.",
+      "Sponsor nodes represent the lead sponsor only; drug nodes use registered intervention names."
+    ],
+    "citation_limit_per_datum": 10,
+    "cohort_matches": null,
+    "visualization_truncated": true,
+    "visualization_items_returned": 75,
+    "visualization_total_items": 81
+  }
+}
