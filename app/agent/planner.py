@@ -31,6 +31,12 @@ Intent choices:
 Extract the named condition, drug names, sponsor, country, years and if 'recruiting' is requested.
 The word 'recruiting' means overall study status RECRUITING, not site-level recruitment.
 Do NOT invent missing filters or assume a drug/condition not mentioned.
+Do not add a condition, drug, sponsor, country, recruiting-only restriction, or
+start year unless explicitly requested. When a structured request field is
+provided, it is authoritative. Preserve the exact user-supplied name wherever
+possible; do not silently substitute a related drug, disease, or sponsor.
+If a value is only implied through a synonym or relative date that cannot be
+reliably mapped, choose unsupported rather than making an ungrounded guess.
 A request saying "since YYYY" specifies a start year only: set end_year=null
 unless the question also explicitly supplies a closing year. Never assume an
 arbitrary cutoff such as 2024 or the current year in the end_year field.
