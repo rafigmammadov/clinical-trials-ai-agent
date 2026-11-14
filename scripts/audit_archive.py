@@ -14,7 +14,7 @@ from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 ROOT = Path(__file__).resolve().parent.parent
 INCLUDE_DIRS = ("app", "tests", "docs", "scripts", "evals", ".github", "examples")
 INCLUDE_FILES = (
-    "README.md", "START_HERE.md", "SECURITY.md", "CHANGELOG.md",
+    "README.md", "SECURITY.md", "CHANGELOG.md",
     "Makefile", "requirements.txt", "pytest.ini", ".env.example", ".gitignore",
 )
 SKIP_PARTS = {".git", ".venv", "venv", "__pycache__", ".pytest_cache", ".ruff_cache", "dist", "reports"}

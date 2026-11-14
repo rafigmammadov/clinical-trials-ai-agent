@@ -17,10 +17,13 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     fi
 fi
 
-if [[ -f examples/time_trend.json && -f examples/phase_distribution.json && \
-      -f examples/geography.json && -f examples/network.json && \
-      -f examples/comparison.json ]]; then
-    python -m scripts.verify_examples
-fi
+# All five real query/JSON pairs are mandatory for this final distribution.
+for name in time_trend phase_distribution geography network comparison; do
+    if [[ ! -s "examples/${name}.json" ]]; then
+        echo "ABORT: missing examples/${name}.json; regenerate the five real registry responses" >&2
+        exit 1
+    fi
+done
+python -m scripts.verify_examples
 
 python -m scripts.audit_archive --build dist/clinical-trials-ai-agent.zip
