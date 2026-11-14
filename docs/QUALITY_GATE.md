@@ -48,3 +48,5 @@ unzip -l dist/clinical-trials-ai-agent.zip
 ```
 
 Review the archive for unexpected files, local secrets, caches, and environment directories. `.env` and API credentials must not be included. An uploaded artifact should be understandable and reproducible from the README and the provided example files.
+
+For v0.6.0 also run `python -m evals.recall` before packaging and confirm the service version in `/health`.
