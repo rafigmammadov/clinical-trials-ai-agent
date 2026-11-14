@@ -1,0 +1,607 @@
+[
+  {
+    "id": "p01",
+    "category": "positive",
+    "question": "Show trial phase distribution for melanoma",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "melanoma"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p02",
+    "category": "positive",
+    "question": "Show trials for Niemann-Pick disease type C",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "Niemann–Pick disease type C"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p03",
+    "category": "positive",
+    "question": "Show phase distributions in Canada",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p04",
+    "category": "positive",
+    "question": "Show geographic trends in US trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United States"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p05",
+    "category": "positive",
+    "question": "Plot annual U.S.A. trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United States"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p06",
+    "category": "positive",
+    "question": "How many UK trials are recruiting?",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United Kingdom",
+      "recruiting_only": true
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p07",
+    "category": "positive",
+    "question": "Plot pembrolizumab trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "pembrolizumab"
+      ]
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p08",
+    "category": "positive",
+    "question": "Compare Keytruda and Opdivo phases",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "Keytruda",
+        "Opdivo"
+      ]
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p09",
+    "category": "positive",
+    "question": "Show trials sponsored by Pfizer, Inc.",
+    "plan": {
+      "intent": "phase_distribution",
+      "sponsor": "Pfizer Inc"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p10",
+    "category": "positive",
+    "question": "Show trials since 2018",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2018
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p11",
+    "category": "positive",
+    "question": "Count recruiting lung cancer studies",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "lung cancer",
+      "recruiting_only": true
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p12",
+    "category": "positive",
+    "question": "Count currently enrolling asthma trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "asthma",
+      "recruiting_only": true
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p13",
+    "category": "positive",
+    "question": "Show study status distribution",
+    "plan": {
+      "intent": "phase_distribution"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p14",
+    "category": "positive",
+    "question": "Show multi-site clinical trials for 2020",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2020
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p15",
+    "category": "positive",
+    "question": "Show lung cancer trials by stage in Germany",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "lung cancer",
+      "country": "Germany"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p16",
+    "category": "positive",
+    "question": "Compare nivolumab and pembrolizumab for melanoma",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "nivolumab",
+        "pembrolizumab"
+      ],
+      "condition": "melanoma"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p17",
+    "category": "positive",
+    "question": "Studies for type 2 diabetes since 2015",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "type 2 diabetes",
+      "start_year": 2015
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p18",
+    "category": "positive",
+    "question": "Show phase distribution for Keytruda",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "Keytruda"
+      ]
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "r01",
+    "category": "reject",
+    "question": "Show the distribution of trial phases",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "melanoma"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r02",
+    "category": "reject",
+    "question": "Show top lead sponsors by trial count",
+    "plan": {
+      "intent": "phase_distribution",
+      "sponsor": "Pfizer"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r03",
+    "category": "reject",
+    "question": "Show a clinical trial geography chart",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r04",
+    "category": "reject",
+    "question": "Show annual study trends",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2020
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r05",
+    "category": "reject",
+    "question": "Show completed studies by phase",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r06",
+    "category": "reject",
+    "question": "Compare phase distributions for nivolumab and another drug",
+    "plan": {
+      "intent": "drug_comparison",
+      "drugs": [
+        "nivolumab",
+        "pembrolizumab"
+      ]
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r07",
+    "category": "reject",
+    "question": "Show us geographic study distribution",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United States"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r08",
+    "category": "reject",
+    "question": "Show Canadianish trial sites",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r09",
+    "category": "reject",
+    "question": "Show stage for metforminXR",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "metformin"
+      ]
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r10",
+    "category": "reject",
+    "question": "Show phase distribution in studies without melanoma",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "melanoma"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r11",
+    "category": "reject",
+    "question": "Analyze non-melanoma skin cancer studies",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "melanoma"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r12",
+    "category": "reject",
+    "question": "Show trial count not in Canada",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r13",
+    "category": "reject",
+    "question": "Exclude studies with Keytruda from the results",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "Keytruda"
+      ]
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r14",
+    "category": "reject",
+    "question": "Show stages for trials with no Pfizer sponsors",
+    "plan": {
+      "intent": "phase_distribution",
+      "sponsor": "Pfizer"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r15",
+    "category": "reject",
+    "question": "Show the study timeline for NCT20200000",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2020
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r16",
+    "category": "reject",
+    "question": "Show trials that are not recruiting",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r17",
+    "category": "reject",
+    "question": "Show clinical trial phases in France",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Germany"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r18",
+    "category": "reject",
+    "question": "Show trial phases for drug H",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "Drug H",
+        "Drug I"
+      ]
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r19",
+    "category": "reject",
+    "question": "Show histograms for diabetes",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "diabetes",
+      "sponsor": "Pfizer"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r20",
+    "category": "reject",
+    "question": "Show studies involving tamoxifen but not pembrolizumab",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "pembrolizumab"
+      ]
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "o01",
+    "category": "override",
+    "question": "Show my predefined cohort by phase",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "melanoma"
+    },
+    "expected": "allow",
+    "overrides": {
+      "condition": "melanoma"
+    }
+  },
+  {
+    "id": "o02",
+    "category": "override",
+    "question": "Show phase distribution for specific studies",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "Keytruda"
+      ]
+    },
+    "expected": "allow",
+    "overrides": {
+      "drugs": [
+        "Keytruda"
+      ]
+    }
+  },
+  {
+    "id": "o03",
+    "category": "override",
+    "question": "Show clinical trials selected by location",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "Canada"
+    },
+    "expected": "allow",
+    "overrides": {
+      "country": "Canada"
+    }
+  },
+  {
+    "id": "o04",
+    "category": "override",
+    "question": "Show latest trial trends",
+    "plan": {
+      "intent": "phase_distribution",
+      "start_year": 2021
+    },
+    "expected": "allow",
+    "overrides": {
+      "start_year": 2021
+    }
+  },
+  {
+    "id": "o05",
+    "category": "override",
+    "question": "Show completed study trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected": "allow",
+    "overrides": {
+      "recruiting_only": true
+    }
+  },
+  {
+    "id": "o06",
+    "category": "override",
+    "question": "Show phase distribution for my selected study group",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "melanoma",
+      "country": "Canada"
+    },
+    "expected": "reject",
+    "overrides": {
+      "condition": "melanoma"
+    }
+  },
+  {
+    "id": "o07",
+    "category": "override",
+    "question": "Show phase distribution for my selected study group",
+    "plan": {
+      "intent": "phase_distribution",
+      "condition": "melanoma",
+      "country": "Canada"
+    },
+    "expected": "allow",
+    "overrides": {
+      "condition": "melanoma",
+      "country": "Canada"
+    }
+  },
+  {
+    "id": "o08",
+    "category": "override",
+    "question": "Show selected drug phases",
+    "plan": {
+      "intent": "phase_distribution",
+      "drugs": [
+        "Keytruda",
+        "Opdivo"
+      ]
+    },
+    "expected": "allow",
+    "overrides": {
+      "drugs": [
+        "Keytruda",
+        "Opdivo"
+      ]
+    }
+  },
+  {
+    "id": "r21",
+    "category": "reject",
+    "question": "Show studies not in USA",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United States"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r22",
+    "category": "reject",
+    "question": "Show trials excluding US sites",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "USA"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r23",
+    "category": "reject",
+    "question": "Show trials outside the UK",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "United Kingdom"
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r24",
+    "category": "reject",
+    "question": "Show not currently recruiting trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r25",
+    "category": "reject",
+    "question": "Show no longer recruiting trials",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "r26",
+    "category": "reject",
+    "question": "Show no recruiting study cohorts",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected": "reject"
+  },
+  {
+    "id": "p19",
+    "category": "positive",
+    "question": "Show US trial geography",
+    "plan": {
+      "intent": "phase_distribution",
+      "country": "USA"
+    },
+    "expected": "allow"
+  },
+  {
+    "id": "p20",
+    "category": "positive",
+    "question": "Show trials currently enrolling participants",
+    "plan": {
+      "intent": "phase_distribution",
+      "recruiting_only": true
+    },
+    "expected": "allow"
+  }
+]
