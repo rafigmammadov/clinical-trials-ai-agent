@@ -81,6 +81,17 @@ def verify_example(path: Path, expected_type: str, *, allow_partial: bool = Fals
             for ref in refs
         ):
             raise ValueError("Invalid citation identifier or missing source evidence")
+        if meta.drug_match_mode == "registered_name" and meta.query_plan.drugs:
+            from app.services.intervention_matching import NAME_FIELD, ALIAS_FIELD
+            field_key, excerpt_key = (
+                ("related_field_path", "related_excerpt")
+                if meta.query_plan.intent == "drug_comparison" else
+                ("matched_drug_field_path", "matched_drug_excerpt")
+            )
+            for ref in refs:
+                if (ref.get(field_key) not in {NAME_FIELD, ALIAS_FIELD}
+                        or not ref.get(excerpt_key)):
+                    raise ValueError("Strict cohort citation lacks registered DRUG membership evidence")
     note = "TRUNCATED" if meta.visualization_truncated else "FULL CHART"
     return f"{chart.type}: {len(rows)} points/edges, {meta.records_used} studies, {note}"
 
