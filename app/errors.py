@@ -10,3 +10,7 @@ class QueryError(Exception):
 
 class UpstreamError(Exception):
     """A provider was unreachable or returned an invalid response."""
+
+
+class IntegrityError(Exception):
+    """A generated visualization contradicted its normalized source evidence."""

@@ -56,18 +56,37 @@ _STOP_WORDS = {
 _COMMON_CONDITIONS = (
     "melanoma", "diabetes", "asthma", "psoriasis", "epilepsy", "obesity",
     "hypertension", "alzheimer's", "parkinson's", "cystic fibrosis",
-    "covid-19", "hiv", "tuberculosis", "endometriosis", "arthritis",
+    "covid-19", "hiv", "tuberculosis", "endometriosis",
+    "rheumatoid arthritis", "arthritis",
+)
+# Do not consume retrieval or relationship wording ("network for breast cancer",
+# "interventions in Fabry disease") as if it were part of a condition.
+# The rightmost substantive tokens before disease/cancer/syndrome can belong
+# to the condition name, but a grammatical connector ends that name.
+_CONDITION_CONNECTORS = (
+    "in|for|of|on|with|from|and|or|to|by|at|into|between|among|through"
 )
 _CONDITION_PATTERN = re.compile(
-    r"\b(?P<term>(?:[\w’'–-]+\s+){0,3}(?:disease|syndrome|cancer)"
-    r"(?:\s+type\s+[A-Za-z0-9]+)?)\b", re.IGNORECASE,
+    rf"\b(?P<term>(?:(?!(?:{_CONDITION_CONNECTORS})\b)[\w’'–-]+\s+){{0,4}}"
+    r"(?:disease|syndrome|cancer)(?:\s+type\s+[A-Za-z0-9]+)?)\b",
+    re.IGNORECASE,
 )
+# Sponsor filtering requires an explicitly named entity, not a chart facet
+# such as "lead sponsors" or "sponsors and drugs". The word boundary
+# prevents singular 'sponsor' from matching the prefix of 'sponsors'.
 _EXPLICIT_SPONSOR = re.compile(
-    r"\b(?:sponsored\s+by|lead\s+sponsor\s*(?:is|:)?|sponsor\s*[:=])\s*"
-    r"(?P<name>[A-Za-z0-9][\w\s&.,'-]{0,120}?)"
+    r"\b(?:sponsored\s+by|lead\s+sponsor\b\s*(?:is\b|[:=])?|sponsor\s*[:=])\s*"
+    r"(?P<name>(?!(?:and|or|of|for|with|in|to)\b)[A-Za-z0-9][\w\s&.,'-]{0,120}?)"
     r"(?=\s+(?:in|since|from|through|until|for|with|during|before|after|"
     r"among|where|that|which)\b|[;?!]|$)", re.IGNORECASE,
 )
+
+# Generic network-analysis facets are not registered drug names.
+_NON_DRUG_FACET_NOUNS = frozenset({
+    "intervention", "interventions", "connection", "connections", "relationship",
+    "relationships", "link", "links", "network", "networks", "categories",
+    "types", "classes", "associations", "association",
+})
 _EXPLICIT_YEAR = r"(?<!\w)((?:19|20)\d{2})(?!\w)"
 
 
@@ -99,13 +118,21 @@ def _condition_requirements(question: str) -> list[Requirement]:
     # Terms without a disease/cancer/syndrome suffix are explicitly supported
     # only when they appear as whole words in clinical-study questions.
     normalized = _words(question)
-    for name in _COMMON_CONDITIONS:
+    claimed_spans: list[tuple[int, int]] = []
+    # Specific conditions win over a nested generic match: requesting
+    # "rheumatoid arthritis" must not also require "arthritis" separately.
+    for name in sorted(_COMMON_CONDITIONS, key=len, reverse=True):
         phrase = _words(name)
-        if re.search(rf"(?<!\w){re.escape(phrase)}(?!\w)", normalized):
-            if not _is_excluded(question, name) and not re.search(
+        for mention in re.finditer(rf"(?<!\w){re.escape(phrase)}(?!\w)", normalized):
+            if any(mention.start() < end and start < mention.end()
+                   for start, end in claimed_spans):
+                continue
+            if _is_excluded(question, name) or re.search(
                 rf"\bnon[\s-]+{re.escape(name)}\b", question, re.I
             ):
-                result.append(Requirement("condition", name))
+                continue
+            claimed_spans.append(mention.span())
+            result.append(Requirement("condition", name))
     return _unique(result)
 
 
@@ -169,7 +196,9 @@ def _drug_requirements(question: str, intent: str) -> list[Requirement]:
         question, re.I,
     ):
         drug = match.group("name")
-        if drug.casefold() not in _STOP_WORDS and not _is_excluded(question, drug):
+        if (drug.casefold() not in _STOP_WORDS
+                and drug.casefold() not in _NON_DRUG_FACET_NOUNS
+                and not _is_excluded(question, drug)):
             results.append(Requirement("drugs", drug))
 
     if intent == "drug_comparison" and re.search(r"\bcompar(?:e|ing|ison)\b", question, re.I):

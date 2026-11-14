@@ -97,13 +97,26 @@ class ClinicalTrialsClient:
         total: int | None = None
         warnings: list[str] = []
         skipped_records = 0
+        seen_page_tokens: set[str] = set()
+        no_progress_pages = 0
+        page_count = 0
+        # Allow legitimate empty pages while bounding broken upstream cursors.
+        max_pages = max_studies + 4
         while len(seen) < max_studies:
+            page_count += 1
+            if page_count > max_pages:
+                raise UpstreamError("ClinicalTrials.gov pagination exceeded the safe page bound")
             request_params = {**params, "pageSize": min(1000, max_studies - len(seen))}
             if token:
                 request_params["pageToken"] = token
             body = await self._request(request_params)
-            if total is None and isinstance(body.get("totalCount"), int):
-                total = body["totalCount"]
+            if "totalCount" in body:
+                declared = body["totalCount"]
+                if type(declared) is not int or declared < 0:
+                    raise UpstreamError("ClinicalTrials.gov returned invalid totalCount")
+                if total is not None and declared != total:
+                    raise UpstreamError("ClinicalTrials.gov returned inconsistent totalCount")
+                total = declared
             before = len(seen)
             for raw in body["studies"]:
                 try:
@@ -116,13 +129,19 @@ class ClinicalTrialsClient:
                 if len(seen) >= max_studies:
                     break
             next_token = body.get("nextPageToken")
-            if not next_token:
+            if next_token is None:
                 token = None
                 break
-            if not isinstance(next_token, str) or next_token == token:
+            if (not isinstance(next_token, str) or not next_token.strip()
+                    or next_token in seen_page_tokens):
                 raise UpstreamError("Invalid or repeated page token from ClinicalTrials.gov")
+            seen_page_tokens.add(next_token)
             if len(seen) == before:
-                raise UpstreamError("Pagination made no progress while retrieving studies")
+                no_progress_pages += 1
+                if no_progress_pages >= 3:
+                    raise UpstreamError("Pagination made no progress across three consecutive pages")
+            else:
+                no_progress_pages = 0
             token = next_token
         # A malformed study is an omitted source record even when totalCount is
         # absent; successful pagination alone does not prove data completeness.

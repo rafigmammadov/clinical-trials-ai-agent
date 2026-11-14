@@ -225,3 +225,84 @@ async def test_relative_or_exclusive_time_cannot_be_silently_ignored(question):
             AnalyzeRequest(query=question)
         )
     assert registry.calls == 0
+
+
+@pytest.mark.parametrize("question,expected_condition", [
+    (
+        "Show a network of lead sponsors and drug interventions in Fabry disease studies",
+        "Fabry disease",
+    ),
+    (
+        "Show sponsor-to-drug connections for breast cancer clinical studies",
+        "breast cancer",
+    ),
+    (
+        "Show sponsor-drug network for Wilson disease trials",
+        "Wilson disease",
+    ),
+    (
+        "Show sponsors and drug interventions for Niemann-Pick disease type C studies",
+        "Niemann-Pick disease type C",
+    ),
+    (
+        "Show drug-to-drug intervention co-listings in rheumatoid arthritis studies",
+        "rheumatoid arthritis",
+    ),
+])
+def test_network_chart_dimensions_are_not_named_filters(question, expected_condition):
+    """A chart axis is not a sponsor/drug entity and context prose is not a disease."""
+    intent = ("drug_cooccurrence_network" if "drug-to-drug" in question
+              else "sponsor_drug_network")
+    requirements, _ = extract_question_requirements(question, intent)
+    assert [(item.field, item.value) for item in requirements] == [
+        ("condition", expected_condition)
+    ]
+    plan = QueryPlan(intent=intent, condition=expected_condition)
+    assert missing_question_filters(plan, AnalyzeRequest(query=question)) == ()
+    validated, warning = AnalysisService(FixedPlanner(plan), RecordingRegistry())._validate_inferred(
+        plan, AnalyzeRequest(query=question)
+    )
+    assert validated == plan
+    assert warning is None
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("question,condition", [
+    (
+        "Show a network of lead sponsors and drug interventions in Fabry disease studies",
+        "Fabry disease",
+    ),
+    (
+        "Show sponsor-to-drug connections for breast cancer clinical studies",
+        "breast cancer",
+    ),
+])
+async def test_valid_network_analysis_gets_past_guard_to_registry(question, condition):
+    registry = RecordingRegistry()
+    response = await AnalysisService(
+        FixedPlanner(QueryPlan(intent="sponsor_drug_network", condition=condition)),
+        registry,
+    ).analyze(AnalyzeRequest(query=question))
+    assert registry.calls == 1
+    assert response.meta.query_plan.condition == condition
+
+
+@pytest.mark.parametrize("question,sponsor", [
+    ("Count trials sponsored by Pfizer in Canada", "Pfizer"),
+    ("Count trials with lead sponsor is Roche", "Roche"),
+    ("Count trials with lead sponsor: Novartis", "Novartis"),
+])
+def test_explicit_sponsor_names_still_detected(question, sponsor):
+    requirements, _ = extract_question_requirements(question, "sponsor_distribution")
+    assert [(item.field, item.value) for item in requirements if item.field == "sponsor"] == [
+        ("sponsor", sponsor)
+    ]
+
+
+def test_specific_common_condition_does_not_create_generic_duplicate():
+    requirements, _ = extract_question_requirements(
+        "Show rheumatoid arthritis studies by phase", "phase_distribution"
+    )
+    assert [(item.field, item.value) for item in requirements] == [
+        ("condition", "rheumatoid arthritis")
+    ]

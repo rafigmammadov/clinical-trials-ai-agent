@@ -13,7 +13,7 @@ from fastapi.responses import JSONResponse
 from app.agent.orchestrator import AnalysisService
 from app.agent.planner import OpenAIPlanner, RulesPlanner
 from app.config import get_settings
-from app.errors import PlanningError, QueryError, UpstreamError
+from app.errors import PlanningError, QueryError, UpstreamError, IntegrityError
 from app.schemas.api import AnalyzeRequest, AnalyzeResponse
 from app.services.clinicaltrials import ClinicalTrialsClient
 from app.version import __version__
@@ -80,6 +80,16 @@ async def query_error_handler(_request: Request, error: QueryError) -> JSONRespo
 @app.exception_handler(UpstreamError)
 async def upstream_error_handler(_request: Request, error: UpstreamError) -> JSONResponse:
     return JSONResponse(status_code=502, content={"error": "registry_unavailable", "detail": str(error)})
+
+
+@app.exception_handler(IntegrityError)
+async def integrity_error_handler(_request: Request, _error: IntegrityError) -> JSONResponse:
+    # An internal assertion failed. Do not reveal study values or server details.
+    logger.error("visualization_evidence_integrity_failure")
+    return JSONResponse(status_code=500, content={
+        "error": "analysis_integrity_failure",
+        "detail": "The visualization failed source-evidence validation",
+    })
 
 
 @app.get("/health", tags=["system"])

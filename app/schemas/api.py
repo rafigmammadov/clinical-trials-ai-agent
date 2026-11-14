@@ -186,6 +186,8 @@ class ResponseMeta(StrictModel):
     warnings: list[str]
     assumptions: list[str]
     citation_limit_per_datum: int
+    planner_attempts: int = Field(default=1, ge=1, le=2)
+    planner_repaired: bool = False
     # For two separate cohort searches, no meaningful combined totalCount exists.
     cohort_matches: dict[str, int | None] | None = None
     drug_match_mode: DrugMatchMode = "registry_text"
@@ -201,6 +203,8 @@ class ResponseMeta(StrictModel):
 
     @model_validator(mode="after")
     def validate_accounting(self) -> "ResponseMeta":
+        if self.planner_repaired != (self.planner_attempts == 2):
+            raise ValueError("planner_repaired must reflect planner_attempts")
         for field in ("records_fetched", "records_used", "citation_limit_per_datum"):
             if getattr(self, field) < 0:
                 raise ValueError(f"{field} must be non-negative")

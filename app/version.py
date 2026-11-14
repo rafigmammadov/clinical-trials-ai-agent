@@ -1,3 +1,3 @@
-"""Service release identifier; independent of the /api/v1 contract version."""
+"""Release version; independent of the /api/v1 URL contract."""
 
-__version__ = "0.6.0"
+__version__ = "1.0.0"

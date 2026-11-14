@@ -74,4 +74,5 @@ def test_case_insensitive_country_alias_comparison_for_labeled_recall():
 def test_service_version_comes_from_single_module():
     from app.main import app
     from app.version import __version__
-    assert app.version == __version__ == "0.6.0"
+    assert app.version == __version__
+    assert __version__.count(".") == 2

@@ -9,12 +9,13 @@ from pydantic import ValidationError
 
 from app.agent.planner import Planner
 from app.agent.grounding import validate_plan_grounding
-from app.agent.recall import validate_plan_recall
-from app.errors import QueryError
+from app.agent.recall import validate_plan_recall, _unsupported_constraints
+from app.errors import QueryError, IntegrityError
 from app.schemas.api import AnalyzeRequest, AnalyzeResponse, DrugMatchMode, QueryPlan, ResponseMeta
 from app.services.intervention_matching import find_registered_drug_match
 from app.services.clinicaltrials import ClinicalTrialsClient
 from app.services.normalizer import Study
+from app.services.evidence import verify_chart_evidence
 from app.visualizations.builder import build_chart
 
 
@@ -133,14 +134,16 @@ class AnalysisService:
             chosen.append(study)
         return chosen
 
-    async def analyze(self, request: AnalyzeRequest) -> AnalyzeResponse:
-        inferred_plan = await self._planner.plan(request.query)
-        if inferred_plan.intent == "unsupported":
+    def _validate_inferred(self, inferred: QueryPlan, request: AnalyzeRequest) -> tuple[QueryPlan, str | None]:
+        """Validate BEFORE accessing external clinical data; no implied filters."""
+        if inferred.intent == "unsupported":
             raise QueryError("The requested analysis is unsupported; ask a question about clinical trial counts, distributions or relationships")
-        inferred_plan, temporal_warning = self._reconcile_end_year(inferred_plan, request)
-        plan = self._merge(inferred_plan, request)
+        inferred, temporal_warning = self._reconcile_end_year(inferred, request)
+        plan = self._merge(inferred, request)
         plan = validate_plan_grounding(plan, request)
         plan = validate_plan_recall(plan, request)
+        # These restrictions are part of a runnable plan, not just formatting.
+        # Keep them inside the validation path used by guarded evaluations.
         if request.drug_match_mode == "registered_name" and not plan.drugs:
             raise QueryError("registered_name drug matching requires a named drug filter")
         if plan.intent == "drug_comparison":
@@ -148,7 +151,28 @@ class AnalysisService:
                 raise QueryError("Drug comparisons require exactly two distinct drug names")
         elif len(plan.drugs) > 1:
             raise QueryError("Only drug comparisons accept more than one named drug filter")
+        return plan, temporal_warning
 
+    async def _plan_with_one_repair(self, request: AnalyzeRequest) -> tuple[QueryPlan, str | None, int]:
+        inferred = await self._planner.plan(request.query)
+        # Never overturn an explicit unsupported classification through retries.
+        if inferred.intent == "unsupported":
+            raise QueryError("The requested analysis is unsupported; ask a question about clinical trial counts, distributions or relationships")
+        try:
+            plan, temporal_warning = self._validate_inferred(inferred, request)
+            return plan, temporal_warning, 1
+        except QueryError as error:
+            # Non-representable exclusions and relative dates cannot be repaired
+            # into a narrower plan using this request schema.
+            repair = getattr(self._planner, "repair", None)
+            if not callable(repair) or _unsupported_constraints(request.query):
+                raise
+            corrected = await repair(request.query, inferred, str(error))
+            plan, temporal_warning = self._validate_inferred(corrected, request)
+            return plan, temporal_warning, 2
+
+    async def analyze(self, request: AnalyzeRequest) -> AnalyzeResponse:
+        plan, temporal_warning, planner_attempts = await self._plan_with_one_repair(request)
         if plan.intent == "drug_comparison":
             found = await asyncio.gather(*(
                 self._trials.search(plan, max_studies=request.max_studies, drug=drug)
@@ -188,6 +212,8 @@ class AnalysisService:
 
         if temporal_warning is not None:
             warnings.append(temporal_warning)
+        if planner_attempts == 2:
+            warnings.append("The initial AI plan failed validation and was repaired once before registry retrieval")
         if not studies:
             warnings.append("No matching study records were available for this analysis")
             if plan.drugs and request.drug_match_mode == "registered_name":
@@ -203,6 +229,12 @@ class AnalysisService:
             plan, studies, citation_limit=request.citation_limit, cohorts=cohorts,
             drug_match_mode=request.drug_match_mode,
         )
+        # Validate every displayed citation independently of the chart builders.
+        # An internal rendering bug must not be returned as source-backed truth.
+        try:
+            verify_chart_evidence(chart.visualization, studies)
+        except ValueError as exc:
+            raise IntegrityError("Visualization evidence failed internal consistency verification") from exc
         if chart.visualization_truncated:
             rendered_count = (
                 len(chart.visualization.data["edges"])
@@ -265,6 +297,8 @@ class AnalysisService:
                 visualization_total_items=chart.visualization_total_items,
                 records_visualized=visualized_count,
                 records_not_visualized=not_visualized_count,
+                planner_attempts=planner_attempts,
+                planner_repaired=(planner_attempts == 2),
                 visualization_items_returned=(
                     len(chart.visualization.data["edges"])
                     if chart.visualization.type == "network_graph"
