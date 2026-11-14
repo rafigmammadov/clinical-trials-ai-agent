@@ -5,6 +5,9 @@ cd "$(dirname "$0")/.."
 
 python -m pytest -q
 python -m compileall -q app tests scripts evals
+python -m evals.run --mode validate
+python -m evals.identity
+python -m evals.grounding
 
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     if git ls-files --error-unmatch .env >/dev/null 2>&1; then
