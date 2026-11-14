@@ -13,6 +13,7 @@ check:
 	python -m compileall -q app tests scripts evals
 	python -m pytest -q
 	python -m evals.run --mode validate
+	python -m evals.identity
 
 smoke:
 	bash scripts/smoke.sh
