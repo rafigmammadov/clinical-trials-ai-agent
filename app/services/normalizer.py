@@ -5,11 +5,14 @@ from datetime import date
 import re
 from typing import Any
 
+from app.services.terminology import normalized_name
+
 
 @dataclass(frozen=True, slots=True)
 class Intervention:
     name: str
     kind: str
+    other_names: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -80,11 +83,33 @@ def normalize_study(raw: dict[str, Any]) -> Study:
                               if isinstance(item, dict) and item.get("country")}))
 
     interventions_raw = (protocol.get("armsInterventionsModule") or {}).get("interventions") or []
-    interventions = tuple(
-        Intervention(name=str(item["name"]).strip(), kind=str(item.get("type", "")).upper())
-        for item in interventions_raw
-        if isinstance(item, dict) and item.get("name")
-    )
+    interventions_list = []
+    for item in interventions_raw:
+        if not isinstance(item, dict) or not isinstance(item.get("name"), str):
+            continue
+        name = item["name"].strip()
+        if not name:
+            continue
+        aliases = item.get("otherNames")
+        if not isinstance(aliases, list):
+            aliases = []
+        # Preserve the displayed registry spellings while removing duplicate
+        # names using the same conservative identity rule as the matcher.
+        seen_aliases = {normalized_name(name)}
+        clean_aliases = []
+        for alias in aliases:
+            if not isinstance(alias, str) or not alias.strip():
+                continue
+            alias = alias.strip()
+            key = normalized_name(alias)
+            if key not in seen_aliases:
+                seen_aliases.add(key)
+                clean_aliases.append(alias)
+        interventions_list.append(Intervention(
+            name=name, kind=str(item.get("type", "")).upper(),
+            other_names=tuple(clean_aliases),
+        ))
+    interventions = tuple(interventions_list)
 
     return Study(
         nct_id=nct_id,
