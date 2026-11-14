@@ -544,7 +544,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T19:33:48.994190Z",
+    "analyzed_at": "2026-11-14T21:10:25.662153Z",
     "query_plan": {
       "intent": "drug_comparison",
       "condition": null,
@@ -557,7 +557,7 @@
       "start_year": null,
       "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Compare the phase distributions of clinical trials for ivacaftor versus lumacaftor."
+      "interpretation": "Compare the phase distributions of clinical trials for the drugs ivacaftor and lumacaftor."
     },
     "filters": {
       "drugs": [

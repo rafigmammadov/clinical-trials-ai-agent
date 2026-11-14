@@ -323,7 +323,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T19:33:46.354105Z",
+    "analyzed_at": "2026-11-14T21:10:22.803103Z",
     "query_plan": {
       "intent": "geography",
       "condition": "Wilson disease",
@@ -333,7 +333,7 @@
       "start_year": null,
       "end_year": null,
       "recruiting_only": true,
-      "interpretation": "Count countries by number of recruiting trials for Wilson disease."
+      "interpretation": "Count of recruiting trials for Wilson disease by country."
     },
     "filters": {
       "condition": "Wilson disease",

@@ -225,7 +225,7 @@
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T19:33:43.816053Z",
+    "analyzed_at": "2026-11-14T21:10:19.977144Z",
     "query_plan": {
       "intent": "time_trend",
       "condition": "Niemann-Pick disease type C",
@@ -235,7 +235,7 @@
       "start_year": 2018,
       "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Count trials for Niemann-Pick disease type C started each year since 2018."
+      "interpretation": "Count trials for Niemann-Pick disease type C by their start year since 2018."
     },
     "filters": {
       "condition": "Niemann-Pick disease type C",
