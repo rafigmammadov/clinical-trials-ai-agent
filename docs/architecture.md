@@ -6,6 +6,8 @@ The API accepts a user question plus optional explicit filters. The OpenAI plann
 
 ClinicalTrials.gov is the sole source of clinical-study facts. `ClinicalTrialsClient` compiles allowlisted plan fields into registry query parameters, retrieves pages, normalizes study records and deduplicates by NCT ID. HTTP 408/429 and selected 5xx errors use bounded retry/backoff. Connection pools are reused at application scope. A malformed study is skipped with a warning and prevents `complete=true`.
 
+The optional, deterministic `registered_name` matching step checks registered DRUG intervention `name` and `otherNames` fields after upstream candidate retrieval. It is explicitly selected by the request, never chosen by the LLM. The default `registry_text` policy remains unchanged. The matcher cannot recover unreturned candidates, and its verification is not equivalent to a pharmacologic ontology; details and examples are in [intervention identity](intervention_identity.md).
+
 The deterministic visualization builder operates on normalized immutable `Study` instances. It groups by distinct NCT ID, constructs frontend fields, and attaches field-level citations. It never calls the LLM. `AnalyzeResponse` validates channel encodings, graph references, item counts and basic record-accounting invariants before serialization.
 
 ```mermaid
@@ -36,7 +38,7 @@ Time-series counts use `protocolSection.statusModule.startDateStruct.date`, not 
 
 ## Data and evidence limitations
 
-Searches by intervention, condition and sponsor use ClinicalTrials.gov text search semantics. They do not constitute RxNorm/MeSH identity resolution, and the local sponsor filter specifically checks lead sponsor names. `recruiting_only` uses study-level overall status, not a location-level assertion.
+Searches by intervention, condition and sponsor use ClinicalTrials.gov text search semantics. `meta.drug_match_mode` and optional `meta.matched_drug_counts` identify the drug matching policy; strict mode provides a registered intervention name or alias alongside chart-dimension citations, but `meta.complete` still refers to upstream candidate retrieval. They do not constitute RxNorm/MeSH identity resolution, and the local sponsor filter specifically checks lead sponsor names. `recruiting_only` uses study-level overall status, not a location-level assertion.
 
 For a plotted point or edge, `citation_count` represents distinct contributing NCT IDs, not source-field count. Citations can be capped without changing the aggregate; `citations_complete=false` indicates omitted evidence links. A scatter point uses one study citation containing both start-date and enrollment-field evidence. `record_identity_only` is used when a datum represents a source field that is absent.
 
