@@ -1,0 +1,261 @@
+{
+  "visualization": {
+    "type": "time_series",
+    "title": "Clinical trials started by year — Niemann-Pick disease type C",
+    "encoding": {
+      "x": {
+        "field": "year",
+        "type": "quantitative",
+        "title": "Study start year",
+        "unit": "year"
+      },
+      "y": {
+        "field": "trial_count",
+        "type": "quantitative",
+        "title": "Distinct studies",
+        "aggregate": "none"
+      }
+    },
+    "data": [
+      {
+        "year": 2018,
+        "trial_count": 3,
+        "citation_count": 3,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT01306604",
+            "url": "https://clinicaltrials.gov/study/NCT01306604",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2018-08-20"
+          },
+          {
+            "nct_id": "NCT03643562",
+            "url": "https://clinicaltrials.gov/study/NCT03643562",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2018-06-18"
+          },
+          {
+            "nct_id": "NCT03655223",
+            "url": "https://clinicaltrials.gov/study/NCT03655223",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2018-10-15"
+          }
+        ]
+      },
+      {
+        "year": 2019,
+        "trial_count": 4,
+        "citation_count": 4,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT03471143",
+            "url": "https://clinicaltrials.gov/study/NCT03471143",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2019-02-22"
+          },
+          {
+            "nct_id": "NCT03759639",
+            "url": "https://clinicaltrials.gov/study/NCT03759639",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2019-09-04"
+          },
+          {
+            "nct_id": "NCT03879655",
+            "url": "https://clinicaltrials.gov/study/NCT03879655",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2019-12-02"
+          },
+          {
+            "nct_id": "NCT03893071",
+            "url": "https://clinicaltrials.gov/study/NCT03893071",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2019-05-23"
+          }
+        ]
+      },
+      {
+        "year": 2020,
+        "trial_count": 4,
+        "citation_count": 4,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT03687476",
+            "url": "https://clinicaltrials.gov/study/NCT03687476",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2020-05"
+          },
+          {
+            "nct_id": "NCT03887533",
+            "url": "https://clinicaltrials.gov/study/NCT03887533",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2020-01-06"
+          },
+          {
+            "nct_id": "NCT03910621",
+            "url": "https://clinicaltrials.gov/study/NCT03910621",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2020-04-02"
+          },
+          {
+            "nct_id": "NCT04189601",
+            "url": "https://clinicaltrials.gov/study/NCT04189601",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2020-09-30"
+          }
+        ]
+      },
+      {
+        "year": 2021,
+        "trial_count": 3,
+        "citation_count": 3,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT04860960",
+            "url": "https://clinicaltrials.gov/study/NCT04860960",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2021-07-20"
+          },
+          {
+            "nct_id": "NCT04880356",
+            "url": "https://clinicaltrials.gov/study/NCT04880356",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2021-03-01"
+          },
+          {
+            "nct_id": "NCT05368038",
+            "url": "https://clinicaltrials.gov/study/NCT05368038",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2021-05-10"
+          }
+        ]
+      },
+      {
+        "year": 2022,
+        "trial_count": 2,
+        "citation_count": 2,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT05163288",
+            "url": "https://clinicaltrials.gov/study/NCT05163288",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2022-06-30"
+          },
+          {
+            "nct_id": "NCT05588167",
+            "url": "https://clinicaltrials.gov/study/NCT05588167",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2022-11-28"
+          }
+        ]
+      },
+      {
+        "year": 2023,
+        "trial_count": 2,
+        "citation_count": 2,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT05642221",
+            "url": "https://clinicaltrials.gov/study/NCT05642221",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2023-01-23"
+          },
+          {
+            "nct_id": "NCT05758922",
+            "url": "https://clinicaltrials.gov/study/NCT05758922",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2023-04-24"
+          }
+        ]
+      },
+      {
+        "year": 2024,
+        "trial_count": 0,
+        "citation_count": 0,
+        "citations_complete": true,
+        "citations": []
+      },
+      {
+        "year": 2025,
+        "trial_count": 3,
+        "citation_count": 3,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT07054515",
+            "url": "https://clinicaltrials.gov/study/NCT07054515",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2025-06-30"
+          },
+          {
+            "nct_id": "NCT07082543",
+            "url": "https://clinicaltrials.gov/study/NCT07082543",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2025-06-30"
+          },
+          {
+            "nct_id": "NCT07082725",
+            "url": "https://clinicaltrials.gov/study/NCT07082725",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2025-06-30"
+          }
+        ]
+      },
+      {
+        "year": 2026,
+        "trial_count": 1,
+        "citation_count": 1,
+        "citations_complete": true,
+        "citations": [
+          {
+            "nct_id": "NCT07399704",
+            "url": "https://clinicaltrials.gov/study/NCT07399704",
+            "field_path": "protocolSection.statusModule.startDateStruct.date",
+            "excerpt": "2026-02-04"
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "source": "ClinicalTrials.gov API v2",
+    "source_url": "https://clinicaltrials.gov/data-api/api",
+    "analyzed_at": "2026-11-14T08:36:31.508958Z",
+    "query_plan": {
+      "intent": "time_trend",
+      "condition": "Niemann-Pick disease type C",
+      "drugs": [],
+      "sponsor": null,
+      "country": null,
+      "start_year": 2018,
+      "end_year": null,
+      "recruiting_only": false,
+      "interpretation": "Count of trials started each year since 2018 for Niemann-Pick disease type C."
+    },
+    "filters": {
+      "condition": "Niemann-Pick disease type C",
+      "start_year": 2018,
+      "recruiting_only": false
+    },
+    "records_fetched": 23,
+    "records_used": 22,
+    "total_matches": 23,
+    "complete": true,
+    "warnings": [],
+    "assumptions": [
+      "Year is derived from startDateStruct.date; missing start dates are excluded. A start date may be estimated.",
+      "Start-year filters apply to study start dates, not registration or publication dates.",
+      "With no end year, known future calendar dates are excluded; partial or estimated dates do not establish verified trial starts."
+    ],
+    "citation_limit_per_datum": 10,
+    "cohort_matches": null,
+    "visualization_truncated": false,
+    "visualization_items_returned": 9,
+    "visualization_total_items": null
+  }
+}
