@@ -13,13 +13,14 @@ flowchart TD
     C --> D[Semantic plan validation]
     D --> E[ClinicalTrials.gov API client]
     E --> F[Pagination, normalization and NCT deduplication]
-    F --> G[Deterministic filters and aggregation]
-    G --> H[Visualization builder and source citations]
+    F --> G[Optional registered drug-name verification]
+    G --> K[Deterministic filters and aggregation]
+    K --> H[Visualization builder and source citations]
     H --> I[Response contract validation]
     I --> J[JSON chart specification]
 ```
 
-`app/agent/` owns planning and orchestration; `app/services/` handles the registry integration and normalized study model; `app/visualizations/` calculates the chart data; `app/schemas/` validates inputs, plans and outputs. The API layer does not calculate study counts. The OpenAI client is reused for the lifetime of the application process and closed on shutdown.
+`app/agent/` owns planning and orchestration; `app/services/` handles the registry integration, normalized study model, and optional registered-name matching; `app/visualizations/` calculates the chart data; `app/schemas/` validates inputs, plans and outputs. The API layer does not calculate study counts. The OpenAI client is reused for the lifetime of the application process and closed on shutdown.
 
 The model cannot choose arbitrary network URLs, execute generated code, or supply study counts. It produces an allowlisted, typed `QueryPlan` that the application independently validates. The numbers and citations originate from normalized registry records. We deliberately use no general-purpose agent framework: a small, inspectable workflow makes data lineage and failure modes easier to reason about.
 
@@ -84,7 +85,7 @@ curl --fail-with-body -sS http://127.0.0.1:8000/api/v1/analyze \
 python -m json.tool /tmp/clinical-trials-response.json
 ```
 
-`query` is required (5–2,000 characters). Optional inputs include `condition`, `drugs`, `sponsor`, `country`, `start_year`, `end_year`, `recruiting_only`, `max_studies` (1–5,000 **per registry search**) and `citation_limit` (0–50 **contributing studies per datum**). Explicit structured inputs override the corresponding inferred plan fields. A two-drug comparison performs separate searches; its cohorts can overlap.
+`query` is required (5–2,000 characters). Optional inputs include `condition`, `drugs`, `sponsor`, `country`, `start_year`, `end_year`, `recruiting_only`, `max_studies` (1–5,000 **per registry search**) and `citation_limit` (0–50 **contributing studies per datum**). Set `drug_match_mode` to `registered_name` to retain only records that explicitly register the requested DRUG name or alias; its default is `registry_text` for backward compatibility. Explicit structured inputs override the corresponding inferred plan fields. A two-drug comparison performs separate searches; its cohorts can overlap.
 
 Expected errors: HTTP 422 for invalid input or unsupported analyses, 502 for registry failures, and 503 for unavailable planning. FastAPI also emits HTTP 422 for invalid JSON schema inputs. These errors do not include provider response bodies or credentials. Full field definitions are in [API contract](docs/api.md) and the live `/docs` interface.
 
@@ -104,6 +105,8 @@ Expected errors: HTTP 422 for invalid input or unsupported analyses, 502 for reg
 | `enrollment_histogram` | `histogram` | Enrollment count distributions |
 | `enrollment_scatter` | `scatter_plot` | Enrollment against study start year |
 
+For drug-restricted analyses, `registry_text` (default) uses the registry search matches; `registered_name` verifies candidate studies against the names and aliases recorded for `DRUG` interventions. The strict mode improves cohort interpretability but cannot guarantee recall of trials absent from the original search. See [registered intervention matching](docs/intervention_identity.md) for the exact policy and evidence fields.
+
 The planner can return `unsupported`; the server responds with HTTP 422 instead of substituting a misleading chart. It is not a medical reasoning or efficacy-analysis service. Complex multi-condition comparisons, patient-level outcomes, and clinical ontology resolution are not implemented.
 
 ## Output contract and provenance
@@ -111,12 +114,12 @@ The planner can return `unsupported`; the server responds with HTTP 422 instead 
 Every successful response contains `visualization` and `meta`:
 
 - `visualization.type`, `.title`, `.encoding`, `.data` tell a frontend how to render the result. Ordinary charts contain row arrays; network charts contain `nodes` and `edges`.
-- `meta.query_plan` records the interpreted intent and filters; `meta.filters` records the applied query parameters and `meta.assumptions` describes grouping semantics.
+- `meta.query_plan` records the interpreted intent and filters; `meta.filters` records the applied query/search policy and `meta.assumptions` describes grouping semantics. `meta.drug_match_mode` exposes the selected intervention-matching policy; strict mode also reports `meta.matched_drug_counts`.
 - `meta.records_fetched` counts distinct retrieved NCT IDs; `records_used` counts post-filter records; `records_visualized` counts distinct records supporting displayed rows or edges; `records_not_visualized` reports eligible records omitted from the displayed chart.
 - `meta.complete` describes **registry retrieval**; `meta.visualization_truncated` describes **chart display limits**. A complete registry retrieval can still render only the highest-weighted 75 network edges.
 - A datum's `citation_count` is the number of contributing studies; the `citations` array may be capped and `citations_complete` indicates whether every contributing study has a citation. Each citation carries an NCT ID, canonical registry link, supporting source field and excerpt. Multi-field evidence is kept on the same NCT citation using `related_field_path` and `related_excerpt`.
 
-Source values are taken from the registry, not generated by the LLM. `evidence_scope: record_identity_only` flags records without the relevant field value; the NCT link does not prove that a missing field equals a particular category. Invalid channel references and graph edges referring to nonexistent nodes are rejected by the response schema.
+In strict drug matching mode, study citations also contain registered name/alias evidence establishing cohort membership. Source values are taken from the registry, not generated by the LLM. `evidence_scope: record_identity_only` flags records without the relevant field value; the NCT link does not prove that a missing field equals a particular category. Invalid channel references and graph edges referring to nonexistent nodes are rejected by the response schema.
 
 A trial can count toward multiple phase buckets or country buckets. The sum of category assignments is therefore not generally the number of distinct studies. Drug comparison cohorts may overlap. These decisions are made explicit in response assumptions. See [data and provenance design](docs/architecture.md).
 
@@ -135,6 +138,9 @@ The registry updates over time; study counts and cited records are snapshots, no
 ```bash
 python scripts/generate_examples.py --max-studies 1500
 python -m scripts.verify_examples
+
+# To regenerate comparison.json using verified registered DRUG names/aliases:
+python scripts/generate_examples.py --max-studies 1500 --strict-comparison
 ```
 
 The verifier is offline: it checks stored JSON structure, counts, evidence references and completeness metadata. It is not a substitute for independently checking sample study fields against the registry.
@@ -145,10 +151,11 @@ The verifier is offline: it checks stored JSON structure, counts, evidence refer
 python -m pytest -q
 python -m compileall -q app tests scripts evals
 python -m evals.run --mode validate
+python -m evals.identity
 python -m scripts.verify_examples
 ```
 
-The offline tests use deterministic fixtures and mocked HTTP interactions. They cover query contracts, pagination, retries, failure injection, deduplication, visualization invariants and response metadata. The test suite does **not** demonstrate live-model accuracy or guarantee that public registry search terminology perfectly matches a clinical ontology.
+The identity matcher also has a 24-case, hand-labeled **synthetic** evaluation (`python -m evals.identity`). It does not measure registry search recall or live-model accuracy. The offline tests use deterministic fixtures and mocked HTTP interactions. They cover query contracts, pagination, retries, failure injection, deduplication, visualization invariants and response metadata. The test suite does **not** demonstrate live-model accuracy or guarantee that public registry search terminology perfectly matches a clinical ontology.
 
 For a live smoke test, start Uvicorn in another terminal and run `bash scripts/smoke.sh`. Its low record limit intentionally generates partial results and is not a population estimate.
 
@@ -164,7 +171,7 @@ Reports include overall intent and field-extraction accuracy and per-category re
 
 The development API does not include authentication, user quotas, or infrastructure-level abuse protection; do not deploy it publicly without adding these controls. Input lengths and retrieval limits are bounded, registry requests have timeouts and retry limits, and untrusted user text cannot supply code or arbitrary outbound URLs. Responses expose no OpenAI credentials and provider errors are mapped to constrained messages. See [security notes](SECURITY.md).
 
-ClinicalTrials.gov searches are term-based. Drug names are not resolved to RxNorm identities and disease names are not mapped to a clinical ontology. Study-wide recruiting status is not site-level recruiting status. Some start dates are estimated or partially specified; enrollment can be anticipated rather than actual. The service does not measure therapeutic effectiveness. Higher fidelity terminology, richer outcome analysis, caching and production controls remain future work.
+ClinicalTrials.gov searches are term-based. The opt-in registered-name match checks only names/aliases included in returned records; it is not comprehensive clinical terminology resolution. Drug names are not resolved to RxNorm identities and disease names are not mapped to a clinical ontology. Study-wide recruiting status is not site-level recruiting status. Some start dates are estimated or partially specified; enrollment can be anticipated rather than actual. The service does not measure therapeutic effectiveness. Higher fidelity terminology, richer outcome analysis, caching and production controls remain future work.
 
 ## Maintainer workflow
 
