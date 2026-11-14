@@ -20,3 +20,9 @@ python -m evals.run --mode live --category adversarial --limit 10 --output evals
 The reported `intent_accuracy` is exact enum agreement. `filter_accuracy` compares only annotated properties, normalizes case for strings, and treats the two drug names as an unordered pair. It is not a general clinical-semantic correctness metric; a synonym such as *diabetes mellitus type 2* versus *type 2 diabetes* may score as a mismatch. The evaluation does not retrieve clinical records or verify chart data, which are covered by separate service tests and manual source spot checks.
 
 Do not claim live accuracy based on schema-only validation. Review individual cases before tuning prompts or changing model versions.
+
+## Registered-name identity benchmark (offline, v0.4.0)
+
+Run `python -m evals.identity` to test 24 hand-labeled synthetic registration examples. This is separate from the 50-question LLM planning benchmark. The test fixtures cover registered names, `otherNames` aliases, Unicode/whitespace normalization, non-drug interventions, and deliberately rejected substring/fuzzy matches. The runner is deterministic and makes **no** model or registry API calls.
+
+A perfect 24/24 result demonstrates only that the current matching policy agrees with the annotated synthetic cases. It does not measure the recall of `query.intr`, drug ontology coverage, or the correctness of live registered records. See [intervention matching semantics](../docs/intervention_identity.md).
