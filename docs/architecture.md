@@ -1,70 +1,60 @@
 # Architecture and data semantics
 
-## Execution and trust boundaries
-
-The API accepts a user question plus optional explicit filters. The OpenAI planner returns a Pydantic-validated `QueryPlan`; no executable instructions or arbitrary URL fields are part of the plan. `AnalysisService` verifies supported intents, the number of comparison drug terms and date bounds before triggering registry requests. Explicit structured request filters take precedence over inferred terms.
-
-ClinicalTrials.gov is the sole source of clinical-study facts. `ClinicalTrialsClient` compiles allowlisted plan fields into registry query parameters, retrieves pages, normalizes study records and deduplicates by NCT ID. HTTP 408/429 and selected 5xx errors use bounded retry/backoff. Connection pools are reused at application scope. A malformed study is skipped with a warning and prevents `complete=true`.
-
-The optional, deterministic `registered_name` matching step checks registered DRUG intervention `name` and `otherNames` fields after upstream candidate retrieval. It is explicitly selected by the request, never chosen by the LLM. The default `registry_text` policy remains unchanged. The matcher cannot recover unreturned candidates, and its verification is not equivalent to a pharmacologic ontology; details and examples are in [intervention identity](intervention_identity.md).
-
-The deterministic visualization builder operates on normalized immutable `Study` instances. It groups by distinct NCT ID, constructs frontend fields, and attaches field-level citations. It never calls the LLM. `AnalyzeResponse` validates channel encodings, graph references, item counts and basic record-accounting invariants before serialization.
+The service has five boundaries: HTTP validation, constrained model planning, deterministic plan checks, registry retrieval, and deterministic chart production. `app/main.py` wires shared HTTP clients into the application lifespan; `AnalysisService` coordinates the business flow without embedding registry or model SDK calls in route handlers.
 
 ```mermaid
-flowchart LR
-    U[Untrusted user text] --> P[Constrained query plan]
-    P --> Q[Validated API parameters]
-    Q --> R[ClinicalTrials.gov records]
-    R --> N[Normalized Study objects]
-    N --> C[Pure chart builder]
-    C --> O[Validated output and evidence]
+flowchart TD
+    API[FastAPI / Pydantic inputs] --> Planner[OpenAI structured QueryPlan]
+    Planner --> Validator[Grounding + recall + temporal semantics]
+    Validator -->|failure| Repair[At most one model correction]
+    Repair --> Validator2[Full revalidation]
+    Validator -->|pass| Client[ClinicalTrials.gov v2]
+    Validator2 -->|pass| Client
+    Validator2 -->|failure| Reject[HTTP 422]
+    Client --> Normalizer[Immutable Study records]
+    Normalizer --> Builder[Deterministic chart builder]
+    Builder --> Audit[Independent NCT citation validation]
+    Audit --> Schema[Pydantic response validation]
+    Schema --> JSON[Visualization and metadata]
 ```
 
-## Cardinality and completeness
+## Planner trust boundary
 
-- `records_fetched`: distinct NCT identifiers retrieved by the API adapter; for a comparison, distinct IDs in the union of the two search results.
-- `records_used`: distinct studies remaining after local filters.
-- `records_visualized`: distinct NCT IDs represented by a displayed chart bucket, point, or network edge.
-- `records_not_visualized`: records used minus records visualized (missing chart dimensions or display caps).
-- `total_matches`: registry-reported match count when it is meaningful for a single search; two drug cohorts use `cohort_matches` instead.
-- `complete`: no known missing registry pages or malformed omitted records and, when available, retrieved unique study count matches the reported total.
-- `visualization_truncated`: output intentionally hides categories or network edges beyond the visualization limit, independent of registry completeness.
+`app/agent/planner.py` uses OpenAI's structured output parser with a strict `QueryPlan`: only intent and known filters. Query-plan values cannot carry executable code, network destinations, or numerical trial totals. `grounding.py` flags model-added terms without explicit question evidence. `recall.py` compares high-confidence requested constraints to the plan and fails closed on recognizable unsupported negative filters. Explicit typed API inputs override corresponding inferred fields.
 
-A phase-1/phase-2 study appears in both buckets. A multi-site study can appear once per country. A trial matching two drug text searches may appear in both cohorts. Membership sums should not be interpreted as disjoint trial counts.
+When a structured plan fails a representable-input check, the OpenAI planner may receive **one** correction request. The correction is treated as untrusted and must pass the same validation. Requests requiring unsupported exclusions and initial `unsupported` classifications are not automatically repaired. `planner_attempts` and `planner_repaired` make model-call amplification visible. Rule-based offline planning does not implement repair.
 
-A sponsor–drug edge weight counts unique studies containing both a lead sponsor name and a registered drug intervention name. A drug–drug edge counts unique studies listing both drugs; it does not imply an administered combination or causal relationship. Each edge citation includes evidence for both endpoints.
+The lexical checks are intentionally not medical entity recognition; they can miss rare synonyms or reject ambiguous wording. Prefer explicit structured input for precise analysis. A plan's valid JSON shape does not establish semantic accuracy.
 
-Time-series counts use `protocolSection.statusModule.startDateStruct.date`, not first posting or last update. Missing/invalid dates are excluded. Known future full dates and future months are excluded when an end year is not requested, but ambiguous or estimated dates are not proof of a completed start.
+## Registry and clinical semantics
 
-## Data and evidence limitations
+`ClinicalTrialsClient` only constructs known ClinicalTrials.gov v2 query parameters. It applies timeout and bounded 408/429/5xx retries, respects bounded `Retry-After`, follows `nextPageToken`, detects cursor cycles, and tolerates isolated empty pages while refusing repeated no-progress pages. `max_studies` caps each search. Malformed records are skipped with incomplete-result disclosure rather than treated as true population totals.
 
-Searches by intervention, condition and sponsor use ClinicalTrials.gov text search semantics. `meta.drug_match_mode` and optional `meta.matched_drug_counts` identify the drug matching policy; strict mode provides a registered intervention name or alias alongside chart-dimension citations, but `meta.complete` still refers to upstream candidate retrieval. They do not constitute RxNorm/MeSH identity resolution, and the local sponsor filter specifically checks lead sponsor names. `recruiting_only` uses study-level overall status, not a location-level assertion.
+`normalize_study` creates immutable records keyed by `NCT` identifier. The application uses the registry's study **start date**, not first posting or last update, for time trends. Missing dates do not contribute; dates may be *estimated* rather than actual starts. Recruitment status is the **overall study status**, not a site's current recruitment. Lead sponsor is not equivalent to collaborators.
 
-For a plotted point or edge, `citation_count` represents distinct contributing NCT IDs, not source-field count. Citations can be capped without changing the aggregate; `citations_complete=false` indicates omitted evidence links. A scatter point uses one study citation containing both start-date and enrollment-field evidence. `record_identity_only` is used when a datum represents a source field that is absent.
+| Metric | Counting rule |
+|---|---|
+| Time trend | One distinct NCT per valid start year |
+| Phase distribution | One NCT per phase; multi-phase records contribute to multiple buckets |
+| Geography | One NCT per listed country (not number of sites) |
+| Drug comparison | Separate cohort searches; one NCT may count for both drugs |
+| Sponsor–drug edge | Distinct NCT IDs linking lead sponsor to named DRUG intervention |
+| Drug co-occurrence | Distinct NCT IDs listing both drug names; no inferred administered combination |
+| Histogram / scatter | Numeric enrollment and any other required observed fields |
 
-## Runtime lifecycle and observability
+`drug_match_mode=registered_name` only retains studies with matching DRUG intervention names or registered aliases. Matching is conservative case/whitespace normalization, **not** molecular equivalence or ontology resolution. This policy cannot recover studies absent from the initial registry search.
 
-Uvicorn starts a FastAPI lifespan that owns a pooled HTTPX client for the registry and, if configured, an OpenAI planner client. Both are closed at shutdown. Every HTTP response includes a generated `X-Request-ID` and elapsed-process-time header. Application-level request logs do not store user questions, study bodies, or credentials.
+## Provenance and display completeness
 
-There is intentionally no persistence layer, cache, authentication, multi-agent framework, distributed queue, or hosted dashboard. Those should be added only after measuring a concrete need and defining an operational threat model.
+The visualization builders attach NCT IDs and **verbatim normalized source-field excerpts**. Network edges carry evidence for each endpoint, while scatter points carry date and enrollment from the same study. `app/services/evidence.py` independently verifies all displayed citations and paired fields against the retrieved normalized records. If that verification fails, the endpoint returns an internal integrity error rather than displaying false provenance. This does not cryptographically verify the registry server.
 
-## Model-query trust boundary (v0.5.0)
+`records_fetched` tracks distinct upstream candidates. `records_used` means candidates surviving filters, and `records_visualized` means contributors to displayed rows or edges. `meta.complete` means candidate registry pagination completed with no known omitted/invalid records; it is separate from `visualization_truncated` (top 25 categories or 75 edges). Capped citations disclose `citation_count` and `citations_complete`.
 
-After structured planning and temporal reconciliation, `app/agent/grounding.py` checks whether inferred entity and date restrictions are explicitly supported by the user question. Only a validated, merged plan may reach `ClinicalTrialsClient`. The guard performs no external requests and refuses ambiguous or unsupported restrictions with HTTP 422. It is distinct from registered intervention identity matching, which inspects source records after retrieval. See [guard decision contract](agent_grounding.md).
+## Deliberate tradeoffs
 
-## Planner omission detection (v0.6.0)
+- **No agent framework:** one typed planning step with at most one correction is simpler to inspect and test than opaque tools or multi-agent loops.
+- **No database/cache:** results reflect the live registry at request time; this trades repeated retrieval for clear freshness semantics.
+- **Bounded work:** small chart displays and registry limits constrain response size, with explicit incompleteness metadata rather than invented totals.
+- **No public auth:** appropriate for local evaluation, not for an internet-exposed API without deployment-specific protections.
 
-Before the registry call, `app/agent/recall.py` independently extracts selected
-explicit constraints from the original question and compares them to the
-validated, override-merged `QueryPlan`. This catches cases in which a schema-
-valid model output silently forgets the requested year, disease, study status,
-country, lead sponsor, or explicitly named intervention. It also rejects
-recognized negative filters and relative or exclusive year boundaries the
-current schema cannot faithfully express. A failure returns the existing
-HTTP 422 contract without making an upstream request.
-
-The extraction policy is intentionally limited and lexical; it cannot perform
-comprehensive NER, semantic synonym resolution, or full clinical intent
-validation. The separate offline guard test suite and optional live planner
-recall metric have different denominators and must not be conflated. See
-[the recall contract](plan_recall.md).
+The authoritative HTTP schema is in `app/schemas/api.py`; `/openapi.json` provides the generated machine-readable contract.

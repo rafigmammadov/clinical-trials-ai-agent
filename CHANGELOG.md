@@ -1,53 +1,20 @@
 # Changelog
 
-## Unreleased (v0.6.0 query-plan filter recall candidate)
+## 1.0.0 — Finalized backend release candidate
 
-- Check that high-confidence user-requested clinical conditions, drugs, sponsors,
-  countries, recruiting restrictions, and calendar-year boundaries survive model
-  planning and typed override resolution before any registry retrieval.
-- Reject supported-form but unrepresented multi-entity requests and recognized
-  negative filters instead of silently broadening results.
-- Add 74 hand-labeled synthetic plan-omission cases, with separate guard
-  omission-detection recall and precision. These are not live GPT metrics.
-- Extend opt-in live planner evaluation with requested-filter assertion counts
-  and recall, distinct from the existing field-accuracy score.
-- Establish one source for the service version (`app/version.py`), separately
-  from the stable `/api/v1` URL.
-- Extend pytest, CI, local checks, and release packaging quality gates.
+Four internal engineering stages were implemented together as one patch; **0.7–0.9 are not claimed as independently published releases**:
 
-## Unreleased (v0.5.0 query-filter grounding candidate)
+- **0.7 — Planner recovery:** A rejected structured plan may receive one bounded correction, and it must pass the same grounding, recall and runtime constraints. Responses report planning attempts.
+- **0.8 — Registry reliability:** Pagination tolerates isolated empty pages, detects token cycles and invalid totals, and fails on repeated non-progress.
+- **0.9 — Source evidence:** Independent source-field citation auditing checks NCT IDs, exact excerpts and graph endpoint evidence. Optional guarded model evaluations measure actual plan acceptance and repair behavior, without querying the registry.
+- **1.0 — Product release:** Simplified README, concise API/architecture/verification docs, removed redundant audits and interview preparation files, and required all five genuine examples during release packaging.
 
-- Reject unrequested conditions, drugs, sponsors, countries, year lower bounds, and recruiting-only constraints before registry retrieval. Structured request overrides remain authoritative per field.
-- Reject simple negative expressions (e.g. `without melanoma`, `not in Canada`, `non-recruiting`) rather than converting excluded entities into positive filters.
-- Permit explicitly documented US/USA/UK abbreviation families without treating the lowercase pronoun “us” as geographic evidence; canonicalize aliases to full registry country labels before retrieval.
-- Handle conflicting model and explicit year boundaries as safe HTTP 422 analysis errors; preserve unbounded `since YYYY` correction when a structured start year is provided.
-- Add 54 labeled synthetic grounding decisions, HTTP boundary regressions and documentation describing the lexical policy's limits.
+## Earlier development milestones
 
-## Unreleased (v0.4.1 temporal planning fix)
+- **0.6** — Detect omitted requested filters and measure annotated filter recall.
+- **0.5** — Reject invented model-generated filters before registry retrieval.
+- **0.4** — Verify registered drug names and aliases, plus explicit open-ended year bounds.
+- **0.3** — Response validation, request tracing, provider retries and failure injection.
+- **0.2** — Record accounting, adversarial tests and reproducible archive verification.
 
-- Reject model-inferred end years absent from the question unless the user provided a structured override.
-- For an unbounded `since YYYY` time trend, remove an unsupported model-inferred end year and disclose the correction.
-- Add regression cases and labeled benchmark assertions for unbounded time ranges.
-
-## v0.4.0 — Registered intervention evidence (candidate, not a published release)
-
-- Add opt-in `drug_match_mode=registered_name` for registered DRUG name or `otherNames` alias verification after registry candidate search. Preserve `registry_text` as the default.
-- Report verified post-filter cohort sizes in `meta.matched_drug_counts` and expose the selected matching mode separately from LLM-generated query plans.
-- Attach registered name/alias evidence to strict cohort citations in comparisons and other chart families.
-- Add 24 synthetic, hand-labeled terminology evaluation cases and focused integration regressions. The benchmark does not measure live clinical ontology accuracy.
-- Add explicit documentation for candidate-retrieval limitations, synonyms, overlapping cohorts, and source evidence.
-- Add `--strict-comparison` to the real-example generator without changing its default output behavior.
-
-
-## Unreleased — reliability and contract improvements
-
-- Reuse the OpenAI planner's HTTP connection pool across application requests; close it on shutdown.
-- Add generated request IDs, elapsed-time response headers and privacy-aware request telemetry.
-- Validate chart encoding fields, graph node references and response-record accounting.
-- Change enrollment-scatter citations to carry both required source fields in a single study citation.
-- Honor HTTP-date `Retry-After` headers and retry HTTP 408 responses with bounded delays.
-- Reject invalid registry timeouts and misconfigured non-HTTPS external endpoints at startup.
-- Extend live planner evaluation reports with category-level intent and filter metrics.
-- Add regression tests for those behaviors and expand the API, architecture and security documentation.
-
-This section describes changes prepared in the current working tree. It is not a claim that a GitHub release or PyPI package has been published.
+Milestones describe engineering evolution, not a guarantee that each number was separately deployed or released. See Git tags for published version history.
