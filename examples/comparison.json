@@ -32,807 +32,519 @@
             "nct_id": "NCT02135432",
             "url": "https://clinicaltrials.gov/study/NCT02135432",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "EARLY_PHASE1"
+            "excerpt": "EARLY_PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT03439865",
             "url": "https://clinicaltrials.gov/study/NCT03439865",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "EARLY_PHASE1"
+            "excerpt": "EARLY_PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT03587961",
             "url": "https://clinicaltrials.gov/study/NCT03587961",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "EARLY_PHASE1"
+            "excerpt": "EARLY_PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "Ivacaftor"
           }
         ]
       },
       {
         "drug": "ivacaftor",
         "phase": "Phase 1",
-        "trial_count": 22,
-        "citation_count": 22,
-        "citations_complete": false,
+        "trial_count": 10,
+        "citation_count": 10,
+        "citations_complete": true,
         "citations": [
-          {
-            "nct_id": "NCT00966602",
-            "url": "https://clinicaltrials.gov/study/NCT00966602",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01018368",
-            "url": "https://clinicaltrials.gov/study/NCT01018368",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01060566",
-            "url": "https://clinicaltrials.gov/study/NCT01060566",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01153542",
-            "url": "https://clinicaltrials.gov/study/NCT01153542",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01208285",
-            "url": "https://clinicaltrials.gov/study/NCT01208285",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01216046",
-            "url": "https://clinicaltrials.gov/study/NCT01216046",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
           {
             "nct_id": "NCT01768663",
             "url": "https://clinicaltrials.gov/study/NCT01768663",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01888393",
-            "url": "https://clinicaltrials.gov/study/NCT01888393",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01899105",
             "url": "https://clinicaltrials.gov/study/NCT01899105",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "ivacaftor"
           },
           {
             "nct_id": "NCT01910415",
             "url": "https://clinicaltrials.gov/study/NCT01910415",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
+          },
+          {
+            "nct_id": "NCT02015507",
+            "url": "https://clinicaltrials.gov/study/NCT02015507",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "ivacaftor"
+          },
+          {
+            "nct_id": "NCT03029455",
+            "url": "https://clinicaltrials.gov/study/NCT03029455",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
+          },
+          {
+            "nct_id": "NCT03227471",
+            "url": "https://clinicaltrials.gov/study/NCT03227471",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "ivacaftor"
+          },
+          {
+            "nct_id": "NCT03486236",
+            "url": "https://clinicaltrials.gov/study/NCT03486236",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "Ivacaftor"
+          },
+          {
+            "nct_id": "NCT03768089",
+            "url": "https://clinicaltrials.gov/study/NCT03768089",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "ivacaftor"
+          },
+          {
+            "nct_id": "NCT05668741",
+            "url": "https://clinicaltrials.gov/study/NCT05668741",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "ivacaftor"
+          },
+          {
+            "nct_id": "NCT07283770",
+            "url": "https://clinicaltrials.gov/study/NCT07283770",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "Ivacaftor"
           }
         ]
       },
       {
         "drug": "ivacaftor",
         "phase": "Phase 2",
-        "trial_count": 35,
-        "citation_count": 35,
+        "trial_count": 23,
+        "citation_count": 23,
         "citations_complete": false,
         "citations": [
-          {
-            "nct_id": "NCT00457821",
-            "url": "https://clinicaltrials.gov/study/NCT00457821",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
           {
             "nct_id": "NCT00953706",
             "url": "https://clinicaltrials.gov/study/NCT00953706",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01161537",
             "url": "https://clinicaltrials.gov/study/NCT01161537",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01225211",
             "url": "https://clinicaltrials.gov/study/NCT01225211",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01262352",
             "url": "https://clinicaltrials.gov/study/NCT01262352",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01531673",
             "url": "https://clinicaltrials.gov/study/NCT01531673",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01685801",
             "url": "https://clinicaltrials.gov/study/NCT01685801",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT02070744",
             "url": "https://clinicaltrials.gov/study/NCT02070744",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT02508207",
             "url": "https://clinicaltrials.gov/study/NCT02508207",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
-            "nct_id": "NCT02589236",
-            "url": "https://clinicaltrials.gov/study/NCT02589236",
+            "nct_id": "NCT02730208",
+            "url": "https://clinicaltrials.gov/study/NCT02730208",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
+          },
+          {
+            "nct_id": "NCT02871778",
+            "url": "https://clinicaltrials.gov/study/NCT02871778",
+            "field_path": "protocolSection.designModule.phases",
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           }
         ]
       },
       {
         "drug": "ivacaftor",
         "phase": "Phase 3",
-        "trial_count": 60,
-        "citation_count": 60,
+        "trial_count": 56,
+        "citation_count": 56,
         "citations_complete": false,
         "citations": [
           {
             "nct_id": "NCT00909532",
             "url": "https://clinicaltrials.gov/study/NCT00909532",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT00909727",
             "url": "https://clinicaltrials.gov/study/NCT00909727",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01117012",
             "url": "https://clinicaltrials.gov/study/NCT01117012",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01614457",
             "url": "https://clinicaltrials.gov/study/NCT01614457",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01614470",
             "url": "https://clinicaltrials.gov/study/NCT01614470",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01705145",
             "url": "https://clinicaltrials.gov/study/NCT01705145",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01707290",
             "url": "https://clinicaltrials.gov/study/NCT01707290",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01807923",
             "url": "https://clinicaltrials.gov/study/NCT01807923",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01807949",
             "url": "https://clinicaltrials.gov/study/NCT01807949",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
             "nct_id": "NCT01897233",
             "url": "https://clinicaltrials.gov/study/NCT01897233",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           }
         ]
       },
       {
         "drug": "ivacaftor",
         "phase": "Phase 4",
-        "trial_count": 13,
-        "citation_count": 13,
-        "citations_complete": false,
+        "trial_count": 2,
+        "citation_count": 2,
+        "citations_complete": true,
         "citations": [
           {
             "nct_id": "NCT01937325",
             "url": "https://clinicaltrials.gov/study/NCT01937325",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
+            "excerpt": "PHASE4",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "ivacaftor"
           },
           {
-            "nct_id": "NCT02823470",
-            "url": "https://clinicaltrials.gov/study/NCT02823470",
+            "nct_id": "NCT05743946",
+            "url": "https://clinicaltrials.gov/study/NCT05743946",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT02875366",
-            "url": "https://clinicaltrials.gov/study/NCT02875366",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT03251911",
-            "url": "https://clinicaltrials.gov/study/NCT03251911",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT03256799",
-            "url": "https://clinicaltrials.gov/study/NCT03256799",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT03256968",
-            "url": "https://clinicaltrials.gov/study/NCT03256968",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT03624101",
-            "url": "https://clinicaltrials.gov/study/NCT03624101",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT03956589",
-            "url": "https://clinicaltrials.gov/study/NCT03956589",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT04602468",
-            "url": "https://clinicaltrials.gov/study/NCT04602468",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT04840862",
-            "url": "https://clinicaltrials.gov/study/NCT04840862",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
+            "excerpt": "PHASE4",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "ivacaftor"
           }
         ]
       },
       {
         "drug": "ivacaftor",
         "phase": "Not Applicable",
-        "trial_count": 16,
-        "citation_count": 16,
-        "citations_complete": false,
+        "trial_count": 2,
+        "citation_count": 2,
+        "citations_complete": true,
         "citations": [
           {
             "nct_id": "NCT01784419",
             "url": "https://clinicaltrials.gov/study/NCT01784419",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
+            "excerpt": "NA",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "ivacaftor"
           },
           {
             "nct_id": "NCT02310789",
             "url": "https://clinicaltrials.gov/study/NCT02310789",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT02653027",
-            "url": "https://clinicaltrials.gov/study/NCT02653027",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT02858843",
-            "url": "https://clinicaltrials.gov/study/NCT02858843",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT02965326",
-            "url": "https://clinicaltrials.gov/study/NCT02965326",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT03894657",
-            "url": "https://clinicaltrials.gov/study/NCT03894657",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT04215796",
-            "url": "https://clinicaltrials.gov/study/NCT04215796",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT04415268",
-            "url": "https://clinicaltrials.gov/study/NCT04415268",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT04684823",
-            "url": "https://clinicaltrials.gov/study/NCT04684823",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT04970225",
-            "url": "https://clinicaltrials.gov/study/NCT04970225",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
+            "excerpt": "NA",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           }
         ]
       },
       {
         "drug": "ivacaftor",
         "phase": "Not Reported",
-        "trial_count": 56,
-        "citation_count": 56,
-        "citations_complete": false,
+        "trial_count": 4,
+        "citation_count": 4,
+        "citations_complete": true,
         "citations": [
-          {
-            "nct_id": "NCT01381289",
-            "url": "https://clinicaltrials.gov/study/NCT01381289",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT01381289",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT01549314",
-            "url": "https://clinicaltrials.gov/study/NCT01549314",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT01549314",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT01863238",
-            "url": "https://clinicaltrials.gov/study/NCT01863238",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT01863238",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT02039986",
-            "url": "https://clinicaltrials.gov/study/NCT02039986",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT02039986",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT02141464",
-            "url": "https://clinicaltrials.gov/study/NCT02141464",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT02141464",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT02194881",
-            "url": "https://clinicaltrials.gov/study/NCT02194881",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT02194881",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT02311140",
-            "url": "https://clinicaltrials.gov/study/NCT02311140",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT02311140",
-            "evidence_scope": "record_identity_only"
-          },
           {
             "nct_id": "NCT02445053",
             "url": "https://clinicaltrials.gov/study/NCT02445053",
             "field_path": "protocolSection.identificationModule.nctId",
             "excerpt": "NCT02445053",
-            "evidence_scope": "record_identity_only"
+            "evidence_scope": "record_identity_only",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "ivacaftor"
           },
           {
-            "nct_id": "NCT02722057",
-            "url": "https://clinicaltrials.gov/study/NCT02722057",
+            "nct_id": "NCT03783286",
+            "url": "https://clinicaltrials.gov/study/NCT03783286",
             "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT02722057",
-            "evidence_scope": "record_identity_only"
+            "excerpt": "NCT03783286",
+            "evidence_scope": "record_identity_only",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Ivacaftor"
           },
           {
-            "nct_id": "NCT02807415",
-            "url": "https://clinicaltrials.gov/study/NCT02807415",
+            "nct_id": "NCT04058210",
+            "url": "https://clinicaltrials.gov/study/NCT04058210",
             "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT02807415",
-            "evidence_scope": "record_identity_only"
+            "excerpt": "NCT04058210",
+            "evidence_scope": "record_identity_only",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "ivacaftor"
+          },
+          {
+            "nct_id": "NCT04702360",
+            "url": "https://clinicaltrials.gov/study/NCT04702360",
+            "field_path": "protocolSection.identificationModule.nctId",
+            "excerpt": "NCT04702360",
+            "evidence_scope": "record_identity_only",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "ivacaftor"
           }
         ]
       },
       {
         "drug": "lumacaftor",
         "phase": "Early Phase 1",
-        "trial_count": 1,
-        "citation_count": 1,
+        "trial_count": 0,
+        "citation_count": 0,
         "citations_complete": true,
-        "citations": [
-          {
-            "nct_id": "NCT03587961",
-            "url": "https://clinicaltrials.gov/study/NCT03587961",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "EARLY_PHASE1"
-          }
-        ]
+        "citations": []
       },
       {
         "drug": "lumacaftor",
         "phase": "Phase 1",
-        "trial_count": 8,
-        "citation_count": 8,
+        "trial_count": 3,
+        "citation_count": 3,
         "citations_complete": true,
         "citations": [
-          {
-            "nct_id": "NCT00966602",
-            "url": "https://clinicaltrials.gov/study/NCT00966602",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01216046",
-            "url": "https://clinicaltrials.gov/study/NCT01216046",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
           {
             "nct_id": "NCT01768663",
             "url": "https://clinicaltrials.gov/study/NCT01768663",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT01888393",
-            "url": "https://clinicaltrials.gov/study/NCT01888393",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Lumacaftor"
           },
           {
             "nct_id": "NCT01899105",
             "url": "https://clinicaltrials.gov/study/NCT01899105",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "lumacaftor"
           },
           {
             "nct_id": "NCT01910415",
             "url": "https://clinicaltrials.gov/study/NCT01910415",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT03140527",
-            "url": "https://clinicaltrials.gov/study/NCT03140527",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
-          },
-          {
-            "nct_id": "NCT05968612",
-            "url": "https://clinicaltrials.gov/study/NCT05968612",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE1"
+            "excerpt": "PHASE1",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Lumacaftor"
           }
         ]
       },
       {
         "drug": "lumacaftor",
         "phase": "Phase 2",
-        "trial_count": 8,
-        "citation_count": 8,
+        "trial_count": 1,
+        "citation_count": 1,
         "citations_complete": true,
         "citations": [
-          {
-            "nct_id": "NCT00865904",
-            "url": "https://clinicaltrials.gov/study/NCT00865904",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
           {
             "nct_id": "NCT01225211",
             "url": "https://clinicaltrials.gov/study/NCT01225211",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
-          {
-            "nct_id": "NCT02589236",
-            "url": "https://clinicaltrials.gov/study/NCT02589236",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
-          {
-            "nct_id": "NCT02709109",
-            "url": "https://clinicaltrials.gov/study/NCT02709109",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
-          {
-            "nct_id": "NCT03061331",
-            "url": "https://clinicaltrials.gov/study/NCT03061331",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
-          {
-            "nct_id": "NCT03625466",
-            "url": "https://clinicaltrials.gov/study/NCT03625466",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
-          {
-            "nct_id": "NCT04581408",
-            "url": "https://clinicaltrials.gov/study/NCT04581408",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
-          },
-          {
-            "nct_id": "NCT07695090",
-            "url": "https://clinicaltrials.gov/study/NCT07695090",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE2"
+            "excerpt": "PHASE2",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Lumacaftor"
           }
         ]
       },
       {
         "drug": "lumacaftor",
         "phase": "Phase 3",
-        "trial_count": 12,
-        "citation_count": 12,
-        "citations_complete": false,
+        "trial_count": 4,
+        "citation_count": 4,
+        "citations_complete": true,
         "citations": [
-          {
-            "nct_id": "NCT01807923",
-            "url": "https://clinicaltrials.gov/study/NCT01807923",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
-          },
-          {
-            "nct_id": "NCT01807949",
-            "url": "https://clinicaltrials.gov/study/NCT01807949",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
-          },
           {
             "nct_id": "NCT01897233",
             "url": "https://clinicaltrials.gov/study/NCT01897233",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
-          },
-          {
-            "nct_id": "NCT01931839",
-            "url": "https://clinicaltrials.gov/study/NCT01931839",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Lumacaftor"
           },
           {
             "nct_id": "NCT02390219",
             "url": "https://clinicaltrials.gov/study/NCT02390219",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].name",
+            "related_excerpt": "Lumacaftor"
           },
           {
             "nct_id": "NCT02514473",
             "url": "https://clinicaltrials.gov/study/NCT02514473",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "lumacaftor"
           },
           {
-            "nct_id": "NCT02544451",
-            "url": "https://clinicaltrials.gov/study/NCT02544451",
+            "nct_id": "NCT03601637",
+            "url": "https://clinicaltrials.gov/study/NCT03601637",
             "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
-          },
-          {
-            "nct_id": "NCT02797132",
-            "url": "https://clinicaltrials.gov/study/NCT02797132",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
-          },
-          {
-            "nct_id": "NCT03125395",
-            "url": "https://clinicaltrials.gov/study/NCT03125395",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
-          },
-          {
-            "nct_id": "NCT03150719",
-            "url": "https://clinicaltrials.gov/study/NCT03150719",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE3"
+            "excerpt": "PHASE3",
+            "related_field_path": "protocolSection.armsInterventionsModule.interventions[].otherNames[]",
+            "related_excerpt": "lumacaftor"
           }
         ]
       },
       {
         "drug": "lumacaftor",
         "phase": "Phase 4",
-        "trial_count": 3,
-        "citation_count": 3,
+        "trial_count": 0,
+        "citation_count": 0,
         "citations_complete": true,
-        "citations": [
-          {
-            "nct_id": "NCT02823470",
-            "url": "https://clinicaltrials.gov/study/NCT02823470",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT02875366",
-            "url": "https://clinicaltrials.gov/study/NCT02875366",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          },
-          {
-            "nct_id": "NCT03956589",
-            "url": "https://clinicaltrials.gov/study/NCT03956589",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "PHASE4"
-          }
-        ]
+        "citations": []
       },
       {
         "drug": "lumacaftor",
         "phase": "Not Applicable",
-        "trial_count": 7,
-        "citation_count": 7,
+        "trial_count": 0,
+        "citation_count": 0,
         "citations_complete": true,
-        "citations": [
-          {
-            "nct_id": "NCT02653027",
-            "url": "https://clinicaltrials.gov/study/NCT02653027",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT02858843",
-            "url": "https://clinicaltrials.gov/study/NCT02858843",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT02965326",
-            "url": "https://clinicaltrials.gov/study/NCT02965326",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT03894657",
-            "url": "https://clinicaltrials.gov/study/NCT03894657",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT04415268",
-            "url": "https://clinicaltrials.gov/study/NCT04415268",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT04970225",
-            "url": "https://clinicaltrials.gov/study/NCT04970225",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          },
-          {
-            "nct_id": "NCT05526027",
-            "url": "https://clinicaltrials.gov/study/NCT05526027",
-            "field_path": "protocolSection.designModule.phases",
-            "excerpt": "NA"
-          }
-        ]
+        "citations": []
       },
       {
         "drug": "lumacaftor",
         "phase": "Not Reported",
-        "trial_count": 10,
-        "citation_count": 10,
+        "trial_count": 0,
+        "citation_count": 0,
         "citations_complete": true,
-        "citations": [
-          {
-            "nct_id": "NCT02807415",
-            "url": "https://clinicaltrials.gov/study/NCT02807415",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT02807415",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT03445793",
-            "url": "https://clinicaltrials.gov/study/NCT03445793",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT03445793",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT03475381",
-            "url": "https://clinicaltrials.gov/study/NCT03475381",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT03475381",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT03512119",
-            "url": "https://clinicaltrials.gov/study/NCT03512119",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT03512119",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT03565692",
-            "url": "https://clinicaltrials.gov/study/NCT03565692",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT03565692",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT03795363",
-            "url": "https://clinicaltrials.gov/study/NCT03795363",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT03795363",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT04138589",
-            "url": "https://clinicaltrials.gov/study/NCT04138589",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT04138589",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT04301856",
-            "url": "https://clinicaltrials.gov/study/NCT04301856",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT04301856",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT04623879",
-            "url": "https://clinicaltrials.gov/study/NCT04623879",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT04623879",
-            "evidence_scope": "record_identity_only"
-          },
-          {
-            "nct_id": "NCT04732910",
-            "url": "https://clinicaltrials.gov/study/NCT04732910",
-            "field_path": "protocolSection.identificationModule.nctId",
-            "excerpt": "NCT04732910",
-            "evidence_scope": "record_identity_only"
-          }
-        ]
+        "citations": []
       }
     ]
   },
   "meta": {
     "source": "ClinicalTrials.gov API v2",
     "source_url": "https://clinicaltrials.gov/data-api/api",
-    "analyzed_at": "2026-11-14T18:34:51.640726Z",
+    "analyzed_at": "2026-11-14T19:25:41.652064Z",
     "query_plan": {
       "intent": "drug_comparison",
       "condition": null,
@@ -845,34 +557,41 @@
       "start_year": null,
       "end_year": null,
       "recruiting_only": false,
-      "interpretation": "Compare phase distribution of trials for ivacaftor and lumacaftor."
+      "interpretation": "User wants to compare the distribution of trial phases for ivacaftor and lumacaftor."
     },
     "filters": {
       "drugs": [
         "ivacaftor",
         "lumacaftor"
       ],
-      "recruiting_only": false
+      "recruiting_only": false,
+      "drug_match_mode": "registered_name"
     },
     "records_fetched": 204,
-    "records_used": 204,
+    "records_used": 97,
     "total_matches": null,
     "complete": true,
     "warnings": [],
     "assumptions": [
       "A trial mentioning both drugs can belong to both cohorts; totals are not disjoint.",
       "Registry intervention searches are full-text matches, not verified drug ontology mappings.",
-      "Unrecognized phase labels are preserved rather than silently dropped."
+      "Unrecognized phase labels are preserved rather than silently dropped.",
+      "Registered-name mode verifies DRUG intervention names and otherNames in retrieved records using case-insensitive, whitespace-normalized equality. It is not drug ontology resolution and cannot recover candidates absent from the upstream registry text search."
     ],
     "citation_limit_per_datum": 10,
     "cohort_matches": {
       "ivacaftor": 202,
       "lumacaftor": 49
     },
+    "drug_match_mode": "registered_name",
+    "matched_drug_counts": {
+      "ivacaftor": 97,
+      "lumacaftor": 8
+    },
     "visualization_truncated": false,
     "visualization_items_returned": 14,
     "visualization_total_items": null,
-    "records_visualized": 204,
+    "records_visualized": 97,
     "records_not_visualized": 0
   }
 }
