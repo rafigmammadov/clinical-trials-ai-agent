@@ -28,6 +28,7 @@ class ChartResult:
     assumptions: tuple[str, ...] = ()
     visualization_truncated: bool = False
     visualization_total_items: int | None = None
+    visualized_nct_ids: frozenset[str] = frozenset()
 
 
 def _source_field(kind: str, study: Study, value: str | int | None) -> tuple[str, str]:
@@ -56,12 +57,17 @@ def _citations(
     refs = []
     for study in ordered[:limit]:
         field_path, excerpt = _source_field(field_kind, study, value)
-        refs.append({
+        reference = {
             "nct_id": study.nct_id,
             "url": f"https://clinicaltrials.gov/study/{study.nct_id}",
             "field_path": field_path,
             "excerpt": excerpt,
-        })
+        }
+        if field_path == "protocolSection.identificationModule.nctId" and field_kind != "nct":
+            # A record ID is provenance, not evidence that an absent field
+            # had a particular value. Keep that distinction machine-readable.
+            reference["evidence_scope"] = "record_identity_only"
+        refs.append(reference)
     return {
         "citation_count": len(ordered),
         "citations_complete": len(ordered) <= limit,
@@ -116,6 +122,11 @@ def _distribution(plan: QueryPlan, studies: list[Study], limit: int) -> ChartRes
         assumptions.append("Country means any listed study-site country, not necessarily an actively recruiting site.")
     if plan.intent == "sponsor_distribution":
         assumptions.append("Sponsor refers to the lead sponsor, not collaborators.")
+    if any(label == "Not Reported" for label in buckets):
+        assumptions.append(
+            "An absent source field can be supported by a record-identity citation only, "
+            "not an exact excerpt proving the field's absence."
+        )
     if len(keys) > 25:
         assumptions.append("Only the top 25 categories by distinct study count are displayed.")
     chart_title = f"Clinical trials by {title.lower()}"
@@ -130,6 +141,7 @@ def _distribution(plan: QueryPlan, studies: list[Study], limit: int) -> ChartRes
         tuple(assumptions),
         visualization_truncated=len(keys) > len(top_keys),
         visualization_total_items=len(keys),
+        visualized_nct_ids=frozenset(s.nct_id for key in top_keys for s in buckets[key]),
     )
 
 
@@ -149,6 +161,7 @@ def _trend(plan: QueryPlan, studies: list[Study], limit: int) -> ChartResult:
     return ChartResult(
         _chart("time_series", "Clinical trials started by year", encoding, data),
         ("Year is derived from startDateStruct.date; missing start dates are excluded. A start date may be estimated.",),
+        visualized_nct_ids=frozenset(s.nct_id for year in years for s in buckets.get(str(year), [])),
     )
 
 
@@ -156,9 +169,12 @@ def _comparison(
     cohorts: dict[str, list[Study]], limit: int
 ) -> ChartResult:
     rows = []
-    for drug, studies in cohorts.items():
-        buckets = _group_by(studies, _phase_labels)
-        for phase in PHASE_ORDER:
+    bucket_sets = {drug: _group_by(studies, _phase_labels) for drug, studies in cohorts.items()}
+    extra_phases = sorted({phase for buckets in bucket_sets.values()
+                           for phase in buckets if phase not in PHASE_ORDER})
+    all_phases = [*PHASE_ORDER, *extra_phases]
+    for drug, buckets in bucket_sets.items():
+        for phase in all_phases:
             support = buckets.get(phase, [])
             rows.append({
                 "drug": drug, "phase": phase, "trial_count": len(support),
@@ -169,7 +185,11 @@ def _comparison(
     return ChartResult(
         _chart("grouped_bar_chart", "Trial phase comparison by drug", encoding, rows),
         ("A trial mentioning both drugs can belong to both cohorts; totals are not disjoint.",
-         "Registry intervention searches are full-text matches, not verified drug ontology mappings."),
+         "Registry intervention searches are full-text matches, not verified drug ontology mappings.",
+         "Unrecognized phase labels are preserved rather than silently dropped."),
+        visualized_nct_ids=frozenset(
+            s.nct_id for group in cohorts.values() for s in group
+        ),
     )
 
 
@@ -178,6 +198,10 @@ def _network(plan: QueryPlan, studies: list[Study], limit: int) -> ChartResult:
     node_meta: dict[str, dict[str, str]] = {}
 
     def register(node_id: str, label: str, kind: str, study: Study) -> None:
+        # Labels must not change with API record order/capitalization variants.
+        previous = node_meta.get(node_id)
+        if previous is not None:
+            label = min(label, previous["label"], key=lambda text: (text.casefold(), text))
         node_meta[node_id] = {"id": node_id, "label": label, "kind": kind}
 
     for study in studies:
@@ -243,6 +267,9 @@ def _network(plan: QueryPlan, studies: list[Study], limit: int) -> ChartResult:
         }, {"nodes": nodes, "edges": edges}), tuple(assumptions),
         visualization_truncated=len(edge_studies) > len(selected_edges),
         visualization_total_items=len(edge_studies),
+        visualized_nct_ids=frozenset(
+            nct for edge in selected_edges for nct in edge_studies[edge]
+        ),
     )
 
 
@@ -267,6 +294,7 @@ def _histogram(studies: list[Study], limit: int) -> ChartResult:
             "y": {"field": "trial_count", "type": "quantitative", "title": "Distinct studies"},
         }, rows),
         ("Enrollment may be estimated or actual; studies without numeric enrollment are excluded.",),
+        visualized_nct_ids=frozenset(s.nct_id for s in valid),
     )
 
 
@@ -293,6 +321,7 @@ def _scatter(studies: list[Study], limit: int) -> ChartResult:
             "tooltip": {"field": "nct_id", "type": "nominal"},
         }, rows),
         ("Each point is a single NCT record with numeric enrollment and a known start year.",),
+        visualized_nct_ids=frozenset(row["nct_id"] for row in rows),
     )
 
 
@@ -300,6 +329,14 @@ def build_chart(
     plan: QueryPlan, studies: list[Study], *, citation_limit: int,
     cohorts: dict[str, list[Study]] | None = None,
 ) -> ChartResult:
+    # The public client deduplicates, but this pure builder must preserve
+    # distinct-NCT semantics even when tested with repeated upstream records.
+    studies = list({study.nct_id: study for study in studies}.values())
+    if cohorts is not None:
+        cohorts = {
+            name: list({study.nct_id: study for study in group}.values())
+            for name, group in cohorts.items()
+        }
     if plan.intent == "time_trend":
         result = _trend(plan, studies, citation_limit)
     elif plan.intent in {
@@ -313,8 +350,10 @@ def build_chart(
         result = _network(plan, studies, citation_limit)
     elif plan.intent == "enrollment_histogram":
         result = _histogram(studies, citation_limit)
-    else:
+    elif plan.intent == "enrollment_scatter":
         result = _scatter(studies, citation_limit)
+    else:
+        raise ValueError(f"Unsupported visualization intent: {plan.intent}")
 
     context = plan.condition or (" vs ".join(plan.drugs) if plan.drugs else None)
     if context:
@@ -323,5 +362,6 @@ def build_chart(
             result.assumptions,
             result.visualization_truncated,
             result.visualization_total_items,
+            result.visualized_nct_ids,
         )
     return result
