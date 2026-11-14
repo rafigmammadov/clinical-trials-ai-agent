@@ -7,7 +7,8 @@ from itertools import combinations
 from math import ceil
 from typing import Any, Iterable
 
-from app.schemas.api import QueryPlan, VisualizationSpec
+from app.schemas.api import DrugMatchMode, QueryPlan, VisualizationSpec
+from app.services.intervention_matching import find_registered_drug_match
 from app.services.normalizer import Study
 
 
@@ -166,7 +167,7 @@ def _trend(plan: QueryPlan, studies: list[Study], limit: int) -> ChartResult:
 
 
 def _comparison(
-    cohorts: dict[str, list[Study]], limit: int
+    cohorts: dict[str, list[Study]], limit: int, drug_match_mode: DrugMatchMode
 ) -> ChartResult:
     rows = []
     bucket_sets = {drug: _group_by(studies, _phase_labels) for drug, studies in cohorts.items()}
@@ -176,9 +177,18 @@ def _comparison(
     for drug, buckets in bucket_sets.items():
         for phase in all_phases:
             support = buckets.get(phase, [])
+            provenance = _citations(support, field_kind="phase", value=phase, limit=limit)
+            if drug_match_mode == "registered_name":
+                by_id = {study.nct_id: study for study in support}
+                for ref in provenance["citations"]:
+                    matched = find_registered_drug_match(by_id[ref["nct_id"]], drug)
+                    if matched is None:
+                        raise ValueError("Strict cohort citation lacks registered intervention evidence")
+                    ref["related_field_path"] = matched.field_path
+                    ref["related_excerpt"] = matched.excerpt
             rows.append({
                 "drug": drug, "phase": phase, "trial_count": len(support),
-                **_citations(support, field_kind="phase", value=phase, limit=limit),
+                **provenance,
             })
     encoding = _standard_encoding("phase", "Phase")
     encoding["color"] = {"field": "drug", "type": "nominal", "title": "Drug cohort"}
@@ -327,6 +337,7 @@ def _scatter(studies: list[Study], limit: int) -> ChartResult:
 def build_chart(
     plan: QueryPlan, studies: list[Study], *, citation_limit: int,
     cohorts: dict[str, list[Study]] | None = None,
+    drug_match_mode: DrugMatchMode = "registry_text",
 ) -> ChartResult:
     # The public client deduplicates, but this pure builder must preserve
     # distinct-NCT semantics even when tested with repeated upstream records.
@@ -344,7 +355,7 @@ def build_chart(
     }:
         result = _distribution(plan, studies, citation_limit)
     elif plan.intent == "drug_comparison":
-        result = _comparison(cohorts or {}, citation_limit)
+        result = _comparison(cohorts or {}, citation_limit, drug_match_mode)
     elif plan.intent in {"sponsor_drug_network", "drug_cooccurrence_network"}:
         result = _network(plan, studies, citation_limit)
     elif plan.intent == "enrollment_histogram":
@@ -353,6 +364,26 @@ def build_chart(
         result = _scatter(studies, citation_limit)
     else:
         raise ValueError(f"Unsupported visualization intent: {plan.intent}")
+
+    # The displayed dimension (phase, year, sponsor, etc.) is not by itself
+    # evidence that a study belongs to a requested drug cohort. Attach the
+    # exact registered DRUG name or alias that established membership.
+    # These extra fields do not replace existing dimension/edge citations.
+    if drug_match_mode == "registered_name" and len(plan.drugs) == 1:
+        by_id = {study.nct_id: study for study in studies}
+        data = result.visualization.data
+        rows = ([*data["nodes"], *data["edges"]]
+                if result.visualization.type == "network_graph" else data)
+        for row in rows:
+            for ref in row.get("citations", []):
+                study = by_id.get(ref["nct_id"])
+                if study is None:
+                    continue
+                matched = find_registered_drug_match(study, plan.drugs[0])
+                if matched is None:
+                    raise ValueError("Strict drug citation lacks registered intervention evidence")
+                ref["matched_drug_field_path"] = matched.field_path
+                ref["matched_drug_excerpt"] = matched.excerpt
 
     context = plan.condition or (" vs ".join(plan.drugs) if plan.drugs else None)
     if context:
