@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.4.0 — Registered intervention evidence (candidate, not a published release)
+
+- Add opt-in `drug_match_mode=registered_name` for registered DRUG name or `otherNames` alias verification after registry candidate search. Preserve `registry_text` as the default.
+- Report verified post-filter cohort sizes in `meta.matched_drug_counts` and expose the selected matching mode separately from LLM-generated query plans.
+- Attach registered name/alias evidence to strict cohort citations in comparisons and other chart families.
+- Add 24 synthetic, hand-labeled terminology evaluation cases and focused integration regressions. The benchmark does not measure live clinical ontology accuracy.
+- Add explicit documentation for candidate-retrieval limitations, synonyms, overlapping cohorts, and source evidence.
+- Add `--strict-comparison` to the real-example generator without changing its default output behavior.
+
+
 ## Unreleased — reliability and contract improvements
 
 - Reuse the OpenAI planner's HTTP connection pool across application requests; close it on shutdown.
