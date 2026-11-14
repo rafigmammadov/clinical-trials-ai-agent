@@ -1,0 +1,345 @@
+[
+  {
+    "id": "exact-lower",
+    "term": "pembrolizumab",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": "name",
+    "expected_excerpt": "Pembrolizumab"
+  },
+  {
+    "id": "exact-casefold",
+    "term": "PEMBROLIZUMAB",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": "name",
+    "expected_excerpt": "Pembrolizumab"
+  },
+  {
+    "id": "exact-outer-space",
+    "term": "  pembrolizumab  ",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": "name",
+    "expected_excerpt": "Pembrolizumab"
+  },
+  {
+    "id": "exact-internal-space",
+    "term": "Drug   Alpha",
+    "interventions": [
+      {
+        "name": "Drug Alpha",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": "name",
+    "expected_excerpt": "Drug Alpha"
+  },
+  {
+    "id": "alias-brand",
+    "term": "Keytruda",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Keytruda"
+        ]
+      }
+    ],
+    "expected_field": "alias",
+    "expected_excerpt": "Keytruda"
+  },
+  {
+    "id": "alias-casefold",
+    "term": "KEYTRUDA",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Keytruda"
+        ]
+      }
+    ],
+    "expected_field": "alias",
+    "expected_excerpt": "Keytruda"
+  },
+  {
+    "id": "alias-code",
+    "term": "MK-3475",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "MK-3475"
+        ]
+      }
+    ],
+    "expected_field": "alias",
+    "expected_excerpt": "MK-3475"
+  },
+  {
+    "id": "alias-fullwidth",
+    "term": "ＫＥＹＴＲＵＤＡ",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Keytruda"
+        ]
+      }
+    ],
+    "expected_field": "alias",
+    "expected_excerpt": "Keytruda"
+  },
+  {
+    "id": "alias-duplicates",
+    "term": "keytruda",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Keytruda",
+          "KEYTRUDA"
+        ]
+      }
+    ],
+    "expected_field": "alias",
+    "expected_excerpt": "Keytruda"
+  },
+  {
+    "id": "alias-no-guess",
+    "term": "pembro",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Keytruda"
+        ]
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "substring-rejected",
+    "term": "Drug Alpha",
+    "interventions": [
+      {
+        "name": "Drug Alpha 20mg",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "prefix-rejected",
+    "term": "ivacaft",
+    "interventions": [
+      {
+        "name": "ivacaftor",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "suffix-rejected",
+    "term": "caftor",
+    "interventions": [
+      {
+        "name": "ivacaftor",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "punctuation-not-stripped",
+    "term": "MK3475",
+    "interventions": [
+      {
+        "name": "MK-3475",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "dose-not-equated",
+    "term": "Drug Alpha",
+    "interventions": [
+      {
+        "name": "Drug Alpha 50mg",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "device-rejected",
+    "term": "Keytruda",
+    "interventions": [
+      {
+        "name": "Keytruda",
+        "type": "DEVICE",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "biological-rejected",
+    "term": "Keytruda",
+    "interventions": [
+      {
+        "name": "Keytruda",
+        "type": "BIOLOGICAL",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "placebo-rejected",
+    "term": "Placebo",
+    "interventions": [
+      {
+        "name": "Placebo",
+        "type": "OTHER",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "multiple-registered",
+    "term": "Opdivo",
+    "interventions": [
+      {
+        "name": "Placebo",
+        "type": "OTHER",
+        "otherNames": []
+      },
+      {
+        "name": "Nivolumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Opdivo"
+        ]
+      }
+    ],
+    "expected_field": "alias",
+    "expected_excerpt": "Opdivo"
+  },
+  {
+    "id": "multiple-unregistered",
+    "term": "Opdivo",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Keytruda"
+        ]
+      },
+      {
+        "name": "Placebo",
+        "type": "OTHER",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "empty-alias",
+    "term": "Keytruda",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "blank-term",
+    "term": "  ",
+    "interventions": [
+      {
+        "name": "Pembrolizumab",
+        "type": "DRUG",
+        "otherNames": [
+          "Keytruda"
+        ]
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  },
+  {
+    "id": "canonical-name-preferred",
+    "term": "Keytruda",
+    "interventions": [
+      {
+        "name": "Keytruda",
+        "type": "DRUG",
+        "otherNames": [
+          "Pembrolizumab"
+        ]
+      }
+    ],
+    "expected_field": "name",
+    "expected_excerpt": "Keytruda"
+  },
+  {
+    "id": "accent-preserved",
+    "term": "Cafe",
+    "interventions": [
+      {
+        "name": "Café",
+        "type": "DRUG",
+        "otherNames": []
+      }
+    ],
+    "expected_field": null,
+    "expected_excerpt": null
+  }
+]
