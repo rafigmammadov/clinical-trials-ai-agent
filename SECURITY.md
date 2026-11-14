@@ -7,3 +7,7 @@ API keys belong in an untracked `.env` or deployment secret manager, never in Gi
 LLM output is validated against an explicit query-plan schema. It cannot provide arbitrary URLs, executable code or database queries. ClinicalTrials.gov fields remain untrusted data; the registry adapter normalizes or rejects invalid records. Provider failures are mapped to bounded, generic API errors without embedding raw provider response bodies.
 
 If you find a vulnerability, contact the repository owner privately. Please avoid placing credentials or personal medical data in a public issue.
+
+## Untrusted planner fields
+
+v0.5.0 rejects a defined set of unrequested, model-generated registry filters before reaching the upstream API. The heuristic uses bounded lexical evidence and a small abbreviation list, not a full semantic parser; it cannot defeat prompt injection simply because a malicious question includes a target filter word. Typed schemas, the fixed ClinicalTrials.gov destination, and deterministic aggregation remain necessary additional boundaries.
