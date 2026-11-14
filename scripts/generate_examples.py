@@ -32,14 +32,17 @@ EXAMPLES = {
 }
 
 
-async def generate(url: str, max_studies: int) -> None:
+async def generate(url: str, max_studies: int, strict_comparison: bool = False) -> None:
     out = Path("examples")
     out.mkdir(exist_ok=True)
     async with httpx.AsyncClient(timeout=180.0) as client:
         for name, payload in EXAMPLES.items():
+            request_payload = {**payload, "max_studies": max_studies}
+            if strict_comparison and name == "comparison":
+                request_payload["drug_match_mode"] = "registered_name"
             response = await client.post(
                 f"{url.rstrip('/')}/api/v1/analyze",
-                json={**payload, "max_studies": max_studies},
+                json=request_payload,
             )
             response.raise_for_status()
             result = response.json()
@@ -57,5 +60,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--url", default="http://127.0.0.1:8000")
     parser.add_argument("--max-studies", type=int, default=1500)
+    parser.add_argument("--strict-comparison", action="store_true",
+                        help="Verify comparison cohorts against registered DRUG names and otherNames")
     options = parser.parse_args()
-    asyncio.run(generate(options.url, options.max_studies))
+    asyncio.run(generate(options.url, options.max_studies, options.strict_comparison))
