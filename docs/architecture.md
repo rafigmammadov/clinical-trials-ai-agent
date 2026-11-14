@@ -51,3 +51,20 @@ There is intentionally no persistence layer, cache, authentication, multi-agent 
 ## Model-query trust boundary (v0.5.0)
 
 After structured planning and temporal reconciliation, `app/agent/grounding.py` checks whether inferred entity and date restrictions are explicitly supported by the user question. Only a validated, merged plan may reach `ClinicalTrialsClient`. The guard performs no external requests and refuses ambiguous or unsupported restrictions with HTTP 422. It is distinct from registered intervention identity matching, which inspects source records after retrieval. See [guard decision contract](agent_grounding.md).
+
+## Planner omission detection (v0.6.0)
+
+Before the registry call, `app/agent/recall.py` independently extracts selected
+explicit constraints from the original question and compares them to the
+validated, override-merged `QueryPlan`. This catches cases in which a schema-
+valid model output silently forgets the requested year, disease, study status,
+country, lead sponsor, or explicitly named intervention. It also rejects
+recognized negative filters and relative or exclusive year boundaries the
+current schema cannot faithfully express. A failure returns the existing
+HTTP 422 contract without making an upstream request.
+
+The extraction policy is intentionally limited and lexical; it cannot perform
+comprehensive NER, semantic synonym resolution, or full clinical intent
+validation. The separate offline guard test suite and optional live planner
+recall metric have different denominators and must not be conflated. See
+[the recall contract](plan_recall.md).
