@@ -13,8 +13,10 @@ from collections import Counter, defaultdict, deque
 from pathlib import Path
 
 from app.agent.planner import OpenAIPlanner
+from app.agent.orchestrator import AnalysisService
+from app.errors import QueryError, PlanningError
 from app.config import get_settings
-from app.schemas.api import QueryPlan
+from app.schemas.api import QueryPlan, AnalyzeRequest
 
 DATASET = Path(__file__).with_name("cases.json")
 
@@ -128,9 +130,61 @@ async def run_live(cases: list[dict], model: str, key: str) -> dict:
     }
 
 
+async def run_guarded(cases: list[dict], model: str, key: str) -> dict:
+    """Evaluate the *runtime* plan guard and one-repair flow; no registry calls.
+
+    The expected decision is to reject 'unsupported' cases and accept supported
+    cases only after full deterministic validation. This is a planning benchmark,
+    not a clinical data accuracy test.
+    """
+    planner = OpenAIPlanner(api_key=key, model=model)
+
+    class ForbiddenRegistry:
+        async def search(self, *_args, **_kwargs):
+            raise AssertionError("Guarded planner eval must never retrieve clinical data")
+
+    service = AnalysisService(planner, ForbiddenRegistry())
+    rows = []
+    try:
+        for case in cases:
+            try:
+                plan, _warning, attempts = await service._plan_with_one_repair(
+                    AnalyzeRequest(query=case["question"])
+                )
+                rows.append({
+                    "id": case["id"], "category": case["category"],
+                    "accepted": True, "attempts": attempts,
+                    "intent_correct": plan.intent == case["intent"],
+                    "observed_intent": plan.intent,
+                })
+            except (QueryError, PlanningError) as exc:
+                rows.append({
+                    "id": case["id"], "category": case["category"],
+                    "accepted": False, "attempts": None,
+                    "intent_correct": case["intent"] == "unsupported",
+                    "error_type": type(exc).__name__,
+                    # Safe application validation feedback helps reproduce
+                    # false rejections without guessing from a bare type.
+                    "error_detail": str(exc)[:400],
+                })
+    finally:
+        await planner.close()
+    decisions = [row["accepted"] == (case["intent"] != "unsupported")
+                 for row, case in zip(rows, cases)]
+    return {
+        "mode": "guarded", "model": model, "evaluated": len(rows),
+        "guard_decision_accuracy": sum(decisions) / len(decisions) if decisions else None,
+        "accepted": sum(row["accepted"] for row in rows),
+        "rejected": sum(not row["accepted"] for row in rows),
+        "repaired": sum(row["attempts"] == 2 for row in rows),
+        "results": rows,
+        "note": "Guarded evaluation runs model planning only; no ClinicalTrials.gov calls or count verification",
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run validated query-planner benchmark")
-    parser.add_argument("--mode", choices=["validate", "live"], default="validate")
+    parser.add_argument("--mode", choices=["validate", "live", "guarded"], default="validate")
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--category", default=None, help="Optional family to evaluate")
     parser.add_argument("--output", type=Path, default=None)
@@ -150,7 +204,11 @@ def main() -> None:
     settings = get_settings()
     if not settings.openai_api_key:
         parser.error("A rotated OPENAI_API_KEY is required for --mode live")
-    report = asyncio.run(run_live(balanced_sample(cases, args.limit), settings.openai_model, settings.openai_api_key))
+    chosen = balanced_sample(cases, args.limit)
+    if args.mode == "guarded":
+        report = asyncio.run(run_guarded(chosen, settings.openai_model, settings.openai_api_key))
+    else:
+        report = asyncio.run(run_live(chosen, settings.openai_model, settings.openai_api_key))
     print(json.dumps({key: value for key, value in report.items() if key != "results"}, indent=2))
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
