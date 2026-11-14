@@ -84,6 +84,8 @@ Each populated chart row or graph relationship can contain supporting NCT IDs, l
 
 Treat `meta.complete` and `meta.visualization_truncated` separately. The former describes registry retrieval; the latter indicates that the renderer-facing chart omits lower-ranked categories or graph edges. A full registry result can still produce a truncated graph.
 
+`records_fetched` counts unique studies retrieved; `records_used` counts unique post-filter studies; `records_visualized` counts distinct NCT IDs that actually support a displayed datum or graph edge. `records_not_visualized` is the difference, for example when dates or enrollment are missing, or network edges are omitted. A `record_identity_only` citation indicates an NCT record link where the relevant clinical field was missing; it is not a fabricated field-value excerpt. Unsupported analyses return HTTP 422 without accessing the registry.
+
 ## Supported analyses
 
 | Intent | JSON visualization | Calculation |
@@ -124,7 +126,7 @@ python -m pytest -q
 python -m compileall -q app tests scripts
 ```
 
-The test suite covers parsing, validation, pagination, deduplication, HTTP retries, malformed records, aggregation, citations, truncation, error mapping, and a mocked API request. CI runs it on Python 3.11, 3.12, and 3.13. A passing offline suite does not replace a live registry and model smoke test.
+The test suite covers parsing, validation, pagination, deduplication, HTTP retries, malformed records, aggregation, citations, truncation, error mapping, metamorphic counting invariants, and a mocked API request. CI runs it on Python 3.11, 3.12, and 3.13. A passing offline suite does not replace a live registry and model smoke test.
 
 With the server running and `PLANNER_MODE=openai`:
 
@@ -137,6 +139,15 @@ python -m scripts.verify_examples
 The generator writes five registry-backed responses to `examples/` for time trends, phases, geography, sponsor–drug networks, and drug comparisons. Actual counts change as the registry is updated. The verifier checks structural consistency, chart accounting, citation references, and completeness metadata using the saved files; it makes no provider calls.
 
 For an offline plumbing check, use `PLANNER_MODE=rules` and pass explicit structured filters. Restart the server after changing `.env`.
+
+The labeled 50-question planner benchmark is opt-in and separate from unit tests:
+
+```bash
+python -m evals.run --mode validate                   # offline schema check
+python -m evals.run --mode live --limit 10             # genuine, billable model calls
+```
+
+The default live sample interleaves query categories. See [evaluation methodology](evals/README.md), [engineering audit](docs/engineering_audit.md) and [requirements traceability](docs/requirements_traceability.md). Offline benchmark validation does not establish natural-language interpretation accuracy.
 
 ## Code layout
 
@@ -151,7 +162,8 @@ app/
 tests/             offline unit and API contract tests
 examples/          saved live JSON responses
 scripts/           setup, smoke checks, example validation, release archive
-docs/              design decisions and quality checks
+docs/              decisions, requirements traceability, audit, quality gates
+evals/             labeled planner questions and opt-in live evaluation
 ```
 
 The HTTP layer does not contain analysis rules. The planner, registry client, normalizer, and visualization builder can be tested independently. Provider failures are mapped to stable HTTP errors (`422` for invalid analyses, `502` for registry failures, and `503` for planning failures).
