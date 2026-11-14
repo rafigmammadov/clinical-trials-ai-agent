@@ -47,3 +47,7 @@ For a plotted point or edge, `citation_count` represents distinct contributing N
 Uvicorn starts a FastAPI lifespan that owns a pooled HTTPX client for the registry and, if configured, an OpenAI planner client. Both are closed at shutdown. Every HTTP response includes a generated `X-Request-ID` and elapsed-process-time header. Application-level request logs do not store user questions, study bodies, or credentials.
 
 There is intentionally no persistence layer, cache, authentication, multi-agent framework, distributed queue, or hosted dashboard. Those should be added only after measuring a concrete need and defining an operational threat model.
+
+## Model-query trust boundary (v0.5.0)
+
+After structured planning and temporal reconciliation, `app/agent/grounding.py` checks whether inferred entity and date restrictions are explicitly supported by the user question. Only a validated, merged plan may reach `ClinicalTrialsClient`. The guard performs no external requests and refuses ambiguous or unsupported restrictions with HTTP 422. It is distinct from registered intervention identity matching, which inspects source records after retrieval. See [guard decision contract](agent_grounding.md).
